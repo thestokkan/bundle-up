@@ -1,0 +1,19 @@
+.counting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 24px;
+}
+
+.count-text {
+    color: var(--sharp-contrast-color-1);
+    margin: 0;
+}
+
+.count-text#negative {
+    color: var(--sharp-contrast-color-2);
+}
+
+.button-div {
+    margin: 10px;
+}

@@ -1,0 +1,116 @@
+button {
+    width: var(--button-width-medium);
+    min-height: var(--button-min-height);
+    box-sizing: border-box;
+    border-radius: 30px;
+    font-size: var(--font-size-input);
+    margin: 16px;
+    border: none;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: var(--hover-color);
+}
+
+@media (pointer: coarse) {
+    button {
+        min-height: 48px;
+    }
+}
+
+.default {
+    background-color: var(--medium-button-background-color);
+    color: var(--medium-button-text-color);
+}
+
+.danger {
+    background-color: var(--danger-soft-color);
+    color: var(--accent-color-dark);
+}
+
+.primary {
+    background-color: var(--sharp-contrast-color-2);
+    color: var(--accent-color-dark);
+}
+
+.connect {
+    background-image: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
+    color: var(--medium-button-text-color);
+    font-size: var(--font-size-input);
+    font-weight: bold;
+    min-height: var(--button-min-height);
+    border-radius: 0 12px 12px 0;
+    width: var(--button-width-small);
+    margin: 0;
+    padding: 0;
+    vertical-align: bottom;
+}
+
+.connect:hover {
+    background-image: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
+    color: var(--light-button-text-color);
+}
+
+.icon {
+    width: auto;
+    height: var(--font-size-icon-button);
+    border-radius: unset;
+    background-color: transparent;
+    border: none;
+    font-size: var(--font-size-icon-button);
+    color: var(--sharp-contrast-color-1);
+    text-align: center;
+}
+
+.icon:hover {
+    color: var(--hover-color);
+    background-color: transparent;
+}
+
+.cross {
+    height: 48px;
+    width: 48px;
+    border-radius: 8px;
+}
+
+.counter {
+    width: 48px;
+    height: 48px;
+    border-radius: 12%;
+    font-size: var(--font-size-input);
+    margin: 0;
+
+}
+
+.counter#up {
+    background-color: var(--sharp-contrast-color-1);
+}
+
+.counter#down {
+    background-color: var(--sharp-contrast-color-2);
+}
+
+.counter#down:hover,
+.counter#up:hover {
+    background-color: var(--hover-color);
+}
+
+/* Theme button */
+.theme {
+    width: auto;
+    height: auto;
+    font-size: var(--font-size-h3);
+    color: var(--theme-button-color);
+    background-color: transparent;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    top: 5%;
+    right: 3%;
+}
+
+.theme:hover {
+    font-size: calc(var(--font-size-h3) + 2px);
+    background-color: transparent;
+}
