@@ -1,0 +1,14 @@
+a {
+    color: var(--sharp-contrast-color-2);
+    font-size: medium;
+    text-decoration: none;
+    margin: 12px;
+}
+
+a:hover, a:visited:hover{
+    color: var(--hover-color);
+}
+
+a:visited {
+    color: var(--sharp-contrast-color-1);
+}
