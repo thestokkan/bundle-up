@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class BundleUpApplication {
-
   public static void main(String[] args) {
     SpringApplication.run(BundleUpApplication.class, args);
   }
