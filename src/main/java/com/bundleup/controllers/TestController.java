@@ -17,17 +17,11 @@ public class TestController {
   @Autowired
   WeatherRepository weatherRepository;
 
-
-
   @GetMapping("/")
   public List<Weather> home() {
 
     var test=(List<Weather>) weatherRepository.findAll();
 
-
     return test;
-
-
-
   }
 }
