@@ -71,7 +71,7 @@ function App() {
           <div className="toggle-theme">
             <Button onClick={() => {toggleTheme()}} type={"theme"} children={themeIcon}></Button>
           </div>
-          <img className="Bundled-up-logo" src="bundled-up.svg" alt="Bundled up kid"/>
+          <img className="Bundled-up-logo" src="%PUBLIC_URL%/bundled-up.svg" alt="Bundled up kid"/>
           <h1>
             BundleUp!
           </h1>
