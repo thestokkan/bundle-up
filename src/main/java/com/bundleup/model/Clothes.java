@@ -1,4 +1,2 @@
-package com.bundleup.model;
-
-public class Clothe {
+package com.bundleup.model;public class Clothes {
 }
