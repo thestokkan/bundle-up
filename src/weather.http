@@ -1,0 +1,2 @@
+GET https://api.open-meteo.com/v1/forecast?latitude=59.91&longitude=10.75&daily=weathercode,temperature_2m_max,temperature_2m_min&windspeed_unit=ms&timezone=Europe%2FBerlin
+Accept: application/json
