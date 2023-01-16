@@ -1,0 +1,19 @@
+input {
+    height: var(--field-min-height);
+    background-color: var(--input-field-background-color);
+    border-radius: 12px;
+    border: none;
+    padding: 24px;
+    font-size: var(--font-size-input);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+input:hover {
+    background-color: var(--hover-color);
+}
+
+.connect-right {
+    border-radius: 12px 0 0 12px;
+    margin-right: 0;
+}

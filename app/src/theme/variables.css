@@ -1,0 +1,85 @@
+:root {
+    /* FONTS */
+    --body-font: Roboto sans-serif;
+    --accent-font: Verdana, sans-serif;
+    --code-font: monospace;
+
+    /* COLORS */
+    /* Color scheme */
+    --neutral-color-xlight: whitesmoke;
+    --neutral-color-dark: #1a1a1a;
+    --neutral-color-medium: #666666;
+    --neutral-color-light: #b3b3b3;
+    --accent-color-dark: #19334d;
+    --accent-color-medium: #336699;
+    --accent-color-light: #b2cce6;
+    --accent-color-xlight: #ecf2f9;
+    --danger-soft-color: #ebaead;
+    --danger-sharp-color: #BD312E;
+
+    /* FONT SIZES */
+    --font-size-body: 16px;
+    --font-size-input: 16px;
+    --font-size-secondary: 14px;
+    --font-size-link: 12px;
+    --font-size-h1: 72px;
+    --font-size-h2: 48px;
+    --font-size-h3: 36px;
+    --font-size-h4: 24px;
+    --font-size-icon-button: 72px;
+
+    /* OTHER SIZES */
+    --button-min-height: 48px;
+    --button-width-small: 96px;
+    --button-width-medium: 144px;
+    --button-width-large: 192px;
+    --field-min-height: 48px;
+
+    /* Elements */
+    --medium-button-background-color: var(--accent-color-medium);
+    --medium-button-text-color: var(--neutral-color-xlight);
+    --light-button-background-color: var(--accent-color-light);
+    --light-button-text-color: var(--neutral-color-dark);
+    --hover-color: var(--neutral-color-xlight);
+    --link-color: var(--sharp-contrast-color-2);
+    --visited-link-color: var(--sharp-contrast-color-1);
+}
+
+.dark {
+    --sharp-contrast-color-1: sandybrown;
+    --sharp-contrast-color-2: #00bfff;
+    --h1-color: var(--sharp-contrast-color-1);
+
+    --heading-color: var(--accent-color-light);
+    --body-background-color: var(--accent-color-dark);
+    --body-font-color: var(--neutral-color-xlight);
+
+    --hover-color: var(--neutral-color-xlight);
+
+    --slider-main-color: var(--accent-color-medium);
+    --slider-main-color-hover: var(--hover-color);
+    --slider-track-color: var(--accent-color-xlight);
+
+    --theme-button-color: var(--sharp-contrast-color-1);
+    --input-field-background-color: var(--neutral-color-xlight);
+}
+
+.light {
+    --sharp-contrast-color-1: #d76c0f;
+    --sharp-contrast-color-2: #0099cc;
+
+    --h1-color: var(--sharp-contrast-color-1);
+    --heading-color: var(--accent-color-dark);
+    --body-background-color: var(--neutral-color-xlight);
+    --body-font-color: var(--neutral-color-dark);
+
+    --hover-color: var(--accent-color-light);
+
+    --slider-main-color: var(--accent-color-medium);
+    --slider-main-color-hover: var(--hover-color);
+    --slider-track-color: var(--accent-color-xlight);
+
+    --theme-button-color: var(--accent-color-light);
+    --input-field-background-color: var(--accent-color-xlight);
+
+}
