@@ -30,4 +30,14 @@ public class WeatherController {
     return weatherService.getWeatherData().hourly();
   }
 
+  @GetMapping("/today")
+  public HourlyWeather daytime1() {
+    return weatherService.getDaytimeWeather(1);
+  }
+
+  @GetMapping("/tomorrow")
+  public HourlyWeather tomorrow() {
+    return weatherService.getDaytimeWeather(2);
+  }
+
 }

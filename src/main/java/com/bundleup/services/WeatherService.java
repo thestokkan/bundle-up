@@ -1,5 +1,6 @@
 package com.bundleup.services;
 
+import com.bundleup.weatherApi.HourlyWeather;
 import com.bundleup.weatherApi.WeatherData;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,11 +13,12 @@ public class WeatherService {
   LocalDate today = LocalDate.now();
   String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
 
-  private final String WEATHER_API_URL =
-          "https://api.open-meteo.com/v1/forecast?latitude=59" +
-          ".91&longitude=10.75&hourly=temperature_2m,apparent_temperature,precipitation," +
-          "windspeed_10m&daily=weathercode&windspeed_unit=ms&timezone=Europe/Berlin" +
-          "&start_date=" + today + "&end_date" + "=" + tomorrow;
+  private final String WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=59" +
+                                         ".91&longitude=10.75&hourly=temperature_2m," +
+                                         "apparent_temperature,precipitation," +
+                                         "windspeed_10m&daily=weathercode&windspeed_unit=ms" +
+                                         "&timezone=Europe/Berlin" + "&start_date=" + today +
+                                         "&end_date" + "=" + tomorrow;
 
   RestTemplate restTemplate;
   private WeatherData data;
@@ -31,5 +33,32 @@ public class WeatherService {
     }
     return data;
   }
+
+  public HourlyWeather getHourlyWeather() {
+    return getWeatherData().hourly();
+  }
+
+  // Weather data between 8am and 5pm
+  // Indices today: 8 - 17
+  // Indices tomorrow: 32 - 41
+
+  public HourlyWeather getDaytimeWeather(int day) {
+    int startIndex = 8;
+    int endIndex = 18;
+
+    if (day == 2) {
+      startIndex = 32;
+      endIndex = 42;
+    }
+    return new HourlyWeather(
+            getHourlyWeather().time().subList(startIndex,endIndex),
+            getHourlyWeather().temperature().subList(startIndex,endIndex),
+            getHourlyWeather().apparentTemperature().subList(startIndex,endIndex),
+            getHourlyWeather().precipitation().subList(startIndex,endIndex),
+            getHourlyWeather().windSpeed().subList(startIndex,endIndex)
+    );
+  }
+
+
 
 }
