@@ -12,13 +12,12 @@ public class WeatherService {
   LocalDate today = LocalDate.now();
   String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
 
-  private final String WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=59" +
-                                         ".91&longitude=10.75&daily=weathercode," +
-                                         "temperature_2m_max,temperature_2m_min," +
-                                         "apparent_temperature_max,apparent_temperature_min," +
-                                         "precipitation_sum,windspeed_10m_max&windspeed_unit=ms" +
-                                         "&timezone=Europe/Berlin&start_date=" + today +
-                                         "&end_date" + "=" + tomorrow;
+  private final String WEATHER_API_URL =
+          "https://api.open-meteo.com/v1/forecast?latitude=59" +
+          ".91&longitude=10.75&hourly=temperature_2m,apparent_temperature,precipitation," +
+          "windspeed_10m&daily=weathercode&windspeed_unit=ms&timezone=Europe/Berlin" +
+          "&start_date=" + today + "&end_date" + "=" + tomorrow;
+
   RestTemplate restTemplate;
   private WeatherData data;
 
