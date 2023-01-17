@@ -14,14 +14,12 @@ import java.util.List;
 @RestController
 public class TestController {
 
-  @Autowired
-  WeatherRepository weatherRepository;
 
   @GetMapping("/")
-  public List<Weather> home() {
+  public String home() {
 
-    var test=(List<Weather>) weatherRepository.findAll();
 
-    return test;
+
+    return "home";
   }
 }
