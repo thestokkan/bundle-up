@@ -2,6 +2,7 @@ package com.bundleup.services;
 
 import com.bundleup.weatherApi.HourlyWeather;
 import com.bundleup.weatherApi.WeatherData;
+import com.bundleup.weatherApi.WeatherInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,7 +42,6 @@ public class WeatherService {
   // Weather data between 8am and 5pm
   // Indices today: 8 - 17
   // Indices tomorrow: 32 - 41
-
   public HourlyWeather getDaytimeWeather(int day) {
     int startIndex = 8;
     int endIndex = 18;
@@ -50,6 +50,7 @@ public class WeatherService {
       startIndex = 32;
       endIndex = 42;
     }
+
     return new HourlyWeather(
             getHourlyWeather().time().subList(startIndex,endIndex),
             getHourlyWeather().temperature().subList(startIndex,endIndex),
@@ -59,6 +60,15 @@ public class WeatherService {
     );
   }
 
+  public WeatherInfo getWeatherInfo() {
+    return new WeatherInfo(data.latitude(),
+                           data.longitude(),
+                           data.daily().time().get(0),
+                           data.daily().time().get(1),
+                           data.daily().weathercode().get(0),
+                           data.daily().weathercode().get(1)
+    );
+  }
 
 
 }

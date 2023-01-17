@@ -4,6 +4,7 @@ import com.bundleup.services.WeatherService;
 import com.bundleup.weatherApi.DailyWeather;
 import com.bundleup.weatherApi.HourlyWeather;
 import com.bundleup.weatherApi.WeatherData;
+import com.bundleup.weatherApi.WeatherInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,4 +41,8 @@ public class WeatherController {
     return weatherService.getDaytimeWeather(2);
   }
 
+  @GetMapping("/info")
+  public WeatherInfo info() {
+    return weatherService.getWeatherInfo();
+  }
 }
