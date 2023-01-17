@@ -1,6 +1,5 @@
 package com.bundleup.services;
 
-import com.bundleup.model.Combo;
 import com.bundleup.weatherApi.WeatherData;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -32,12 +31,5 @@ public class WeatherService {
     }
     return data;
   }
-/*
-  public Combo getWeatherIDFromWeather(){
-
-
-
-
-  }*/
 
 }
