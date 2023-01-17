@@ -1,5 +1,6 @@
 package com.bundleup.controllers;
 
+import com.bundleup.model.Weather;
 import com.bundleup.services.WeatherService;
 import com.bundleup.weatherApi.DailyWeather;
 import com.bundleup.weatherApi.HourlyWeather;
@@ -44,5 +45,10 @@ public class WeatherController {
   @GetMapping("/info")
   public WeatherInfo info() {
     return weatherService.getWeatherInfo();
+  }
+
+  @GetMapping("/dbweather")
+  public Weather db() {
+    return weatherService.getWeatherForDatabase(1);
   }
 }

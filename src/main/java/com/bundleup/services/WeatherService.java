@@ -1,5 +1,6 @@
 package com.bundleup.services;
 
+import com.bundleup.model.Weather;
 import com.bundleup.weatherApi.HourlyWeather;
 import com.bundleup.weatherApi.WeatherData;
 import com.bundleup.weatherApi.WeatherInfo;
@@ -8,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 @Service
 public class WeatherService {
@@ -68,6 +70,37 @@ public class WeatherService {
                            data.daily().weathercode().get(0),
                            data.daily().weathercode().get(1)
     );
+  }
+
+  private Comparator<Double> comparator() {
+    return (n1, n2) -> {
+      if (n1 < 0 && n2 < 0) {
+        return n2.compareTo(n1);
+      } else {
+        return n1.compareTo(n2);
+      }
+    };
+  }
+
+  public Weather getWeatherForDatabase(int day) {
+    HourlyWeather w = getDaytimeWeather(day);
+
+    Double maxTemp = w.apparentTemperature()
+                      .stream()
+                      .max(comparator())
+                      .get();
+    Double minTemp = w.apparentTemperature()
+                      .stream()
+                      .min(comparator())
+                      .get();
+
+    double precipitationSum = w.precipitation()
+                               .stream()
+                               .mapToDouble(Double::intValue)
+                               .sum();
+    boolean rain = precipitationSum > 0.5 && maxTemp > 0;
+
+    return new Weather(null, maxTemp, minTemp, rain);
   }
 
 
