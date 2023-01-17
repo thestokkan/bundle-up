@@ -4,23 +4,21 @@ import com.bundleup.weatherApi.WeatherData;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class WeatherService {
-  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-  private String today = simpleDateFormat.format(new Date());
+  LocalDate today = LocalDate.now();
+  String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
 
   private final String WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=59" +
                                          ".91&longitude=10.75&daily=weathercode," +
                                          "temperature_2m_max,temperature_2m_min," +
                                          "apparent_temperature_max,apparent_temperature_min," +
                                          "precipitation_sum,windspeed_10m_max&windspeed_unit=ms" +
-                                         "&timezone=Europe/Berlin&start_date=2023-01-17&end_date" +
-                                         "=2023-01-18";
+                                         "&timezone=Europe/Berlin&start_date=" + today +
+                                         "&end_date" + "=" + tomorrow;
   RestTemplate restTemplate;
   private WeatherData data;
 
@@ -32,7 +30,6 @@ public class WeatherService {
     if (data == null) {
       data = restTemplate.getForObject(WEATHER_API_URL, WeatherData.class);
     }
-    System.out.println("TODAY'S DATE: " + today);
     return data;
   }
 
