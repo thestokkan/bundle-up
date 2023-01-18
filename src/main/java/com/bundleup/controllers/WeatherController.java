@@ -1,9 +1,11 @@
 package com.bundleup.controllers;
 
+import com.bundleup.model.Weather;
 import com.bundleup.services.WeatherService;
 import com.bundleup.weatherApi.DailyWeather;
 import com.bundleup.weatherApi.HourlyWeather;
 import com.bundleup.weatherApi.WeatherData;
+import com.bundleup.weatherApi.WeatherInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,4 +32,23 @@ public class WeatherController {
     return weatherService.getWeatherData().hourly();
   }
 
+  @GetMapping("/today")
+  public HourlyWeather daytime1() {
+    return weatherService.getDaytimeWeather(1);
+  }
+
+  @GetMapping("/tomorrow")
+  public HourlyWeather tomorrow() {
+    return weatherService.getDaytimeWeather(2);
+  }
+
+  @GetMapping("/info")
+  public WeatherInfo info() {
+    return weatherService.getWeatherInfo();
+  }
+
+  @GetMapping("/dbweather")
+  public Weather db() {
+    return weatherService.getWeatherForDatabase(1);
+  }
 }

@@ -9,4 +9,4 @@ public record HourlyWeather(
         @JsonProperty("temperature_2m") List<Double> temperature,
         @JsonProperty("apparent_temperature") List<Double> apparentTemperature,
         List<Double> precipitation,
-        @JsonProperty("windspeed_10m") List<Double> windspeed) {}
+        @JsonProperty("windspeed_10m") List<Double> windSpeed) {}
