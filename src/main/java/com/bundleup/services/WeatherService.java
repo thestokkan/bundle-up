@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WeatherService {
@@ -57,27 +58,32 @@ public class WeatherService {
 
     String date = data.daily().time().get(dayIndex);
     int weatherCode = data.daily().weathercode().get(dayIndex);
-    List<String> time = hourlyData.time().subList(startIndex, endIndex);
-    List<Double> temperature = hourlyData.temperature().subList(startIndex, endIndex);
-    List<Double> apparentTemperature =
-            hourlyData.apparentTemperature().subList(startIndex, endIndex);
-    List<Double> precipitation = hourlyData.precipitation().subList(startIndex, endIndex);
-    List<Double> windSpeed = hourlyData.windSpeed().subList(startIndex, endIndex);
-    Double maxTemp = getMax(apparentTemperature);
-    Double minTemp = getMin(apparentTemperature);
-    Double precipitationSum = getDoubleSum(precipitation);
+    List<String> time = hourlyData.time();
+    List<Double> temperature = hourlyData.temperature();
+    List<Double> apparentTemperature = hourlyData.apparentTemperature();
+    List<Double> precipitation = hourlyData.precipitation();
+    List<Double> windSpeed = hourlyData.windSpeed();
 
-    return new DailyWeather(date, weatherCode, time, temperature, apparentTemperature,
-                            precipitation, windSpeed, maxTemp, minTemp, precipitationSum);
+    // Between 8am and 5pm
+    Double maxTempDay = getMax(temperature.subList(startIndex, endIndex));
+    Double minTempDay = getMin(temperature.subList(startIndex, endIndex));
+    Double maxApparentTempDay = getMax(apparentTemperature.subList(startIndex, endIndex));
+    Double minApparentTempDay = getMin(apparentTemperature.subList(startIndex, endIndex));
+    Double precipitationSumDay = getDoubleSum(precipitation.subList(startIndex, endIndex));
+    Double maxWindSpeedDay = getMax(windSpeed.subList(startIndex, endIndex));
+
+    return new DailyWeather(date, weatherCode, maxTempDay, minTempDay, maxApparentTempDay,
+                            minApparentTempDay, precipitationSumDay, maxWindSpeedDay, time,
+                            temperature, apparentTemperature, precipitation, windSpeed);
   }
 
   // Helper methods
   private Double getMax(List<Double> list) {
-    return list.stream().max(comparator()).get();
+    return list.stream().max(Double::compare).get();
   }
 
   private Double getMin(List<Double> list) {
-    return list.stream().min(comparator()).get();
+    return list.stream().min(Double::compare).get();
   }
 
   private Double getDoubleSum(List<Double> list) {
