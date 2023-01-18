@@ -16,11 +16,9 @@ public class WeatherController {
 
   @GetMapping("/weather")
   public WeatherData getWeatherDataForLocation(@RequestParam("latitude") Float latitude,
-                                               @RequestParam("longitude") Float longitude) {
-    System.out.println("REQUEST PARAMS:");
-    System.out.println(latitude);
-    System.out.println(longitude);
-    return weatherService.getWeatherDataForLocation(latitude, longitude);
+                                               @RequestParam("longitude") Float longitude,
+                                               @RequestParam("timezone") String timezone) {
+    return weatherService.getWeatherDataForLocation(latitude, longitude, timezone);
   }
 
 }

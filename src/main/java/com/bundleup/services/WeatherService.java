@@ -15,20 +15,6 @@ import java.util.List;
 
 @Service
 public class WeatherService {
-  private final LocalDate today = LocalDate.now();
-  private final String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
-//  Float latitude;
-//  Float longitude;
-//  private final String WEATHER_API_URL =
-//          "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" +
-//          longitude + "&hourly=temperature_2m," + "apparent_temperature,precipitation," +
-//          "windspeed_10m&daily=weathercode&windspeed_unit=ms&start_date=" + today + "&end_date" +
-//          "=" + tomorrow;
-  //  Double latitude = 59.91;
-  //  Double longitude = 10.75;
-  //  String timezone = "Europe/Berlin";
-  //  ?latitude=59.91&longitude=10.75
-  String timezone = "Europe/Berlin";
   RestTemplate restTemplate;
   private WeatherDataAPI data;
   private HourlyWeatherAPI hourlyData;
@@ -37,23 +23,21 @@ public class WeatherService {
     this.restTemplate = restTemplate;
   }
 
-  // Data from API
-  public void setWeatherDataFromAPI(Float latitude,
-                                    Float longitude) {
-
-    data = restTemplate.getForObject( "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" +
-                                      longitude + "&hourly=temperature_2m," + "apparent_temperature,precipitation," +
-                                      "windspeed_10m&daily=weathercode&windspeed_unit=ms&timezone" +
-                                      "=Europe/Berlin&start_date=" + today + "&end_date" +
-                                      "=" + tomorrow, WeatherDataAPI.class);
-    hourlyData = data.hourly();
-  }
-
-  // Service methods
   public WeatherData getWeatherDataForLocation(Float latitude,
-                                               Float longitude) {
+                                               Float longitude,
+                                               String timezone) {
 
-    setWeatherDataFromAPI(latitude, longitude);
+    LocalDate today = LocalDate.now();
+    String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
+
+    data = restTemplate.getForObject(
+            "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" +
+            longitude + "&hourly=temperature_2m,apparent_temperature,precipitation," +
+            "windspeed_10m&daily=weathercode&windspeed_unit=ms&timezone=" + timezone +
+            "&start_date=" + today + "&end_date=" + tomorrow, WeatherDataAPI.class);
+
+    assert data != null;
+    hourlyData = data.hourly();
 
     return new WeatherData(new Location(latitude, longitude), getDailyWeatherData(0),
                            getDailyWeatherData(1), data.hourlyUnitsAPI());
