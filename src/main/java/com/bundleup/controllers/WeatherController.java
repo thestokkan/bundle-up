@@ -21,12 +21,12 @@ public class WeatherController {
 
   @GetMapping("/today")
   public DailyWeather daytime() {
-    return weatherService.getDailyWeatherData(1);
+    return weatherService.getDailyWeatherData(0);
   }
 
   @GetMapping("/tomorrow")
   public DailyWeather tomorrow() {
-    return weatherService.getDailyWeatherData(2);
+    return weatherService.getDailyWeatherData(1);
   }
 
 }
