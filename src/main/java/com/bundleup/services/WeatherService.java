@@ -49,18 +49,16 @@ public class WeatherService {
     Location location =
             new Location(getWeatherDataFromAPI().latitude(), getWeatherDataFromAPI().longitude());
 
-    return new WeatherData(location, getDailyWeatherData(1), getDailyWeatherData(2),
+    return new WeatherData(location, getDailyWeatherData(0), getDailyWeatherData(1),
                            getWeatherDataFromAPI().hourlyUnitsAPI());
   }
 
-  // day 1 = today
-  // day 2 = tomorrow
-  public DailyWeather getDailyWeatherData(int day) {
-    int dayIndex = day - 1;
+  /** dayIndex 0 = today, dayIndex 1 = tomorrow **/
+  public DailyWeather getDailyWeatherData(int dayIndex) {
     int startIndex = 8;
     int endIndex = 18;
 
-    if (day == 2) {
+    if (dayIndex == 1) {
       startIndex = 32;
       endIndex = 42;
     }
