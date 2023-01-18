@@ -3,8 +3,8 @@ package com.bundleup.services;
 import com.bundleup.model.DailyWeather;
 import com.bundleup.model.Location;
 import com.bundleup.model.WeatherData;
-import com.bundleup.model.weatherApi.HourlyWeatherAPI;
-import com.bundleup.model.weatherApi.WeatherDataAPI;
+import com.bundleup.model.APImodels.HourlyWeatherAPI;
+import com.bundleup.model.APImodels.WeatherDataAPI;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,12 +17,16 @@ import java.util.List;
 public class WeatherService {
   LocalDate today = LocalDate.now();
   String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
+  Double latitude = 59.91;
+  Double longitude = 10.75;
+  String timezone = "Europe/Berlin";
 
-  private final String WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast?latitude=59" +
-                                         ".91&longitude=10.75&hourly=temperature_2m," +
+  private final String WEATHER_API_URL =
+          "https://api.open-meteo.com/v1/forecast?latitude=" + latitude +
+                                         "&longitude=" + longitude + "&hourly=temperature_2m," +
                                          "apparent_temperature,precipitation," +
                                          "windspeed_10m&daily=weathercode&windspeed_unit=ms" +
-                                         "&timezone=Europe/Berlin" + "&start_date=" + today +
+                                         "&timezone=" + timezone + "&start_date=" + today +
                                          "&end_date" + "=" + tomorrow;
 
   RestTemplate restTemplate;
