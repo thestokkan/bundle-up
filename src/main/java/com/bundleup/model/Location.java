@@ -1,3 +1,3 @@
 package com.bundleup.model;
 
-public record Location(Double latitude, Double longitude) {}
+public record Location(Float latitude, Float longitude) {}

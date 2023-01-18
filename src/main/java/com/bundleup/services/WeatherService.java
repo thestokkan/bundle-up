@@ -1,10 +1,10 @@
 package com.bundleup.services;
 
+import com.bundleup.model.APImodels.HourlyWeatherAPI;
+import com.bundleup.model.APImodels.WeatherDataAPI;
 import com.bundleup.model.DailyWeather;
 import com.bundleup.model.Location;
 import com.bundleup.model.WeatherData;
-import com.bundleup.model.APImodels.HourlyWeatherAPI;
-import com.bundleup.model.APImodels.WeatherDataAPI;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,49 +15,53 @@ import java.util.List;
 
 @Service
 public class WeatherService {
-  LocalDate today = LocalDate.now();
-  String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
-  Double latitude = 59.91;
-  Double longitude = 10.75;
+  private final LocalDate today = LocalDate.now();
+  private final String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
+//  Float latitude;
+//  Float longitude;
+//  private final String WEATHER_API_URL =
+//          "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" +
+//          longitude + "&hourly=temperature_2m," + "apparent_temperature,precipitation," +
+//          "windspeed_10m&daily=weathercode&windspeed_unit=ms&start_date=" + today + "&end_date" +
+//          "=" + tomorrow;
+  //  Double latitude = 59.91;
+  //  Double longitude = 10.75;
+  //  String timezone = "Europe/Berlin";
+  //  ?latitude=59.91&longitude=10.75
   String timezone = "Europe/Berlin";
-
-  private final String WEATHER_API_URL =
-          "https://api.open-meteo.com/v1/forecast?latitude=" + latitude +
-                                         "&longitude=" + longitude + "&hourly=temperature_2m," +
-                                         "apparent_temperature,precipitation," +
-                                         "windspeed_10m&daily=weathercode&windspeed_unit=ms" +
-                                         "&timezone=" + timezone + "&start_date=" + today +
-                                         "&end_date" + "=" + tomorrow;
-
   RestTemplate restTemplate;
   private WeatherDataAPI data;
+  private HourlyWeatherAPI hourlyData;
 
   public WeatherService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
   }
 
   // Data from API
-  public WeatherDataAPI getWeatherDataFromAPI() {
-    if (data == null) {
-      data = restTemplate.getForObject(WEATHER_API_URL, WeatherDataAPI.class);
-    }
-    return data;
-  }
+  public void setWeatherDataFromAPI(Float latitude,
+                                    Float longitude) {
 
-  public HourlyWeatherAPI getHourlyWeatherFromAPI() {
-    return getWeatherDataFromAPI().hourly();
+    data = restTemplate.getForObject( "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" +
+                                      longitude + "&hourly=temperature_2m," + "apparent_temperature,precipitation," +
+                                      "windspeed_10m&daily=weathercode&windspeed_unit=ms&timezone" +
+                                      "=Europe/Berlin&start_date=" + today + "&end_date" +
+                                      "=" + tomorrow, WeatherDataAPI.class);
+    hourlyData = data.hourly();
   }
 
   // Service methods
-  public WeatherData getWeatherData() {
-    Location location =
-            new Location(getWeatherDataFromAPI().latitude(), getWeatherDataFromAPI().longitude());
+  public WeatherData getWeatherDataForLocation(Float latitude,
+                                               Float longitude) {
 
-    return new WeatherData(location, getDailyWeatherData(0), getDailyWeatherData(1),
-                           getWeatherDataFromAPI().hourlyUnitsAPI());
+    setWeatherDataFromAPI(latitude, longitude);
+
+    return new WeatherData(new Location(latitude, longitude), getDailyWeatherData(0),
+                           getDailyWeatherData(1), data.hourlyUnitsAPI());
   }
 
-  /** dayIndex 0 = today, dayIndex 1 = tomorrow **/
+  /**
+   * dayIndex 0 = today, dayIndex 1 = tomorrow
+   **/
   public DailyWeather getDailyWeatherData(int dayIndex) {
     int startIndex = 8;
     int endIndex = 18;
@@ -67,14 +71,14 @@ public class WeatherService {
       endIndex = 42;
     }
 
-    String date = getWeatherDataFromAPI().daily().time().get(dayIndex);
-    int weatherCode =getWeatherDataFromAPI().daily().weathercode().get(dayIndex);
-    List<String> time = getHourlyWeatherFromAPI().time().subList(startIndex, endIndex);
-    List<Double> temperature = getHourlyWeatherFromAPI().temperature().subList(startIndex, endIndex);
+    String date = data.daily().time().get(dayIndex);
+    int weatherCode = data.daily().weathercode().get(dayIndex);
+    List<String> time = hourlyData.time().subList(startIndex, endIndex);
+    List<Double> temperature = hourlyData.temperature().subList(startIndex, endIndex);
     List<Double> apparentTemperature =
-            getHourlyWeatherFromAPI().apparentTemperature().subList(startIndex, endIndex);
-    List<Double> precipitation = getHourlyWeatherFromAPI().precipitation().subList(startIndex, endIndex);
-    List<Double> windSpeed = getHourlyWeatherFromAPI().windSpeed().subList(startIndex, endIndex);
+            hourlyData.apparentTemperature().subList(startIndex, endIndex);
+    List<Double> precipitation = hourlyData.precipitation().subList(startIndex, endIndex);
+    List<Double> windSpeed = hourlyData.windSpeed().subList(startIndex, endIndex);
     Double maxTemp = getMax(apparentTemperature);
     Double minTemp = getMin(apparentTemperature);
     Double precipitationSum = getDoubleSum(precipitation);
@@ -83,7 +87,7 @@ public class WeatherService {
                             precipitation, windSpeed, maxTemp, minTemp, precipitationSum);
   }
 
-  // Utility methods
+  // Helper methods
   private Double getMax(List<Double> list) {
     return list.stream().max(comparator()).get();
   }
@@ -105,7 +109,4 @@ public class WeatherService {
       }
     };
   }
-
-
-
 }
