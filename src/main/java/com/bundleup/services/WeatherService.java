@@ -1,10 +1,10 @@
 package com.bundleup.services;
 
+import com.bundleup.model.APImodels.HourlyWeatherAPI;
+import com.bundleup.model.APImodels.WeatherDataAPI;
 import com.bundleup.model.DailyWeather;
 import com.bundleup.model.Location;
 import com.bundleup.model.WeatherData;
-import com.bundleup.model.APImodels.HourlyWeatherAPI;
-import com.bundleup.model.APImodels.WeatherDataAPI;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,52 +12,41 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WeatherService {
-  LocalDate today = LocalDate.now();
-  String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
-  Double latitude = 59.91;
-  Double longitude = 10.75;
-  String timezone = "Europe/Berlin";
-
-  private final String WEATHER_API_URL =
-          "https://api.open-meteo.com/v1/forecast?latitude=" + latitude +
-                                         "&longitude=" + longitude + "&hourly=temperature_2m," +
-                                         "apparent_temperature,precipitation," +
-                                         "windspeed_10m&daily=weathercode&windspeed_unit=ms" +
-                                         "&timezone=" + timezone + "&start_date=" + today +
-                                         "&end_date" + "=" + tomorrow;
-
   RestTemplate restTemplate;
   private WeatherDataAPI data;
+  private HourlyWeatherAPI hourlyData;
 
   public WeatherService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
   }
 
-  // Data from API
-  public WeatherDataAPI getWeatherDataFromAPI() {
-    if (data == null) {
-      data = restTemplate.getForObject(WEATHER_API_URL, WeatherDataAPI.class);
-    }
-    return data;
+  public WeatherData getWeatherDataForLocation(Float latitude,
+                                               Float longitude,
+                                               String timezone) {
+
+    LocalDate today = LocalDate.now();
+    String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
+
+    data = restTemplate.getForObject(
+            "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" +
+            longitude + "&hourly=temperature_2m,apparent_temperature,precipitation," +
+            "windspeed_10m&daily=weathercode&windspeed_unit=ms&timezone=" + timezone +
+            "&start_date=" + today + "&end_date=" + tomorrow, WeatherDataAPI.class);
+
+    assert data != null;
+    hourlyData = data.hourly();
+
+    return new WeatherData(new Location(latitude, longitude), getDailyWeatherData(0),
+                           getDailyWeatherData(1), data.hourlyUnitsAPI());
   }
 
-  public HourlyWeatherAPI getHourlyWeatherFromAPI() {
-    return getWeatherDataFromAPI().hourly();
-  }
-
-  // Service methods
-  public WeatherData getWeatherData() {
-    Location location =
-            new Location(getWeatherDataFromAPI().latitude(), getWeatherDataFromAPI().longitude());
-
-    return new WeatherData(location, getDailyWeatherData(0), getDailyWeatherData(1),
-                           getWeatherDataFromAPI().hourlyUnitsAPI());
-  }
-
-  /** dayIndex 0 = today, dayIndex 1 = tomorrow **/
+  /**
+   * dayIndex 0 = today, dayIndex 1 = tomorrow
+   **/
   public DailyWeather getDailyWeatherData(int dayIndex) {
     int startIndex = 8;
     int endIndex = 18;
@@ -67,45 +56,38 @@ public class WeatherService {
       endIndex = 42;
     }
 
-    String date = getWeatherDataFromAPI().daily().time().get(dayIndex);
-    int weatherCode =getWeatherDataFromAPI().daily().weathercode().get(dayIndex);
-    List<String> time = getHourlyWeatherFromAPI().time().subList(startIndex, endIndex);
-    List<Double> temperature = getHourlyWeatherFromAPI().temperature().subList(startIndex, endIndex);
-    List<Double> apparentTemperature =
-            getHourlyWeatherFromAPI().apparentTemperature().subList(startIndex, endIndex);
-    List<Double> precipitation = getHourlyWeatherFromAPI().precipitation().subList(startIndex, endIndex);
-    List<Double> windSpeed = getHourlyWeatherFromAPI().windSpeed().subList(startIndex, endIndex);
-    Double maxTemp = getMax(apparentTemperature);
-    Double minTemp = getMin(apparentTemperature);
-    Double precipitationSum = getDoubleSum(precipitation);
+    String date = data.daily().time().get(dayIndex);
+    int weatherCode = data.daily().weathercode().get(dayIndex);
+    List<String> time = hourlyData.time();
+    List<Double> temperature = hourlyData.temperature();
+    List<Double> apparentTemperature = hourlyData.apparentTemperature();
+    List<Double> precipitation = hourlyData.precipitation();
+    List<Double> windSpeed = hourlyData.windSpeed();
 
-    return new DailyWeather(date, weatherCode, time, temperature, apparentTemperature,
-                            precipitation, windSpeed, maxTemp, minTemp, precipitationSum);
+    // Between 8am and 5pm
+    Double maxTempDay = getMax(temperature.subList(startIndex, endIndex));
+    Double minTempDay = getMin(temperature.subList(startIndex, endIndex));
+    Double maxApparentTempDay = getMax(apparentTemperature.subList(startIndex, endIndex));
+    Double minApparentTempDay = getMin(apparentTemperature.subList(startIndex, endIndex));
+    Double precipitationSumDay = getDoubleSum(precipitation.subList(startIndex, endIndex));
+    Double maxWindSpeedDay = getMax(windSpeed.subList(startIndex, endIndex));
+
+    return new DailyWeather(date, weatherCode, maxTempDay, minTempDay, maxApparentTempDay,
+                            minApparentTempDay, precipitationSumDay, maxWindSpeedDay, time,
+                            temperature, apparentTemperature, precipitation, windSpeed);
   }
 
-  // Utility methods
+  // Helper methods
   private Double getMax(List<Double> list) {
-    return list.stream().max(comparator()).get();
+    return list.stream().max(Comparator.reverseOrder()).get();
   }
 
   private Double getMin(List<Double> list) {
-    return list.stream().min(comparator()).get();
+    return list.stream().min(Comparator.reverseOrder()).get();
   }
 
   private Double getDoubleSum(List<Double> list) {
     return list.stream().mapToDouble(Double::doubleValue).sum();
   }
-
-  private Comparator<Double> comparator() {
-    return (n1, n2) -> {
-      if (n1 < 0 && n2 < 0) {
-        return n2.compareTo(n1);
-      } else {
-        return n1.compareTo(n2);
-      }
-    };
-  }
-
-
 
 }

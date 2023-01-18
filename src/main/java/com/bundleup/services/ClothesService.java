@@ -39,9 +39,9 @@ public class ClothesService {
     public List<Clothes> weatherTooClothes(int index) {
         DailyWeather dailyWeather=weatherService.getDailyWeatherData(index);
 
-        double temp= dailyWeather.minTemp();
+        double temp= dailyWeather.minApparentTempDay();
 
-        boolean rain= dailyWeather.precipitationSum()>RAINAMOUNT && temp>SNOWRAINTEMP;
+        boolean rain= dailyWeather.precipitationSumDay()>RAINAMOUNT && temp>SNOWRAINTEMP;
 
         List<Weather> weathers =(List<Weather>) weatherRepository.findAll().stream()
                 .filter(w->w.getMax_temp()>=temp)
