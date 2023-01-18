@@ -51,10 +51,7 @@ public class TestController {
     Weather weather=weathers.get(0);
     Combo combo=comboRepository.findByWeather(weather);
 
-
     var clothes=(List<Clothes>)comboClothesRepository.findClothesByComboID(combo.getId());
-
-
     return clothes;
   }
 }
