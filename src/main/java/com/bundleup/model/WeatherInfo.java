@@ -1,10 +1,10 @@
 package com.bundleup.model;
 
+import com.bundleup.model.weatherApi.HourlyUnitsAPI;
+
 public record WeatherInfo(
-        Double latitude,
-        Double longitude,
-        String dateToday,
-        String dateTomorrow,
-        int weatherCodeToday,
-        int weatherCodeTomorrow
+        Location location,
+        DailyWeather today,
+        DailyWeather tomorrow,
+        HourlyUnitsAPI units
 ) {}

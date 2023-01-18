@@ -1,15 +1,17 @@
 package com.bundleup.services;
 
-import com.bundleup.model.database.Weather;
-import com.bundleup.model.weatherApi.HourlyWeather;
-import com.bundleup.model.weatherApi.WeatherData;
+import com.bundleup.model.DailyWeather;
+import com.bundleup.model.Location;
 import com.bundleup.model.WeatherInfo;
+import com.bundleup.model.weatherApi.HourlyWeatherAPI;
+import com.bundleup.model.weatherApi.WeatherDataAPI;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.List;
 
 @Service
 public class WeatherService {
@@ -24,27 +26,37 @@ public class WeatherService {
                                          "&end_date" + "=" + tomorrow;
 
   RestTemplate restTemplate;
-  private WeatherData data;
+  private WeatherDataAPI data;
 
   public WeatherService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
   }
 
-  public WeatherData getWeatherData() {
+  // Data from API
+  public WeatherDataAPI getWeatherDataFromAPI() {
     if (data == null) {
-      data = restTemplate.getForObject(WEATHER_API_URL, WeatherData.class);
+      data = restTemplate.getForObject(WEATHER_API_URL, WeatherDataAPI.class);
     }
     return data;
   }
 
-  public HourlyWeather getHourlyWeather() {
-    return getWeatherData().hourly();
+  public HourlyWeatherAPI getHourlyWeatherFromAPI() {
+    return getWeatherDataFromAPI().hourly();
   }
 
-  // Weather data between 8am and 5pm
-  // Indices today: 8 - 17
-  // Indices tomorrow: 32 - 41
-  public HourlyWeather getDaytimeWeather(int day) {
+  // Service methods
+  public WeatherInfo getWeatherInfo() {
+    Location location =
+            new Location(getWeatherDataFromAPI().latitude(), getWeatherDataFromAPI().longitude());
+
+    return new WeatherInfo(location, getDailyWeather(1), getDailyWeather(2),
+                           getWeatherDataFromAPI().hourlyUnitsAPI());
+  }
+
+  // day 1 = today
+  // day 2 = tomorrow
+  public DailyWeather getDailyWeather(int day) {
+    int dayIndex = day - 1;
     int startIndex = 8;
     int endIndex = 18;
 
@@ -53,23 +65,33 @@ public class WeatherService {
       endIndex = 42;
     }
 
-    return new HourlyWeather(
-            getHourlyWeather().time().subList(startIndex,endIndex),
-            getHourlyWeather().temperature().subList(startIndex,endIndex),
-            getHourlyWeather().apparentTemperature().subList(startIndex,endIndex),
-            getHourlyWeather().precipitation().subList(startIndex,endIndex),
-            getHourlyWeather().windSpeed().subList(startIndex,endIndex)
-    );
+    String date = getWeatherDataFromAPI().daily().time().get(dayIndex);
+    int weatherCode =getWeatherDataFromAPI().daily().weathercode().get(dayIndex);
+    List<String> time = getHourlyWeatherFromAPI().time().subList(startIndex, endIndex);
+    List<Double> temperature = getHourlyWeatherFromAPI().temperature().subList(startIndex, endIndex);
+    List<Double> apparentTemperature =
+            getHourlyWeatherFromAPI().apparentTemperature().subList(startIndex, endIndex);
+    List<Double> precipitation = getHourlyWeatherFromAPI().precipitation().subList(startIndex, endIndex);
+    List<Double> windSpeed = getHourlyWeatherFromAPI().windSpeed().subList(startIndex, endIndex);
+    Double maxTemp = getMax(apparentTemperature);
+    Double minTemp = getMin(apparentTemperature);
+    Double precipitationSum = getDoubleSum(precipitation);
+
+    return new DailyWeather(date, weatherCode, time, temperature, apparentTemperature,
+                            precipitation, windSpeed, maxTemp, minTemp, precipitationSum);
   }
 
-  public WeatherInfo getWeatherInfo() {
-    return new WeatherInfo(data.latitude(),
-                           data.longitude(),
-                           data.daily().time().get(0),
-                           data.daily().time().get(1),
-                           data.daily().weathercode().get(0),
-                           data.daily().weathercode().get(1)
-    );
+  // Utility methods
+  private Double getMax(List<Double> list) {
+    return list.stream().max(comparator()).get();
+  }
+
+  private Double getMin(List<Double> list) {
+    return list.stream().min(comparator()).get();
+  }
+
+  private Double getDoubleSum(List<Double> list) {
+    return list.stream().mapToDouble(Double::doubleValue).sum();
   }
 
   private Comparator<Double> comparator() {
@@ -81,27 +103,5 @@ public class WeatherService {
       }
     };
   }
-
-  public Weather getWeatherForDatabase(int day) {
-    HourlyWeather w = getDaytimeWeather(day);
-
-    Double maxTemp = w.apparentTemperature()
-                      .stream()
-                      .max(comparator())
-                      .get();
-    Double minTemp = w.apparentTemperature()
-                      .stream()
-                      .min(comparator())
-                      .get();
-
-    double precipitationSum = w.precipitation()
-                               .stream()
-                               .mapToDouble(Double::intValue)
-                               .sum();
-    boolean rain = precipitationSum > 0.5 && maxTemp > 0;
-
-    return new Weather(null, maxTemp, minTemp, rain);
-  }
-
 
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public record HourlyWeather(
+public record HourlyWeatherAPI(
         List<String> time,
         @JsonProperty("temperature_2m") List<Double> temperature,
         @JsonProperty("apparent_temperature") List<Double> apparentTemperature,

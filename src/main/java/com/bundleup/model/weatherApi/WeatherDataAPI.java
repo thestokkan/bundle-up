@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record WeatherData(
+public record WeatherDataAPI(
         Double latitude,
         Double longitude,
-        @JsonProperty("hourly_units")
-        HourlyUnits hourlyUnits,
-        @JsonProperty("hourly")
-        HourlyWeather hourly,
-        @JsonProperty("daily") DailyWeather daily) {}
+        @JsonProperty("hourly_units") HourlyUnitsAPI hourlyUnitsAPI,
+        @JsonProperty("hourly") HourlyWeatherAPI hourly,
+        @JsonProperty("daily") DailyWeatherAPI daily) {}
