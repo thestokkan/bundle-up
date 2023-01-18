@@ -79,24 +79,15 @@ public class WeatherService {
 
   // Helper methods
   private Double getMax(List<Double> list) {
-    return list.stream().max(Double::compare).get();
+    return list.stream().max(Comparator.reverseOrder()).get();
   }
 
   private Double getMin(List<Double> list) {
-    return list.stream().min(Double::compare).get();
+    return list.stream().min(Comparator.reverseOrder()).get();
   }
 
   private Double getDoubleSum(List<Double> list) {
     return list.stream().mapToDouble(Double::doubleValue).sum();
   }
 
-  private Comparator<Double> comparator() {
-    return (n1, n2) -> {
-      if (n1 < 0 && n2 < 0) {
-        return n2.compareTo(n1);
-      } else {
-        return n1.compareTo(n2);
-      }
-    };
-  }
 }
