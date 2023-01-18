@@ -18,6 +18,6 @@ public class LocationController {
 
   @GetMapping("/location")
   public LocationAPI getLocation(@RequestParam("name") String name) {
-    return locationService.result(name);
+    return locationService.getLocations(name);
   }
 }
