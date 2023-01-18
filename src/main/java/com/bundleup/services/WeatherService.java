@@ -1,9 +1,9 @@
 package com.bundleup.services;
 
-import com.bundleup.model.Weather;
-import com.bundleup.weatherApi.HourlyWeather;
-import com.bundleup.weatherApi.WeatherData;
-import com.bundleup.weatherApi.WeatherInfo;
+import com.bundleup.model.database.Weather;
+import com.bundleup.model.weatherApi.HourlyWeather;
+import com.bundleup.model.weatherApi.WeatherData;
+import com.bundleup.model.WeatherInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

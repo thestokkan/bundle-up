@@ -1,11 +1,11 @@
 package com.bundleup.controllers;
 
-import com.bundleup.model.Weather;
+import com.bundleup.model.database.Weather;
 import com.bundleup.services.WeatherService;
-import com.bundleup.weatherApi.DailyWeather;
-import com.bundleup.weatherApi.HourlyWeather;
-import com.bundleup.weatherApi.WeatherData;
-import com.bundleup.weatherApi.WeatherInfo;
+import com.bundleup.model.weatherApi.DailyWeather;
+import com.bundleup.model.weatherApi.HourlyWeather;
+import com.bundleup.model.weatherApi.WeatherData;
+import com.bundleup.model.WeatherInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,7 +1,7 @@
 package com.bundleup.repository;
 
-import com.bundleup.model.Combo;
-import com.bundleup.model.Weather;
+import com.bundleup.model.database.Combo;
+import com.bundleup.model.database.Weather;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ComboRepository extends CrudRepository<Combo,Long> {

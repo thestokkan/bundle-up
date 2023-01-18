@@ -1,4 +1,4 @@
-package com.bundleup.weatherApi;
+package com.bundleup.model;
 
 public record WeatherInfo(
         Double latitude,

@@ -1,4 +1,4 @@
-package com.bundleup.weatherApi;
+package com.bundleup.model.weatherApi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

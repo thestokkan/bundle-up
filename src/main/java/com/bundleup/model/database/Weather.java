@@ -1,6 +1,5 @@
-package com.bundleup.model;
+package com.bundleup.model.database;
 
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -12,12 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "combo_clothes")
-public class ComboClothes {
-
+@Table(name="weather")
+public class Weather {
     @Id
-    private ComboClothesID comboClothesID;
+    private Integer id;
 
+    private Double min_temp;
+    private Double max_temp;
 
+    private Boolean rain;
 
 }

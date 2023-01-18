@@ -1,4 +1,4 @@
-package com.bundleup.model;
+package com.bundleup.model.database;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
