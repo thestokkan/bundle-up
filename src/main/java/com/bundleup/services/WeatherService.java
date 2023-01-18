@@ -2,7 +2,7 @@ package com.bundleup.services;
 
 import com.bundleup.model.DailyWeather;
 import com.bundleup.model.Location;
-import com.bundleup.model.WeatherInfo;
+import com.bundleup.model.WeatherData;
 import com.bundleup.model.weatherApi.HourlyWeatherAPI;
 import com.bundleup.model.weatherApi.WeatherDataAPI;
 import org.springframework.stereotype.Service;
@@ -45,17 +45,17 @@ public class WeatherService {
   }
 
   // Service methods
-  public WeatherInfo getWeatherInfo() {
+  public WeatherData getWeatherData() {
     Location location =
             new Location(getWeatherDataFromAPI().latitude(), getWeatherDataFromAPI().longitude());
 
-    return new WeatherInfo(location, getDailyWeather(1), getDailyWeather(2),
+    return new WeatherData(location, getDailyWeatherData(1), getDailyWeatherData(2),
                            getWeatherDataFromAPI().hourlyUnitsAPI());
   }
 
   // day 1 = today
   // day 2 = tomorrow
-  public DailyWeather getDailyWeather(int day) {
+  public DailyWeather getDailyWeatherData(int day) {
     int dayIndex = day - 1;
     int startIndex = 8;
     int endIndex = 18;

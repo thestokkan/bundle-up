@@ -2,7 +2,7 @@ package com.bundleup.controllers;
 
 import com.bundleup.model.DailyWeather;
 import com.bundleup.services.WeatherService;
-import com.bundleup.model.WeatherInfo;
+import com.bundleup.model.WeatherData;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,18 +15,18 @@ public class WeatherController {
   }
 
   @GetMapping("/weather")
-  public WeatherInfo weatherData() {
-    return weatherService.getWeatherInfo();
+  public WeatherData weatherData() {
+    return weatherService.getWeatherData();
   }
 
   @GetMapping("/today")
   public DailyWeather daytime() {
-    return weatherService.getDailyWeather(1);
+    return weatherService.getDailyWeatherData(1);
   }
 
   @GetMapping("/tomorrow")
   public DailyWeather tomorrow() {
-    return weatherService.getDailyWeather(2);
+    return weatherService.getDailyWeatherData(2);
   }
 
 }

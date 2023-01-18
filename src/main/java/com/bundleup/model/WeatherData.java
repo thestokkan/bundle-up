@@ -2,7 +2,7 @@ package com.bundleup.model;
 
 import com.bundleup.model.weatherApi.HourlyUnitsAPI;
 
-public record WeatherInfo(
+public record WeatherData(
         Location location,
         DailyWeather today,
         DailyWeather tomorrow,
