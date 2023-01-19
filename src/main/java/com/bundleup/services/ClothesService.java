@@ -1,8 +1,6 @@
 package com.bundleup.services;
 
-import com.bundleup.model.ClothesCombo;
-import com.bundleup.model.DailyWeather;
-import com.bundleup.model.WeatherData;
+import com.bundleup.model.*;
 import com.bundleup.model.database.Clothes;
 import com.bundleup.model.database.Combo;
 import com.bundleup.model.database.Weather;
@@ -16,34 +14,32 @@ import java.util.List;
 @Service
 public class ClothesService {
 
-  private int RAINAMOUNT = 0;
-  private int SNOWRAINTEMP = -4;
+  private final int RAINAMOUNT = 0;
+  private final int SNOWRAINTEMP = -4;
 
-  private WeatherService weatherService;
-  private WeatherRepository weatherRepository;
+  private final WeatherRepository weatherRepository;
 
-  private ComboClothesRepository comboClothesRepository;
-  private ComboRepository comboRepository;
+  private final ComboClothesRepository comboClothesRepository;
+  private final ComboRepository comboRepository;
 
 
-  public ClothesService(WeatherService weatherService,
-                        WeatherRepository weatherRepository,
+  public ClothesService(WeatherRepository weatherRepository,
                         ComboClothesRepository comboClothesRepository,
                         ComboRepository comboRepository) {
-    this.weatherService = weatherService;
     this.weatherRepository = weatherRepository;
     this.comboClothesRepository = comboClothesRepository;
     this.comboRepository = comboRepository;
   }
 
   public ClothesCombo getClothesCombo(WeatherData weatherData) {
-    return new ClothesCombo(getDailyCombo(weatherData, 0), getDailyCombo(weatherData, 1));
+    return new ClothesCombo(getDailyCombo((WeatherDataBasic)weatherData, 0),
+                            getDailyCombo((WeatherDataBasic)weatherData, 1));
   }
 
-  private List<Clothes> getDailyCombo(WeatherData weatherData,
+  private List<Clothes> getDailyCombo(WeatherDataBasic weatherData,
                                       int dayIndex) {
-    DailyWeather dailyWeatherBasic = weatherData.today();
-    if (dayIndex == 1) dailyWeatherBasic = weatherData.tomorrow();
+    DailyWeatherBasic dailyWeatherBasic = weatherData.getToday();
+    if (dayIndex == 1) dailyWeatherBasic = weatherData.getTomorrow();
     double minTemp = dailyWeatherBasic.minApparentTempDay();
 
     boolean rain = dailyWeatherBasic.precipitationSumDay() > RAINAMOUNT && minTemp > SNOWRAINTEMP;
