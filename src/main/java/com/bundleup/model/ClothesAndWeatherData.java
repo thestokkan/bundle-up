@@ -1,6 +1,6 @@
 package com.bundleup.model;
 
 public record ClothesAndWeatherData(
-    BasicWeatherData basicWeatherData,
+    WeatherData weatherDataBasic,
     ClothesCombo clothesCombo
 ) {}

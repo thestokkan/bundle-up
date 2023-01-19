@@ -1,10 +1,8 @@
 package com.bundleup.services;
 
+import com.bundleup.model.*;
 import com.bundleup.model.APImodels.HourlyWeatherAPI;
 import com.bundleup.model.APImodels.WeatherDataAPI;
-import com.bundleup.model.DailyWeather;
-import com.bundleup.model.Location;
-import com.bundleup.model.WeatherData;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,7 +10,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class WeatherService {
@@ -27,8 +24,9 @@ public class WeatherService {
   }
 
   public WeatherData getWeatherDataForLocation(Float latitude,
-                                               Float longitude,
-                                               String timezone) {
+                                                       Float longitude,
+                                                       String timezone,
+                                                       String type) {
 
     LocalDate today = LocalDate.now();
     String tomorrow = (today.plusDays(1)).format(DateTimeFormatter.ISO_DATE);
@@ -41,11 +39,16 @@ public class WeatherService {
 
     assert data != null;
     hourlyData = data.hourly();
+    WeatherData weatherData;
 
-    return new WeatherData(getDailyWeatherData(0),
-                           getDailyWeatherData(1), data.hourlyUnitsAPI());
+    if (type.equals("basic")) {
+      weatherData = new WeatherDataBasic(getBasicDailyData(0), getBasicDailyData(1));
+    } else {
+      weatherData = new WeatherDataDetailed(getDetailedDailyData(0),
+                                     getDetailedDailyData(1));
+    }
 
-
+    return weatherData;
   }
 
 
@@ -53,7 +56,8 @@ public class WeatherService {
   /**
    * dayIndex 0 = today, dayIndex 1 = tomorrow
    **/
-  public DailyWeather getDailyWeatherData(int dayIndex) {
+  private DailyWeatherBasic getBasicDailyData(int dayIndex) {
+    // Between 8am and 5pm
     int startIndex = 8;
     int endIndex = 18;
 
@@ -64,13 +68,11 @@ public class WeatherService {
 
     String date = data.daily().time().get(dayIndex);
     int weatherCode = data.daily().weathercode().get(dayIndex);
-    List<String> time = hourlyData.time();
     List<Double> temperature = hourlyData.temperature();
     List<Double> apparentTemperature = hourlyData.apparentTemperature();
     List<Double> precipitation = hourlyData.precipitation();
     List<Double> windSpeed = hourlyData.windSpeed();
 
-    // Between 8am and 5pm
     Double maxTempDay = getMax(temperature.subList(startIndex, endIndex));
     Double minTempDay = getMin(temperature.subList(startIndex, endIndex));
     Double maxApparentTempDay = getMax(apparentTemperature.subList(startIndex, endIndex));
@@ -78,18 +80,37 @@ public class WeatherService {
     Double precipitationSumDay = getDoubleSum(precipitation.subList(startIndex, endIndex));
     Double maxWindSpeedDay = getMax(windSpeed.subList(startIndex, endIndex));
 
-    return new DailyWeather(date, weatherCode, maxTempDay, minTempDay, maxApparentTempDay,
-                            minApparentTempDay, precipitationSumDay, maxWindSpeedDay, time,
-                            temperature, apparentTemperature, precipitation, windSpeed);
+    return new DailyWeatherBasic(date, weatherCode, minTempDay, maxTempDay, minApparentTempDay,
+                            maxApparentTempDay, precipitationSumDay, maxWindSpeedDay);
   }
+
+
+  private DailyWeatherDetail getDetailedDailyData(int dayIndex) {
+    int startIndex = 0;
+    int endIndex = 23;
+
+    if (dayIndex == 1) {
+      startIndex = 24;
+      endIndex = 47;
+    }
+
+    List<String> time = hourlyData.time().subList(startIndex, endIndex);
+    List<Double> temperature = hourlyData.temperature().subList(startIndex, endIndex);
+    List<Double> apparentTemperature = hourlyData.apparentTemperature().subList(startIndex, endIndex);
+    List<Double> precipitation = hourlyData.precipitation().subList(startIndex, endIndex);
+    List<Double> windSpeed = hourlyData.windSpeed().subList(startIndex, endIndex);
+
+    return new DailyWeatherDetail(time, temperature, apparentTemperature, precipitation, windSpeed);
+  }
+
 
   // Helper methods
   private Double getMax(List<Double> list) {
-    return list.stream().max(Comparator.reverseOrder()).get();
+    return list.stream().max(Double::compare).get();
   }
 
   private Double getMin(List<Double> list) {
-    return list.stream().min(Comparator.reverseOrder()).get();
+    return list.stream().min(Double::compare).get();
   }
 
   private Double getDoubleSum(List<Double> list) {
