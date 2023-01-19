@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
-import {Button, Input, Link, Modal, Counter, Slider} from "./components";
+import {Button, Input, Link, Modal, Counter, Slider, WeatherPlot} from "./components";
 import {FaBeer, FaBicycle, FaBookOpen, FaLongArrowAltRight, FaSun, FaMoon} from "react-icons/fa";
 import {
   WiCloud,
@@ -71,13 +71,15 @@ function App() {
           <div className="toggle-theme">
             <Button onClick={() => {toggleTheme()}} type={"theme"} children={themeIcon}></Button>
           </div>
-          <img className="Bundled-up-logo" src="%PUBLIC_URL%/bundled-up.svg" alt="Bundled up kid"/>
+          <img className="Bundled-up-logo" src="bundled-up.svg" alt="Bundled up kid"/>
           <h1>
-            BundleUp!
+              VærKlar
           </h1>
 
+          <WeatherPlot/>
+
           <div className="temperature-setting">
-            <h4>Today's temperature:</h4>
+            <h4>Dagens temperatur:</h4>
             <Counter></Counter>
             <div className="weather-icons">
               <Button
