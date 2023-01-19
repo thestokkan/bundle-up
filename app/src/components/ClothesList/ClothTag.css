@@ -1,0 +1,39 @@
+li {
+  list-style: none;
+  background: #d1703c;
+  color: #fff;
+  height: 0;
+  line-height: 2em;
+  margin: 0;
+  padding: 0 0.5em;
+  overflow: hidden;
+  width: 10em;
+}
+
+li.show {
+  list-style: none;
+  background: #d1703c;
+  color: #fff;
+  line-height: 2em;
+  padding: 0 0.5em;
+  overflow: hidden;
+  width: 10em;
+
+  height: 2em;
+  margin: 2px 0;
+
+  animation: fadeIn 1s ease-out 0s;
+}
+
+@keyframes fadeIn {
+  0% {
+    height: 0;
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.9;
+    height: 2em;
+  }
+}
+
+

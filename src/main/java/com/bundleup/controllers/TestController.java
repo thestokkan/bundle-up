@@ -41,7 +41,8 @@ public class TestController {
   }
 
   @GetMapping("/getclothes")
-  public List<Clothes> home(@RequestParam(name = "temp") double temp,@RequestParam(name="rain") boolean rain) {
+  public List<Clothes> home(@RequestParam(name = "temp", defaultValue = "5") double temp,
+                            @RequestParam(name="rain", defaultValue="true") boolean rain) {
 
     List<Weather> weathers =(List<Weather>) weatherRepository.findAll().stream()
             .filter(w->w.getMax_temp()>=temp)
