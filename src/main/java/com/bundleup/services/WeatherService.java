@@ -20,8 +20,10 @@ public class WeatherService {
   private WeatherDataAPI data;
   private HourlyWeatherAPI hourlyData;
 
+
   public WeatherService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
+
   }
 
   public WeatherData getWeatherDataForLocation(Float latitude,
@@ -42,7 +44,11 @@ public class WeatherService {
 
     return new WeatherData(getDailyWeatherData(0),
                            getDailyWeatherData(1), data.hourlyUnitsAPI());
+
+
   }
+
+
 
   /**
    * dayIndex 0 = today, dayIndex 1 = tomorrow

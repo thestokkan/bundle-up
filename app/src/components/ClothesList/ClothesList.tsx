@@ -75,30 +75,37 @@ const ClothesList = ({clothes}:InProp) => {
 
  
 
-  const [listState, setlistState] = useState<typeof clothes>([]);
+  const [listState, setlistState] = useState<typeof clothes>(clothes);
   
 
-  const add = (cloth: Cloth,delay:number) => {
-    setTimeout(()=>{setlistState((listState) => [...listState, cloth])},delay)
-  };
+  // const add = (cloth: Cloth,delay:number) => {
+  //   setTimeout(()=>{setlistState((listState) => [...listState, cloth])},delay)
+  // };
 
-  useEffect(() => {
+  // useEffect(() => {
     
 
     
 
-    for (let i = 0; i < clothes.length; i++) {
+  //   for (let i = 0; i < clothes.length; i++) {
 
-      add(clothes[i],Math.round(i*2000));
-    }
+  //     add(clothes[i],Math.round(i*2000));
+  //   }
     
-  }, []);
+  // }, []);
+
+  const createStyle: (delay:number,duration:number)=>React.CSSProperties= (delay,duration)=>{
+
+    return{animationDelay:delay+"ms",
+    animationDuration:duration+"ms"}
+
+  }
 
   return (
     <ul>
       
-      {listState.map((c) => (
-        <ClothTag classname={["show"]} clothes={c.cloth} key={c.id} />
+      {listState.map((c,i) => (
+        <ClothTag style={createStyle(i*500,500)} classname={["show"]} clothes={c.cloth} key={c.id} />
       ))}
     </ul>
   );
