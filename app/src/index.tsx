@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
     // <React.StrictMode>
         <ThemeContextProvider>
-            <Clothes />
+            <App />
         </ThemeContextProvider>
     // </React.StrictMode>
 );
