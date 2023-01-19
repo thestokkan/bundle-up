@@ -40,7 +40,7 @@ public class WeatherService {
     assert data != null;
     hourlyData = data.hourly();
 
-    return new WeatherData(new Location(latitude, longitude), getDailyWeatherData(0),
+    return new WeatherData(getDailyWeatherData(0),
                            getDailyWeatherData(1), data.hourlyUnitsAPI());
   }
 
