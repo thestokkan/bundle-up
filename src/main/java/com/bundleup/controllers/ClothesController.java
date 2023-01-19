@@ -21,7 +21,7 @@ public class ClothesController {
     @GetMapping("/clothes")
     public List<Clothes> getClothes(@RequestParam(defaultValue = "0",required = false) int day){
 
-        return clothesService.weatherTooClothes(day);
+//        return clothesService.getClothesCombo(day);
 
     }
 }
