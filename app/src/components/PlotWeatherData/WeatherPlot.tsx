@@ -1,10 +1,21 @@
-import './WeatherPlot.css';
-
+// import './WeatherPlot.css';
+import {getWeatherData} from "../../fetchData";
+import {useEffect, useState} from "react";
 
 const WeatherPlot = () => {
+    const [weatherData, setWeatherData] = useState<any>(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            setWeatherData(await getWeatherData());
+        }
+
+        fetchData();
+    }, []);
+
     return (
         <div className="weather-plot">
-            <p>Weather Plot</p>
+            {JSON.stringify(weatherData)}
         </div>
     );
 };
