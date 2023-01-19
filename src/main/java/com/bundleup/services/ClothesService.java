@@ -1,5 +1,6 @@
 package com.bundleup.services;
 
+import com.bundleup.model.ClothesCombo;
 import com.bundleup.model.DailyWeather;
 import com.bundleup.model.WeatherData;
 import com.bundleup.model.database.Clothes;
@@ -9,51 +10,52 @@ import com.bundleup.repository.ComboClothesRepository;
 import com.bundleup.repository.ComboRepository;
 import com.bundleup.repository.WeatherRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Service
 public class ClothesService {
 
-    private int RAINAMOUNT=0;
-    private int SNOWRAINTEMP=-4;
+  private int RAINAMOUNT = 0;
+  private int SNOWRAINTEMP = -4;
 
-    private WeatherService weatherService;
-    private WeatherRepository weatherRepository;
+  private WeatherService weatherService;
+  private WeatherRepository weatherRepository;
 
-    private ComboClothesRepository comboClothesRepository;
-    private ComboRepository comboRepository;
+  private ComboClothesRepository comboClothesRepository;
+  private ComboRepository comboRepository;
 
 
-    public ClothesService(WeatherService weatherService,
-                          WeatherRepository weatherRepository,
-                          ComboClothesRepository comboClothesRepository,
-                          ComboRepository comboRepository) {
-        this.weatherService = weatherService;
-        this.weatherRepository = weatherRepository;
-        this.comboClothesRepository = comboClothesRepository;
-        this.comboRepository = comboRepository;
-    }
+  public ClothesService(WeatherService weatherService,
+                        WeatherRepository weatherRepository,
+                        ComboClothesRepository comboClothesRepository,
+                        ComboRepository comboRepository) {
+    this.weatherService = weatherService;
+    this.weatherRepository = weatherRepository;
+    this.comboClothesRepository = comboClothesRepository;
+    this.comboRepository = comboRepository;
+  }
 
-    public List<Clothes> weatherTooClothes(int index) {
-        DailyWeather dailyWeather=weatherService.getDailyWeatherData(index);
+  public ClothesCombo getClothesCombo(WeatherData weatherData) {
+    return new ClothesCombo(getDailyCombo(weatherData, 0), getDailyCombo(weatherData, 1));
+  }
 
-        double temp= dailyWeather.minApparentTempDay();
+  private List<Clothes> getDailyCombo(WeatherData weatherData,
+                                      int dayIndex) {
+    DailyWeather dailyWeatherBasic = weatherData.today();
+    if (dayIndex == 1) dailyWeatherBasic = weatherData.tomorrow();
+    double minTemp = dailyWeatherBasic.minApparentTempDay();
 
-        boolean rain= dailyWeather.precipitationSumDay()>RAINAMOUNT && temp>SNOWRAINTEMP;
+    boolean rain = dailyWeatherBasic.precipitationSumDay() > RAINAMOUNT && minTemp > SNOWRAINTEMP;
 
-        List<Weather> weathers =(List<Weather>) weatherRepository.findAll().stream()
-                .filter(w->w.getMax_temp()>=temp)
-                .filter(w->w.getMin_temp()<=temp)
-                .filter(w->w.getRain()==rain).toList();
+    List<Weather> weathers =
+            weatherRepository.findAll().stream().filter(w -> w.getMax_temp() >= minTemp)
+                             .filter(w -> w.getMin_temp() <= minTemp)
+                             .filter(w -> w.getRain() == rain).toList();
 
-        Weather weather=weathers.get(0);
-        Combo combo=comboRepository.findByWeather(weather);
-
-        var clothes=(List<Clothes>)comboClothesRepository.findClothesByComboID(combo.getId());
-        return clothes;
-
-    }
+    Weather weather = weathers.get(0);
+    Combo combo = comboRepository.findByWeather(weather);
+    return (List<Clothes>) comboClothesRepository.findClothesByComboID(combo.getId());
+  }
 
 }
