@@ -19,10 +19,12 @@ li.show {
   overflow: hidden;
   width: 10em;
 
-  height: 2em;
+  
   margin: 2px 0;
 
-  animation: fadeIn 1s ease-out 0s;
+  animation-name: fadeIn;
+  animation-timing-function: cubic-bezier(.36,-0.64,.34,1.76);;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fadeIn {
@@ -33,6 +35,8 @@ li.show {
   100% {
     opacity: 0.9;
     height: 2em;
+    margin: 2px 0;
+
   }
 }
 
