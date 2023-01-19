@@ -18,10 +18,10 @@ public class ClothesController {
         this.clothesService = clothesService;
     }
 
-    @GetMapping("/clothes")
-    public List<Clothes> getClothes(@RequestParam(defaultValue = "0",required = false) int day){
-
-//        return clothesService.getClothesCombo(day);
-
-    }
+//    @GetMapping("/clothes")
+//    public List<Clothes> getClothes(@RequestParam(defaultValue = "0",required = false) int day){
+//
+////        return clothesService.getClothesCombo(day);
+//
+//    }
 }

@@ -15,6 +15,7 @@ import {
   WiSnow,
   WiThunderstorm
 } from "react-icons/wi";
+import {Clothes} from "./components/Clothes";
 
 function App() {
   // Theme settings
@@ -129,6 +130,9 @@ function App() {
               />
             </div>
           </div>
+
+          <Clothes />
+
           <div className="input-and-button flex-row">
             <Input type="text"
                    className="connect-right"
