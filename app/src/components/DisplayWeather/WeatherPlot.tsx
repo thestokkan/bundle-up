@@ -1,5 +1,5 @@
 import './DisplayWeather.css';
-import {getWeatherData} from "../../fetchData";
+import {getWeatherDataAndClothesCombo} from "../../fetchData";
 import {useEffect, useState} from "react";
 import {LineChart, Line, CartesianGrid, XAxis, YAxis} from 'recharts';
 
@@ -8,7 +8,7 @@ const WeatherPlot = () => {
 
     useEffect(() => {
         async function fetchData() {
-            setWeatherData(await getWeatherData());
+            setWeatherData(await getWeatherDataAndClothesCombo());
         }
 
         fetchData();

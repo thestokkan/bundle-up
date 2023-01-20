@@ -5,31 +5,40 @@ export type LocationData = {
     timezone: string
 }
 
-async function getLocation(): Promise<LocationData> {
-    const locationUrl = "https://geocoding-api.open-meteo.com/v1/search?name=Berlin&count=1";
+async function getLocation(locationName: String): Promise<LocationData> {
+    const locationUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + locationName + "&count=1";
     const locationDataIn = await fetch(locationUrl);
     const data = await locationDataIn.json();
 
-    const locationName: string = data.results[0].name;
-    const latitude: number = data.results[0].latitude;
-    const longitude: number = data.results[0].longitude;
-    const timezone: string = data.results[0].timezone;
-
-    const locationData = {
-        locationName: locationName,
-        latitude: latitude,
-        longitude: longitude,
-        timezone: timezone
+    return {
+        locationName: data.results[0].name,
+        latitude: data.results[0].latitude,
+        longitude: data.results[0].longitude,
+        timezone: data.results[0].timezone
     };
-
-    return locationData;
 }
 
+export async function getWeatherDataAndClothesCombo(locationName: String) {
+    const locationData: LocationData = await getLocation(locationName);
+    const timezone = "Europe%2FBerlin";
 
-export async function getWeatherData() {
-    const locationData: LocationData = await getLocation();
-    const weatherUrl = "http://localhost:8080/weather?latitude=" + locationData.latitude
-        + "&longitude=" + locationData.longitude + "&timezone=Europe%2FBerlin";
+    const weatherUrl = "http://localhost:8080/weatherandcombo?latitude=" + locationData.latitude
+        + "&longitude=" + locationData.longitude + "&timezone=" + timezone;
+
+    const weatherDataIn = await fetch(weatherUrl);
+    const data = await weatherDataIn.json();
+
+    console.log(data);
+
+    return data;
+}
+
+export async function getDetailedWeatherData(locationName: String) {
+    const locationData: LocationData = await getLocation(locationName);
+    const timezone = "Europe%2FBerlin";
+
+    const weatherUrl = "http://localhost:8080/detailedweather?latitude=" + locationData.latitude
+        + "&longitude=" + locationData.longitude + "&timezone=" + timezone;
 
     const weatherDataIn = await fetch(weatherUrl);
     const data = await weatherDataIn.json();
