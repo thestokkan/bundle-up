@@ -69,6 +69,7 @@ function App() {
           <h1>
               VærKlar
           </h1>
+        </header>
 
           <WeatherPlot/>
 
@@ -90,7 +91,6 @@ function App() {
             />
           </div>
 
-        </header>
       </div>
   );
 }

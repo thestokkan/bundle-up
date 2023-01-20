@@ -1,4 +1,4 @@
-import './WeatherPlot.css';
+import './DisplayWeather.css';
 import {getWeatherData} from "../../fetchData";
 import {useEffect, useState} from "react";
 import {LineChart, Line, CartesianGrid, XAxis, YAxis} from 'recharts';
