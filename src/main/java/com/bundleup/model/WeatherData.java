@@ -1,3 +1,9 @@
 package com.bundleup.model;
 
-public interface WeatherData {}
+import com.bundleup.model.APImodels.HourlyUnitsAPI;
+
+public record WeatherData(
+        DailyWeather today,
+        DailyWeather tomorrow,
+        HourlyUnitsAPI units
+) {}

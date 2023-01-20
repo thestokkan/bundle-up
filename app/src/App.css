@@ -11,12 +11,14 @@
 }
 
 .App-header {
+  max-height: 100%;
   height: 22vh;
   padding-top: 6vw;
 }
 
 .logo-image {
   height: 16vw;
+  max-height: 100%;
   margin-right: 5px;
 }
 

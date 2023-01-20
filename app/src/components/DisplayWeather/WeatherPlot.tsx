@@ -1,27 +1,43 @@
 import './DisplayWeather.css';
-import {getWeatherDataAndClothesCombo} from "../../fetchData";
+import {getDetailedWeatherData} from "../../fetchData";
 import {useEffect, useState} from "react";
-import {LineChart, Line, CartesianGrid, XAxis, YAxis} from 'recharts';
+import {CartesianGrid, Line, LineChart, XAxis, YAxis} from 'recharts';
 
 const WeatherPlot = () => {
     const [weatherData, setWeatherData] = useState<any>(null);
 
     useEffect(() => {
         async function fetchData() {
-            setWeatherData(await getWeatherDataAndClothesCombo());
+            setWeatherData(await getDetailedWeatherData("Oslo"));
         }
 
         fetchData();
-    }, []);
+    }, []); // Runs every time this component (re)renders
 
-    const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
+
+    const [formattedWeatherData, setFormattedWeatherData] = useState<any>();
+
+    useEffect(() => {
+        if (weatherData) {
+            const today = [];
+
+            for (let i = 0; i < weatherData.today.time.length; i++) {
+                today.push({time: weatherData.today.time[i], temperature: weatherData.today.temperature[i]});
+            }
+
+            setFormattedWeatherData(today);
+        }
+
+
+    }, [weatherData]); // Runs on first render and when weatherData is updated
+
 
     const renderLineChart = (
-        <LineChart className="line-chart" data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-            <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-            <XAxis dataKey="name" />
-            <YAxis />
+        <LineChart className="line-chart" width={300} height={200} data={formattedWeatherData} margin={{top: 5, right: 20, bottom: 5, left: 0}}>
+            <Line type="monotone" dataKey="temperature" stroke="#8884d8"/>
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5"/>
+            <XAxis dataKey="time"/>
+            <YAxis/>
         </LineChart>
     );
 
