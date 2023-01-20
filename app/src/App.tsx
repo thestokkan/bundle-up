@@ -3,7 +3,8 @@ import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
 import {Button, Input, WeatherPlot} from "./components";
-import {FaLongArrowAltRight, FaMoon, FaSun} from "react-icons/fa";
+import {FaLongArrowAltRight, FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
+import {BiLineChart} from "react-icons/bi";
 import {Clothes} from "./components/Clothes";
 
 function App() {
@@ -19,6 +20,26 @@ function App() {
                 themeContext.setTheme("dark");
                 setThemeIcon(<FaSun/>);
             }
+        }
+    }
+
+    // Weather display button
+    const [weatherDisplayIcon, setWeatherDisplayIcon] = useState(<BiLineChart/>)
+    const toggleWeatherDisplay = () => {
+        if (weatherDisplayIcon === <BiLineChart/>) {
+            setWeatherDisplayIcon(<FaTemperatureLow/>);
+        } else {
+            setWeatherDisplayIcon(<BiLineChart/>);
+        }
+    }
+
+    // Toggle day button
+    const [day, setDay] = useState("DAG1")
+    const toggleDay = () => {
+        if (day === "DAG2") {
+            setDay("DAG1");
+        } else {
+            setDay("DAG2");
         }
     }
 
@@ -62,26 +83,42 @@ function App() {
                 </div>
             </header>
 
-            <WeatherPlot/>
+            <div className="app-body">
 
-            <Clothes/>
+                <WeatherPlot/>
 
-            <div className="input-and-button flex-row">
-                <Input type="text"
-                       className="connect-right"
-                       placeholderText="Sted"
-                       id="location"
-                       onChange={handleChange}
-                       onKeyDown={handleKeyDown}
-                       value={fieldInput}
-                />
-                <Button
-                    children=<FaLongArrowAltRight/>
-                    onClick={updateName}
-                    type="connect"
-                />
+                <Clothes/>
+
+                <div className="bottom-row flex-row">
+
+                    <div className="toggle-weather-display bottom-left">
+                        <Button onClick={() => {
+                            toggleWeatherDisplay()
+                        }} type={"icon"} children={weatherDisplayIcon}></Button>
+                    </div>
+
+                    <div className="input-and-button">
+                        <Input type="text"
+                               className="connect-right"
+                               placeholderText="Sted"
+                               id="location"
+                               onChange={handleChange}
+                               onKeyDown={handleKeyDown}
+                               value={fieldInput}
+                        />
+
+                        <Button
+                            children=<FaLongArrowAltRight/>
+                            onClick={updateName}
+                            type="connect"/>
+                    </div>
+                    <div className="toggle-day bottom-right">
+                        <Button onClick={() => {
+                            toggleDay()
+                        }} type={"icon"} children={day}></Button>
+                    </div>
+                </div>
             </div>
-
         </div>
     );
 }

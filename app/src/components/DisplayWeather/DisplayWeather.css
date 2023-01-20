@@ -1,10 +1,11 @@
 .display-weather {
-
-}
-
-.weather-plot {
     height: 250px;
     max-width: 100%;
     background-color: var(--neutral-color-xlight);
     margin-bottom: 32px;
+}
+
+.line-chart {
+    width: auto;
+    height: auto;
 }

@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 100vw;
+  width: 100%;
   background-color: var(--body-background-color);
   position: relative;
   border-radius: 12px;
@@ -32,7 +32,8 @@
   flex-direction: row;
   align-items: baseline;
   justify-content: space-around;
-  margin-top: 20px;
+  margin: 32px;
+  padding: 12px;
 }
 
 .weather-icons .icon {
@@ -44,9 +45,25 @@
 }
 
 .input-and-button {
-  width: 50%;
-  vertical-align: middle;
+  width: 45vw;
+  /*vertical-align: middle;*/
   margin: 12px 0;
+}
+
+.bottom-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-content: space-between;
+}
+
+
+.flex-row {
+  flex-direction: row;
+}
+
+.hidden {
+  display: none;
 }
 
 p {
@@ -74,25 +91,4 @@ h3 {
 h4 {
   font-size: var(--font-size-h4);
   color: var(--heading-color);
-}
-
-.link-list {
-  flex-direction: unset;
-  margin-top: 48px;
-}
-
-.flex-row {
-  flex-direction: unset;
-}
-
-.hidden {
-  display: none;
-}
-
-.icon-buttons {
-  margin: 20px 20px;
-}
-
-.temperature-setting {
-  margin-bottom: 32px;
 }

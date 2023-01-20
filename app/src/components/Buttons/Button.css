@@ -52,22 +52,6 @@ button:hover {
     color: var(--light-button-text-color);
 }
 
-.icon {
-    width: auto;
-    height: var(--font-size-icon-button);
-    border-radius: unset;
-    background-color: transparent;
-    border: none;
-    font-size: var(--font-size-icon-button);
-    color: var(--sharp-contrast-color-1);
-    text-align: center;
-}
-
-.icon:hover {
-    color: var(--hover-color);
-    background-color: transparent;
-}
-
 .cross {
     height: 48px;
     width: 48px;
@@ -94,6 +78,33 @@ button:hover {
 .counter#down:hover,
 .counter#up:hover {
     background-color: var(--hover-color);
+}
+
+.icon {
+    width: auto;
+    height: auto;
+    font-size: var(--font-size-h3);
+    color: var(--theme-button-color);
+    background-color: transparent;
+    margin: 5px;
+    padding: 0;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+}
+
+.icon:hover {
+    font-size: calc(var(--font-size-h3) + 2px);
+    background-color: transparent;
 }
 
 /* Theme button */
