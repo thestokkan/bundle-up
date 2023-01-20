@@ -33,7 +33,7 @@ const WeatherPlot = () => {
 
 
     const renderLineChart = (
-        <LineChart className="line-chart" width={300} height={200} data={formattedWeatherData} margin={{top: 5, right: 20, bottom: 5, left: 0}}>
+        <LineChart className="line-chart" width={320} height={200} data={formattedWeatherData} margin={{top: 5, right: 20, bottom: 5, left: 0}}>
             <Line type="monotone" dataKey="temperature" stroke="#8884d8"/>
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5"/>
             <XAxis dataKey="time"/>
