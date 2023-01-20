@@ -4,25 +4,35 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 100%;
-  max-width: 480px;
+  width: 100vw;
   background-color: var(--body-background-color);
   position: relative;
   border-radius: 12px;
 }
 
 .App-header {
-  padding: 36px 0;
+  height: 22vh;
+  padding-top: 6vw;
 }
 
-.App-logo {
-  size: 100px;
-  height: 100px;
-  pointer-events: none;
+.logo-image {
+  height: 16vw;
+  margin-right: 5px;
 }
 
-.Bundled-up-logo {
-  max-height: 150px;
+.logo-text {
+  font-size: 14vw;
+  font-family: Baskerville, sans-serif;
+  margin: 0;
+  color: var(--sharp-contrast-color-1);
+}
+
+.app-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 .weather-icons .icon {
@@ -34,8 +44,9 @@
 }
 
 .input-and-button {
+  width: 50%;
   vertical-align: middle;
-  margin: 24px 0;
+  margin: 12px 0;
 }
 
 p {

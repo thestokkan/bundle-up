@@ -41,7 +41,7 @@ button:hover {
     font-weight: bold;
     min-height: var(--button-min-height);
     border-radius: 0 12px 12px 0;
-    width: var(--button-width-small);
+    width: var(--button-min-height);
     margin: 0;
     padding: 0;
     vertical-align: bottom;
@@ -103,11 +103,11 @@ button:hover {
     font-size: var(--font-size-h3);
     color: var(--theme-button-color);
     background-color: transparent;
-    position: fixed;
-    margin: 0;
+    position: absolute;
+    margin: 5px;
     padding: 0;
-    top: 5%;
-    right: 3%;
+    top: 1%;
+    right: 1%;
 }
 
 .theme:hover {

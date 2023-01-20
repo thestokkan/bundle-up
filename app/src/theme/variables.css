@@ -60,7 +60,7 @@
     --slider-main-color-hover: var(--hover-color);
     --slider-track-color: var(--accent-color-xlight);
 
-    --theme-button-color: var(--sharp-contrast-color-1);
+    --theme-button-color: var(--accent-color-medium);
     --input-field-background-color: var(--neutral-color-xlight);
 }
 
