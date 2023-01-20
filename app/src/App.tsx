@@ -83,12 +83,17 @@ function App() {
                 </div>
             </header>
 
-            <div className="app-body">
+            <div className="App-body">
 
                 {/*Use Conditional rendering to display either basic data or plot*/}
                 <WeatherPlot/>
 
-                <Clothes/>
+                <div className="recommendation">
+                    <img className="oscar" src="raingear.png" alt="rain"/>
+                    <div>
+                        <Clothes/>
+                    </div>
+                </div>
 
                 <div className="bottom-row flex-row">
 

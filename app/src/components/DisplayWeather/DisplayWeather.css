@@ -1,6 +1,8 @@
-.display-weather {
+.weather-plot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     height: 250px;
-    max-width: 100%;
-    background-color: var(--neutral-color-xlight);
-    margin-bottom: 32px;
+    width: 100%;
+    margin: 32px 0;
 }
