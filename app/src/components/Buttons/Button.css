@@ -41,7 +41,7 @@ button:hover {
     font-weight: bold;
     min-height: var(--button-min-height);
     border-radius: 0 12px 12px 0;
-    width: var(--button-width-small);
+    width: var(--button-min-height);
     margin: 0;
     padding: 0;
     vertical-align: bottom;
@@ -50,22 +50,6 @@ button:hover {
 .connect:hover {
     background-image: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
     color: var(--light-button-text-color);
-}
-
-.icon {
-    width: auto;
-    height: var(--font-size-icon-button);
-    border-radius: unset;
-    background-color: transparent;
-    border: none;
-    font-size: var(--font-size-icon-button);
-    color: var(--sharp-contrast-color-1);
-    text-align: center;
-}
-
-.icon:hover {
-    color: var(--hover-color);
-    background-color: transparent;
 }
 
 .cross {
@@ -96,6 +80,33 @@ button:hover {
     background-color: var(--hover-color);
 }
 
+.icon {
+    width: auto;
+    height: auto;
+    font-size: var(--font-size-h3);
+    color: var(--theme-button-color);
+    background-color: transparent;
+    margin: 5px;
+    padding: 0;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+}
+
+.icon:hover {
+    font-size: calc(var(--font-size-h3) + 2px);
+    background-color: transparent;
+}
+
 /* Theme button */
 .theme {
     width: auto;
@@ -103,11 +114,11 @@ button:hover {
     font-size: var(--font-size-h3);
     color: var(--theme-button-color);
     background-color: transparent;
-    position: fixed;
-    margin: 0;
+    position: absolute;
+    margin: 5px;
     padding: 0;
-    top: 5%;
-    right: 3%;
+    top: 1%;
+    right: 1%;
 }
 
 .theme:hover {

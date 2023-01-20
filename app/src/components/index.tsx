@@ -5,4 +5,4 @@ export {Slider} from '../_unused_components/Slider';
 export {Modal} from './Modal';
 export {Counter} from './Counter';
 export {Toggle} from '../_unused_components/Toggle';
-export {WeatherPlot} from './PlotWeatherData';
+export {WeatherPlot} from './DisplayWeather';

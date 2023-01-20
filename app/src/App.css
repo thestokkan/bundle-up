@@ -1,27 +1,41 @@
 .App {
-  text-align: center;
-}
-
-.App-header {
-  max-width: 100%;
-  padding: 36px 0;
-  background-color: var(--body-background-color);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /*font-size: calc(10px + 2vmin);*/
+  text-align: center;
+  width: 100%;
+  background-color: var(--body-background-color);
+  position: relative;
+  border-radius: 12px;
 }
 
-.App-logo {
-  size: 100px;
-  height: 100px;
-  pointer-events: none;
+.App-header {
+  max-height: 100%;
+  height: 22vh;
+  padding-top: 6vw;
 }
 
-.Bundled-up-logo {
-  max-height: 150px;
+.logo-image {
+  height: 16vw;
+  max-height: 100%;
+  margin-right: 5px;
+}
+
+.logo-text {
+  font-size: 14vw;
+  font-family: Baskerville, sans-serif;
+  margin: 0;
+  color: var(--sharp-contrast-color-1);
+}
+
+.app-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-around;
+  margin: 32px;
+  padding: 12px;
 }
 
 .weather-icons .icon {
@@ -33,8 +47,25 @@
 }
 
 .input-and-button {
-  vertical-align: middle;
-  margin: 24px 0;
+  width: 45vw;
+  /*vertical-align: middle;*/
+  margin: 12px 0;
+}
+
+.bottom-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-content: space-between;
+}
+
+
+.flex-row {
+  flex-direction: row;
+}
+
+.hidden {
+  display: none;
 }
 
 p {
@@ -62,25 +93,4 @@ h3 {
 h4 {
   font-size: var(--font-size-h4);
   color: var(--heading-color);
-}
-
-.link-list {
-  flex-direction: unset;
-  margin-top: 48px;
-}
-
-.flex-row {
-  flex-direction: unset;
-}
-
-.hidden {
-  display: none;
-}
-
-.icon-buttons {
-  margin: 20px 20px;
-}
-
-.temperature-setting {
-  margin-bottom: 32px;
 }
