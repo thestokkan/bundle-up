@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
@@ -34,26 +34,32 @@ function App() {
     }
 
     // Toggle day button
-    const [day, setDay] = useState("DAG1")
+    const [day, setDay] = useState("today");
+    const [dayIcon, setDayIcon] = useState("I MORGEN");
     const toggleDay = () => {
-        if (day === "DAG2") {
-            setDay("DAG1");
+        if (day === "today") {
+            setDay("tomorrow");
+            console.log("day updated: " + day);
+            setDayIcon("I DAG");
         } else {
-            setDay("DAG2");
+            setDay("today");
+            setDayIcon("I MORGEN");
         }
     }
 
+    // useEffect(() => {
+    //
+    // }, [day]);
+
     // Connect input field and button
-    const [fieldInput, setFieldInput] = useState('Oslo');
-    const [updatedName, setUpdatedName] = useState(fieldInput);
+    const [locationName, setLocationName] = useState('Oslo');
+    const [updatedLocationName, setUpdatedLocationName] = useState(locationName);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFieldInput(event.target.value);
+        setLocationName(event.target.value);
     };
 
-    const updateName = () => {
-        setUpdatedName(fieldInput);
-        const welcome = document.getElementById("welcome");
-        if (welcome) welcome.className = "";
+    const updateLocationName = () => {
+        setUpdatedLocationName(locationName);
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -61,9 +67,16 @@ function App() {
 
         if (event.key === 'Enter') {
             event.preventDefault();
-            updateName();
+            updateLocationName();
         }
     };
+
+    // useEffect(() => {
+    //
+    //         updateLocationName();
+    //
+    // }, [locationName]);
+
 
     // Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,7 +98,13 @@ function App() {
 
             <div className="App-body">
 
-                <WeatherPlot/>
+                <div>
+                    <h3>{locationName} {day}</h3>
+                    <WeatherPlot
+                        day={day}
+                        location={locationName}
+                    />
+                </div>
 
                 <div className="recommendation">
                     <img className="oscar" src="raingear.png" alt="rain"/>
@@ -109,18 +128,18 @@ function App() {
                                id="location"
                                onChange={handleChange}
                                onKeyDown={handleKeyDown}
-                               value={fieldInput}
+                               value={locationName}
                         />
 
                         <Button
                             children=<FaLongArrowAltRight/>
-                            onClick={updateName}
+                            onClick={updateLocationName}
                             type="connect"/>
                     </div>
                     <div className="toggle-day bottom-right">
                         <Button onClick={() => {
                             toggleDay()
-                        }} type={"icon"} children={day}></Button>
+                        }} type={"icon"} children={dayIcon}></Button>
                     </div>
                 </div>
             </div>

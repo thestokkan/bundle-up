@@ -77,8 +77,6 @@ function App() {
                     VærKlar
                 </h1>
 
-                <WeatherPlot/>
-
                 <div className="temperature-setting">
                     <h4>Dagens temperatur:</h4>
                     <Counter></Counter>
