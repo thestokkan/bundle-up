@@ -85,7 +85,6 @@ function App() {
 
             <div className="App-body">
 
-                {/*Use Conditional rendering to display either basic data or plot*/}
                 <WeatherPlot/>
 
                 <div className="recommendation">
