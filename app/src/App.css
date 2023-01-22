@@ -1,7 +1,4 @@
 .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
   width: 100%;
   max-width: 480px;
@@ -13,6 +10,12 @@
 .App-header {
   height: 120px;
   padding-top: 12px;
+}
+
+.App-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo-image {
@@ -69,8 +72,8 @@
 }
 
 .oscar {
-  width: 30%;
-  height: 30%;
+  width: 200px;
+  height: auto;
 }
 
 .flex-row {
@@ -96,14 +99,17 @@ h1 {
 h2 {
   font-size: var(--font-size-h2);
   color: var(--heading-color);
+  margin: 0;
 }
 
 h3 {
   font-size: var(--font-size-h3);
   color: var(--heading-color);
+  margin: 0;
 }
 
 h4 {
   font-size: var(--font-size-h4);
   color: var(--heading-color);
+  margin: 0;
 }
