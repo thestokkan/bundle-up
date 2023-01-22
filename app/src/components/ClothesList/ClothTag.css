@@ -27,6 +27,10 @@ li.show {
   animation-fill-mode: forwards;
 }
 
+ul {
+  padding: 0;
+}
+
 @keyframes fadeIn {
   0% {
     height: 0;
@@ -39,5 +43,3 @@ li.show {
 
   }
 }
-
-
