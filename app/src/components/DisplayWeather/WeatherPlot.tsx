@@ -11,13 +11,15 @@ export type WeatherPlotProps = {
 const WeatherPlot = ({day, location}: WeatherPlotProps) => {
     const [weatherData, setWeatherData] = useState<any>(null);
 
+    console.log(getDetailedWeatherData(location))
+
     useEffect(() => {
         async function fetchData() {
             setWeatherData(await getDetailedWeatherData(location));
         }
 
         fetchData();
-    }, []); // Runs every time this component (re)renders
+    }, [day]); // Runs every time this component (re)renders
 
 
     const [formattedWeatherData, setFormattedWeatherData] = useState<any>();
