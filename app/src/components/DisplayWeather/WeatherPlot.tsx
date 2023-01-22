@@ -19,7 +19,7 @@ const WeatherPlot = ({day, location}: WeatherPlotProps) => {
         }
 
         fetchData();
-    }, [day]); // Runs every time this component (re)renders
+    }, [day, location]); // Runs every time this component (re)renders
 
 
     const [formattedWeatherData, setFormattedWeatherData] = useState<any>();
