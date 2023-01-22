@@ -3,7 +3,7 @@ import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
 import {Button, Input, WeatherPlot} from "./components";
-import {FaLongArrowAltRight, FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
+import {FaLongArrowAltRight, FaMoon, FaSun, FaTemperatureLow, FaCalendarMinus, FaCalendarPlus} from "react-icons/fa";
 import {BiLineChart} from "react-icons/bi";
 import {Clothes} from "./components/Clothes";
 
@@ -35,21 +35,17 @@ function App() {
 
     // Toggle day button
     const [day, setDay] = useState("today");
-    const [dayIcon, setDayIcon] = useState("I MORGEN");
+    const [dayIcon, setDayIcon] = useState(<FaCalendarPlus/>);
     const toggleDay = () => {
         if (day === "today") {
             setDay("tomorrow");
             console.log("day updated: " + day);
-            setDayIcon("I DAG");
+            setDayIcon(<FaCalendarMinus/>);
         } else {
             setDay("today");
-            setDayIcon("I MORGEN");
+            setDayIcon(<FaCalendarPlus/>);
         }
     }
-
-    // useEffect(() => {
-    //
-    // }, [day]);
 
     // Connect input field and button
     const [locationName, setLocationName] = useState('Oslo');
@@ -120,7 +116,8 @@ function App() {
 
                     <div className="input-and-button">
                         <Input type="text"
-                               className="connect-right"
+                               className="input"
+                               // className="input connect-right"
                                placeholderText="Sted"
                                id="location"
                                onChange={handleChange}
@@ -128,10 +125,10 @@ function App() {
                                value={locationName}
                         />
 
-                        <Button
-                            children=<FaLongArrowAltRight/>
-                            onClick={updateLocationName}
-                            type="connect"/>
+                        {/*<Button*/}
+                        {/*    children=<FaLongArrowAltRight/>*/}
+                        {/*    onClick={updateLocationName}*/}
+                        {/*    type="connect"/>*/}
                     </div>
                     <div className="toggle-day bottom-right">
                         <Button onClick={() => {

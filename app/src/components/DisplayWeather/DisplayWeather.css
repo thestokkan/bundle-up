@@ -1,4 +1,6 @@
 .weather-plot {
+    width: 98%;
+    height: 250px;
     margin: 12px 0;
 }
 
@@ -7,24 +9,54 @@
     display: block;
 }
 
+
+.legend-item-0 .recharts-legend-item-text {
+    color: var(--chart-temperature-color) !important;
+}
+
+.legend-item-0 .recharts-legend-icon {
+    stroke: var(--chart-temperature-color);;
+}
+
+.legend-item-1 .recharts-legend-item-text {
+    color: var(--chart-apparent-temperature-color) !important;
+}
+
+.legend-item-1 .recharts-legend-icon {
+    stroke: var(--chart-apparent-temperature-color);;
+}
+
+
+.recharts-line-curve#temp {
+    stroke: var(--chart-temperature-color);
+}
+
+.recharts-line-curve#appTemp {
+    stroke: var(--chart-apparent-temperature-color);
+}
+
 .recharts-line-dot {
     display: none;
 }
 
-.recharts-cartesian-grid-horizontal {
-    color: var(--accent-color-light);
+.recharts-cartesian-grid-vertical line {
+    stroke: none;
+}
+
+.recharts-cartesian-grid-horizontal line {
+    stroke: var(--chart-horizontal-line-color);
 }
 
 .recharts-tooltip-wrapper {
     padding: 0 12px;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: var(--tooltip-background-color);
     outline: none;
 }
 
 .label#temp {
-    color: #82ca9d;
+    color: var(--chart-temperature-color);
 }
 
 .label#apparent-temp {
-    color: #8884d8;
+    color: var(--chart-apparent-temperature-color);
 }

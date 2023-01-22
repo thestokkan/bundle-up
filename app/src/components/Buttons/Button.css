@@ -83,8 +83,8 @@ button:hover {
 .icon {
     width: auto;
     height: auto;
-    font-size: var(--font-size-h3);
-    color: var(--theme-button-color);
+    font-size: var(--font-size-h2);
+    color: var(--icon-button-color);
     background-color: transparent;
     margin: 5px;
     padding: 0;
@@ -103,7 +103,7 @@ button:hover {
 }
 
 .icon:hover {
-    font-size: calc(var(--font-size-h3) + 2px);
+    font-size: calc(var(--font-size-h2) + 3px);
     background-color: transparent;
 }
 
@@ -111,7 +111,7 @@ button:hover {
 .theme {
     width: auto;
     height: auto;
-    font-size: var(--font-size-h3);
+    font-size: var(--font-size-h4);
     color: var(--theme-button-color);
     background-color: transparent;
     position: absolute;
@@ -122,6 +122,6 @@ button:hover {
 }
 
 .theme:hover {
-    font-size: calc(var(--font-size-h3) + 2px);
+    font-size: calc(var(--font-size-h4) + 3px);
     background-color: transparent;
 }
