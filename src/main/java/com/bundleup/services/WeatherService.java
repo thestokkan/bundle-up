@@ -86,12 +86,14 @@ public class WeatherService {
 
 
   private DailyWeatherDetail getDetailedDailyData(int dayIndex) {
+    int length = hourlyData.time().size();
+
     int startIndex = 0;
-    int endIndex = 23;
+    int endIndex = length / 2;
 
     if (dayIndex == 1) {
-      startIndex = 24;
-      endIndex = 47;
+      startIndex = length / 2;
+      endIndex = length;
     }
 
     List<String> time = hourlyData.time().subList(startIndex, endIndex);
