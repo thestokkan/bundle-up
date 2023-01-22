@@ -12,14 +12,14 @@
     --neutral-color-light: #b3b3b3;
     --accent-color-dark: #19334d;
     --accent-color-medium: #336699;
-    --accent-color-light: #b2cce6;
+    --accent-color-light: #b2e6e6;
     --accent-color-xlight: #ecf2f9;
     --danger-soft-color: #ebaead;
     --danger-sharp-color: #BD312E;
 
     /* FONT SIZES */
     --font-size-body: 16px;
-    --font-size-input: 16px;
+    --font-size-input: 24px;
     --font-size-secondary: 14px;
     --font-size-link: 12px;
     --font-size-h1: 72px;
@@ -47,7 +47,7 @@
 
 .dark {
     --sharp-contrast-color-1: sandybrown;
-    --sharp-contrast-color-2: #00bfff;
+    --sharp-contrast-color-2: #4dd2ff;
     --h1-color: var(--sharp-contrast-color-1);
 
     --heading-color: var(--accent-color-light);
@@ -60,8 +60,16 @@
     --slider-main-color-hover: var(--hover-color);
     --slider-track-color: var(--accent-color-xlight);
 
-    --theme-button-color: var(--accent-color-medium);
-    --input-field-background-color: var(--neutral-color-xlight);
+    --theme-button-color: var(--sharp-contrast-color-1);
+    --input-field-background-color: var(--accent-color-light);
+    --icon-button-color: var(--accent-color-light);
+    --input-field-border: none;
+
+    --tooltip-background-color: rgb(0,0,0,0.5);
+    --chart-temperature-color: var(--sharp-contrast-color-1);
+    --chart-apparent-temperature-color: var(--sharp-contrast-color-2);
+    --chart-horizontal-line-color: var(--neutral-color-medium);
+
 }
 
 .light {
@@ -81,5 +89,11 @@
 
     --theme-button-color: var(--accent-color-light);
     --input-field-background-color: var(--accent-color-xlight);
+    --icon-button-color: var(--accent-color-medium);
+    --input-field-border: solid 1px var(--accent-color-light);
 
+    --tooltip-background-color: rgb(255, 255, 255, 0.6);
+    --chart-temperature-color: var(--sharp-contrast-color-1);
+    --chart-apparent-temperature-color: var(--sharp-contrast-color-2);
+    --chart-horizontal-line-color: var(--neutral-color-light);
 }

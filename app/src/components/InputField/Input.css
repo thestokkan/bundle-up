@@ -2,11 +2,13 @@ input {
     height: var(--field-min-height);
     background-color: var(--input-field-background-color);
     border-radius: 12px;
-    border: none;
+    border: var(--input-field-border);
     padding: 24px;
     font-size: var(--font-size-input);
     text-align: center;
     box-sizing: border-box;
+    outline: none;
+    max-width: 180px;
 }
 
 input:hover {
