@@ -99,7 +99,6 @@ function App() {
             <div className="App-body">
 
                 <div>
-                    <h3>{locationName} {day}</h3>
                     <WeatherPlot
                         day={day}
                         location={locationName}
@@ -108,9 +107,7 @@ function App() {
 
                 <div className="recommendation">
                     <img className="oscar" src="raingear.png" alt="rain"/>
-                    <div>
-                        <Clothes/>
-                    </div>
+                    <Clothes/>
                 </div>
 
                 <div className="bottom-row flex-row">
