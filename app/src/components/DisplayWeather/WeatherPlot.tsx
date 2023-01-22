@@ -32,7 +32,13 @@ const WeatherPlot = ({day, location}: WeatherPlotProps) => {
             const dailyData = [];
 
             for (let i = 0; i < data.time.length; i++) {
-                dailyData.push({time: data.time[i], temperature: data.temperature[i]});
+                const timeHours = new Date(data.time[i]).getHours().toString().padStart(2, '0');
+
+                dailyData.push({
+                    time: timeHours,
+                    temperature: data.temperature[i],
+                    apparentTemperature: data.apparentTemperature[i]
+                });
             }
 
             setFormattedWeatherData(dailyData);
@@ -43,7 +49,8 @@ const WeatherPlot = ({day, location}: WeatherPlotProps) => {
 
 
     const renderLineChart = (
-        <LineChart className="line-chart" width={320} height={200} data={formattedWeatherData} margin={{top: 5, right: 20, bottom: 5, left: 0}}>
+        <LineChart className="line-chart" width={320} height={200} data={formattedWeatherData}
+                   margin={{top: 5, right: 20, bottom: 5, left: 0}}>
             <Line type="monotone" dataKey="temperature" stroke="#8884d8"/>
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5"/>
             <XAxis dataKey="time"/>
