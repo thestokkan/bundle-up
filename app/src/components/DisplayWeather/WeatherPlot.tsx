@@ -52,6 +52,7 @@ const WeatherPlot = ({day, location}: WeatherPlotProps) => {
         if (active && payload && payload.length) {
             return (
                 <div className="custom-tooltip">
+                    <p className="label" id="time">{`${payload[0].payload.time}:00`}</p>
                     <p className="label" id="temp">{`${payload[0].value} ℃`}</p>
                     <p className="label" id="apparent-temp">{`${payload[1].value} ℃`}</p>
                 </div>
