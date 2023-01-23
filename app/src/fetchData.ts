@@ -26,24 +26,16 @@ export async function getWeatherDataAndClothesCombo(locationName: String) {
         + "&longitude=" + locationData.longitude + "&timezone=" + timezone;
 
     const weatherDataIn = await fetch(weatherUrl);
-    const data = await weatherDataIn.json();
-
-    console.log(data);
-
-    return data;
+    return await weatherDataIn.json();
 }
 
 export async function getDetailedWeatherData(locationName: String) {
     const locationData: LocationData = await getLocation(locationName);
-    const timezone = "Europe%2FBerlin";
 
     const weatherUrl = "/detailedweather?latitude=" + locationData.latitude
-        + "&longitude=" + locationData.longitude + "&timezone=" + timezone;
+        + "&longitude=" + locationData.longitude + "&timezone=" + locationData.timezone;
+
 
     const weatherDataIn = await fetch(weatherUrl);
-    const data = await weatherDataIn.json();
-
-    console.log(data);
-
-    return data;
+    return await weatherDataIn.json();
 }
