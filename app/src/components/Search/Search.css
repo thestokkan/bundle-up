@@ -1,0 +1,38 @@
+:root{
+    --height:4vh
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 45vh;
+
+}
+.myInput {
+    width: 98%;
+    height: var(--height);
+    border: 1px solid grey;
+
+    box-sizing: border-box; /* NEW; padding and border now absorbed into height:100% */
+}
+.myInputAddon {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 98%;
+    height: var(--height);
+    background-color: white;
+    border: 1px solid green;
+    box-sizing: border-box; /* NEW */
+}
+.myInputAddon:hover{
+
+    background-color: aqua;
+    cursor: pointer;
+
+}
+.suggestion-item{
+    display: flex;
+    flex-direction: row;
+    
+}

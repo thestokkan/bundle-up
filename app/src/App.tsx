@@ -103,7 +103,7 @@ function App() {
 
                 <div className="recommendation">
                     <img className="oscar" src="raingear.png" alt="rain"/>
-                    <Clothes/>
+                    <Clothes location={locationName} day={day}/>
                 </div>
 
                 <div className="bottom-row flex-row">

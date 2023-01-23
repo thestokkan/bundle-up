@@ -8,7 +8,7 @@ const SvgArray=()=>{
 
 }
 
-export default SvgArray
+
 
 
 
