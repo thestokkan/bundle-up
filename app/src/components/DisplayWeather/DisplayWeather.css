@@ -1,14 +1,54 @@
-.weather-plot {
-    width: 98%;
-    height: 250px;
+.weather-plot,
+.basic-weather {
+    width: 100%;
+    max-width: 480px;
+    height: 230px;
     margin: 12px 0;
 }
 
+.basic-weather-container {
+    width: 320px;
+    height: 230px;
+}
+
+.basic-weather {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.temperatures {
+    display: flex;
+    flex-direction: column;
+}
+
+p, h1, h4 {
+    margin: 0;
+}
+
+.main-temperature h1 {
+    color: var(--sharp-contrast-color-1);
+    font-size: 64px;
+}
+
+.apparent-temperature h3 {
+    color: var(--sharp-contrast-color-2);
+    margin-top: 12px;
+}
+
+.weather-symbol {
+    font-size: 120px;
+    color: var(--sharp-contrast-color-2);
+
+}
+
+/* Weather plot settings */
 .recharts-legend-item {
     overflow: visible;
     display: block;
 }
-
 
 .legend-item-0 .recharts-legend-item-text {
     color: var(--chart-temperature-color) !important;

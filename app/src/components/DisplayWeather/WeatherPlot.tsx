@@ -62,8 +62,8 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
 
     const renderChart = (
         <LineChart
-            width={480}
-            height={250}
+            width={350}
+            height={230}
             data={formattedWeatherData}
             margin={{
                 top: 5,
