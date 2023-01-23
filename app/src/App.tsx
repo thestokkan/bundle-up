@@ -1,11 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
 import {Button, Input, WeatherPlot} from "./components";
-import {FaLongArrowAltRight, FaMoon, FaSun, FaTemperatureLow, FaCalendarMinus, FaCalendarPlus} from "react-icons/fa";
+import {FaCalendarMinus, FaCalendarPlus, FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
 import {BiLineChart} from "react-icons/bi";
 import {Clothes} from "./components/Clothes";
+import BasicWeather from "./components/DisplayWeather/BasicWeatherData";
 
 function App() {
     // Theme settings
@@ -23,23 +24,12 @@ function App() {
         }
     }
 
-    // Weather display button
-    const [weatherDisplayIcon, setWeatherDisplayIcon] = useState(<BiLineChart/>)
-    const toggleWeatherDisplay = () => {
-        if (weatherDisplayIcon === <BiLineChart/>) {
-            setWeatherDisplayIcon(<FaTemperatureLow/>);
-        } else {
-            setWeatherDisplayIcon(<BiLineChart/>);
-        }
-    }
-
     // Toggle day button
     const [day, setDay] = useState("today");
     const [dayIcon, setDayIcon] = useState(<FaCalendarPlus/>);
     const toggleDay = () => {
         if (day === "today") {
             setDay("tomorrow");
-            console.log("day updated: " + day);
             setDayIcon(<FaCalendarMinus/>);
         } else {
             setDay("today");
@@ -67,12 +57,18 @@ function App() {
         }
     };
 
-    // useEffect(() => {
-    //
-    //         updateLocationName();
-    //
-    // }, [locationName]);
-
+    // Weather display button
+    const [weatherDisplayIcon, setWeatherDisplayIcon] = useState(<BiLineChart/>);
+    const [weatherDisplay, setWeatherDisplay] = useState("basic")
+    const toggleWeatherDisplay = () => {
+        if (weatherDisplay === "basic") {
+            setWeatherDisplay("chart");
+            setWeatherDisplayIcon(<FaTemperatureLow/>);
+        } else {
+            setWeatherDisplay("basic");
+            setWeatherDisplayIcon(<BiLineChart/>);
+        }
+    }
 
     // Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -95,10 +91,12 @@ function App() {
             <div className="App-body">
 
                 <div>
-                    <WeatherPlot
-                        day={day}
-                        location={locationName}
-                    />
+                    {weatherDisplay
+                        && (((weatherDisplay === "chart") &&
+                            (<WeatherPlot day={day} location={locationName}/>))
+                            || ((weatherDisplay === "basic"
+                                && <BasicWeather day={day} location={locationName}/>)))
+                        || <p>Loading...</p>}
                 </div>
 
                 <div className="recommendation">
@@ -110,14 +108,15 @@ function App() {
 
                     <div className="toggle-weather-display bottom-left">
                         <Button onClick={() => {
-                            toggleWeatherDisplay()
+                            toggleWeatherDisplay();
+                            console.log("CLICK!");
                         }} type={"icon"} children={weatherDisplayIcon}></Button>
                     </div>
 
                     <div className="input-and-button">
                         <Input type="text"
                                className="input"
-                               // className="input connect-right"
+                            // className="input connect-right"
                                placeholderText="Sted"
                                id="location"
                                onChange={handleChange}
