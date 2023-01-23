@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { Clothes } from './components/Clothes';
 import reportWebVitals from './reportWebVitals';
 import {ThemeContextProvider} from "./theme";
+
+import {Search} from "./components/Search";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

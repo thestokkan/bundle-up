@@ -2,6 +2,7 @@ import React from "react";
 import { ClothesList } from "../ClothesList";
 import { useState, useEffect } from "react";
 import useSWR from 'swr'
+import { getWeatherDataAndClothesCombo } from "../../fetchData";
 
 const clothes = [
     "Innerlag",
@@ -17,10 +18,10 @@ export type AllClothes = typeof clothes[number];
   const prioMap = new Map<AllClothes, number>();
   prioMap.set("Innerlag", 1);
   prioMap.set("Mellomlag", 2);
-  prioMap.set("Skalljakke/dress", 1);
-  prioMap.set("Vinterjakke/dress", 1);
-  prioMap.set("Regntøy", 1);
-  prioMap.set("Lue/votter", 1);
+  prioMap.set("Skalljakke/dress", 3);
+  prioMap.set("Vinterjakke/dress", 3);
+  prioMap.set("Regntøy", 3);
+  prioMap.set("Lue/votter", 4);
 
 export type Cloth = {
     cloth: AllClothes;
@@ -60,17 +61,14 @@ const dataTooObject = (data: Input) => {
 
 
 
-const Clothes=()=>{
-    //fetch("http://localhost:8080/getclothes").then(r=>r.json()).then(r=>(console.log(r)))
-    const { data, error } = useSWR<Input>("/getclothes", fetcher)
+const Clothes=({location,day}:{location:String,day:string})=>{
+    const { data, error } = useSWR<any>(location, getWeatherDataAndClothesCombo)
 
-    if(error) throw new Error("ERROR");
+
+    if(error) return null;
     if(data==undefined) return null;
 
-    const clothes=dataTooObject(data)
-    console.log(clothes)
-
-
+    let clothes=dataTooObject(data.clothesCombo[day])
 
     return(
         <ClothesList clothes={clothes}/>
