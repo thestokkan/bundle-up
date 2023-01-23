@@ -1,14 +1,9 @@
-.weather-plot,
-.basic-weather {
-    width: 100%;
-    max-width: 480px;
-    height: 230px;
-    margin: 12px 0;
-}
 
+/* Basic weather display */
 .basic-weather-container {
     width: 320px;
     height: 230px;
+    margin: 12px 0 0;
 }
 
 .basic-weather {
@@ -16,7 +11,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 0;
+    margin-top: 12px;
 }
 
 .temperatures {
@@ -24,8 +19,12 @@
     flex-direction: column;
 }
 
-p, h1, h4 {
+p, h2, h4 {
     margin: 0;
+}
+
+p {
+    font-size: 12px;
 }
 
 .main-temperature h1 {
@@ -45,17 +44,35 @@ p, h1, h4 {
 }
 
 /* Weather plot settings */
+
+.weather-plot {
+    width: 100%;
+    max-width: 480px;
+}
+
 .recharts-legend-item {
     overflow: visible;
     display: block;
 }
 
+.recharts-legend-wrapper {
+    width: unset;
+}
+
+.recharts-legend-item.legend-item-0 {
+    margin-right: 0!important;
+    margin-left: 18px;
+}
+
 .legend-item-0 .recharts-legend-item-text {
     color: var(--chart-temperature-color) !important;
 }
-
 .legend-item-0 .recharts-legend-icon {
-    stroke: var(--chart-horizontal-line-color);
+    stroke: var(--chart-temperature-color) !important;
+}
+
+.legend-item-1 {
+    margin-left: 0!important;
 }
 
 .legend-item-1 .recharts-legend-item-text {
@@ -63,7 +80,7 @@ p, h1, h4 {
 }
 
 .legend-item-1 .recharts-legend-icon {
-    stroke: var(--chart-apparent-temperature-color);
+    stroke: var(--chart-apparent-temperature-color) !important;
 }
 
 
