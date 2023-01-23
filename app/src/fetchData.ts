@@ -5,10 +5,15 @@ export type LocationData = {
     timezone: string
 }
 
-async function getLocation(locationName: String): Promise<LocationData> {
+async function getLocation(locationName: String ): Promise<LocationData|null> {
     const locationUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + locationName + "&count=1";
     const locationDataIn = await fetch(locationUrl);
     const data = await locationDataIn.json();
+
+    if(data.results==undefined){
+        return null;
+
+    }
 
     return {
         locationName: data.results[0].name,
@@ -19,23 +24,35 @@ async function getLocation(locationName: String): Promise<LocationData> {
 }
 
 export async function getWeatherDataAndClothesCombo(locationName: String) {
-    const locationData: LocationData = await getLocation(locationName);
+    const locationData: LocationData|null = await getLocation(locationName);
+    if(locationData==null) return null
     const timezone = "Europe%2FBerlin";
 
     const weatherUrl = "/weatherandcombo?latitude=" + locationData.latitude
         + "&longitude=" + locationData.longitude + "&timezone=" + timezone;
 
     const weatherDataIn = await fetch(weatherUrl);
-    return await weatherDataIn.json();
+    const data = await weatherDataIn.json();
+
+    console.log(data);
+
+    return data;
 }
 
 export async function getDetailedWeatherData(locationName: String) {
-    const locationData: LocationData = await getLocation(locationName);
+    const locationData: LocationData|null = await getLocation(locationName);
+
+    if(locationData==null) return null
+    const timezone = "Europe%2FBerlin";
 
     const weatherUrl = "/detailedweather?latitude=" + locationData.latitude
         + "&longitude=" + locationData.longitude + "&timezone=" + locationData.timezone;
 
 
     const weatherDataIn = await fetch(weatherUrl);
-    return await weatherDataIn.json();
+    const data = await weatherDataIn.json();
+
+    console.log(data);
+
+    return data;
 }

@@ -64,6 +64,8 @@ const dataTooObject = (data: Input) => {
 const Clothes=({location,day}:{location:String,day:string})=>{
     const { data, error } = useSWR<any>(location, getWeatherDataAndClothesCombo)
 
+    console.log(location)
+
 
     if(error) return null;
     if(data==undefined) return null;
