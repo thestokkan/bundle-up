@@ -15,7 +15,7 @@
 }
 
 .legend-item-0 .recharts-legend-icon {
-    stroke: var(--chart-temperature-color);;
+    stroke: var(--chart-horizontal-line-color);
 }
 
 .legend-item-1 .recharts-legend-item-text {
@@ -23,7 +23,7 @@
 }
 
 .legend-item-1 .recharts-legend-icon {
-    stroke: var(--chart-apparent-temperature-color);;
+    stroke: var(--chart-apparent-temperature-color);
 }
 
 

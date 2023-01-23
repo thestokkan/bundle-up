@@ -86,7 +86,7 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
 
     return (
         <div className="weather-plot">
-            {renderChart}
+            {renderChart && renderChart || <p>Laster graf...</p>}
         </div>
     );
 };

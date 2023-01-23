@@ -1,23 +1,38 @@
 import './DisplayWeather.css';
-import {getDetailedWeatherData, getWeatherDataAndClothesCombo} from "../../fetchData";
+import {getWeatherDataAndClothesCombo} from "../../fetchData";
 import {useEffect, useState} from "react";
 import {WeatherProps} from "./WeatherPlot";
 
 const BasicWeather = ({day, location}: WeatherProps) => {
-    const [weatherData, setWeatherData] = useState<any>(null);
+    const [data, setData] = useState<any>(null);
 
     useEffect(() => {
         async function fetchData() {
-            setWeatherData(await getWeatherDataAndClothesCombo(location));
+            setData(await getWeatherDataAndClothesCombo(location));
         }
 
         fetchData();
     }, [day, location]);
 
+    const [dailyData, setDailyData] = useState<any>();
+
+    useEffect(() => {
+
+        if (data) {
+            let weatherData = data.weatherDataBasic;
+            let dailyData = weatherData.today;
+            if (day === "tomorrow") dailyData = weatherData.tomorrow;
+
+            setDailyData(dailyData);
+        }
+
+
+    }, [data]); // Runs on first render and when data is updated
+
 
     return (
         <div className="basic-weather">
-            <p>Basic weather info</p>
+            {dailyData && dailyData.minTempDay || <p>Laster værdata....</p>}
         </div>
     );
 };
