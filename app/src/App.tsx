@@ -6,6 +6,7 @@ import {Button, Input, WeatherPlot} from "./components";
 import {FaCalendarMinus, FaCalendarPlus, FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
 import {BiLineChart} from "react-icons/bi";
 import {Clothes} from "./components/Clothes";
+import { useDebouceValue } from './utils/hooks';
 import BasicWeather from "./components/DisplayWeather/BasicWeatherData";
 
 function App() {
@@ -39,13 +40,13 @@ function App() {
 
     // Connect input field and button
     const [locationName, setLocationName] = useState('Oslo');
-    const [updatedLocationName, setUpdatedLocationName] = useState(locationName);
+    const debounceLocationName=useDebouceValue(locationName,500)
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocationName(event.target.value);
     };
 
     const updateLocationName = () => {
-        setUpdatedLocationName(locationName);
+        setLocationName(locationName);
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -93,23 +94,22 @@ function App() {
                 <div>
                     {weatherDisplay
                         && (((weatherDisplay === "chart") &&
-                            (<WeatherPlot day={day} location={locationName}/>))
+                            (<WeatherPlot day={day} location={debounceLocationName}/>))
                             || ((weatherDisplay === "basic"
-                                && <BasicWeather day={day} location={locationName}/>)))
+                                && <BasicWeather day={day} location={debounceLocationName}/>)))
                         || <p>Loading...</p>}
                 </div>
 
                 <div className="recommendation">
                     <img className="oscar" src="raingear.png" alt="rain"/>
-                    <Clothes location={locationName} day={day}/>
+                    <Clothes location={debounceLocationName} day={day}/>
                 </div>
 
                 <div className="bottom-row flex-row">
 
                     <div className="toggle-weather-display bottom-left">
                         <Button onClick={() => {
-                            toggleWeatherDisplay();
-                            console.log("CLICK!");
+                            toggleWeatherDisplay()
                         }} type={"icon"} children={weatherDisplayIcon}></Button>
                     </div>
 

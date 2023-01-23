@@ -1,6 +1,6 @@
 li {
   list-style: none;
-  background: #d1703c;
+  background: var(--sharp-contrast-color-1);
   color: #fff;
   height: 0;
   line-height: 2em;
@@ -8,11 +8,18 @@ li {
   padding: 0 0.5em;
   overflow: hidden;
   width: 10em;
+
 }
 
+li:hover{
+  background-color: var(--sharp-contrast-color-2);
+  cursor: pointer;
+}
+
+
+
 li.show {
-  list-style: none;
-  background: #d1703c;
+
   color: #fff;
   line-height: 2em;
   padding: 0 0.5em;
