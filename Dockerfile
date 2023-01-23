@@ -14,4 +14,4 @@ RUN mvn clean verify
 FROM openjdk:17-slim
 COPY --from=backend /backend/target/bundle-up-0.0.1-SNAPSHOT.jar /app/
 EXPOSE 8080
-CMD ["java", "-jar", "/app/app-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/bundle-up-0.0.1-SNAPSHOT.jar"]
