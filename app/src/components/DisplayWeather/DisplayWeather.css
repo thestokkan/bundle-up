@@ -3,7 +3,8 @@
 .basic-weather-container {
     width: 320px;
     height: 230px;
-    margin: 12px 0 0;
+    margin: 16px 0 0;
+    background-color: rgba(178, 230, 230, 0.2);
 }
 
 .basic-weather {
@@ -11,33 +12,53 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-top: 12px;
+}
+
+.inner-container {
+    height: 175px;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: flex-end;
+    justify-content: flex-end;
 }
 
 .temperatures {
+}
+
+.wind-and-rain {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-around;
+    font-size: 24px;
 }
 
-p, h2, h4 {
+.basic-weather-container p,
+.main-temperature h1,
+.basic-weather-container h2,
+.basic-weather-container h3,
+.basic-weather-container h4 {
     margin: 0;
+    font-weight: normal;
 }
 
-p {
+.heading {
+    background-color: rgba(178, 230, 230, 0.3);
+}
+
+.basic-weather-container p {
     font-size: 12px;
 }
 
-.main-temperature h1 {
-    color: var(--sharp-contrast-color-1);
-    font-size: 64px;
-}
-
 .apparent-temperature h3 {
-    color: var(--sharp-contrast-color-2);
     margin-top: 12px;
 }
 
 .weather-symbol {
+    display: flex;
+    flex-direction: column;
     font-size: 120px;
     color: var(--sharp-contrast-color-2);
 
