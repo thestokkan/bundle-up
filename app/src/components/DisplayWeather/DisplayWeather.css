@@ -5,6 +5,7 @@
     height: 230px;
     margin: 16px 0 0;
     background-color: rgba(178, 230, 230, 0.2);
+    padding-bottom: 12px;
 }
 
 .basic-weather {
@@ -69,6 +70,9 @@
 .weather-plot {
     width: 100%;
     max-width: 480px;
+    height: 250px;
+    background-color: rgba(178, 230, 230, 0.1);
+    padding-bottom: 12px;
 }
 
 .recharts-legend-item {

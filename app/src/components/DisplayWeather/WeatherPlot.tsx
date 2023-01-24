@@ -86,6 +86,7 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
 
     return (
         <div className="weather-plot">
+            <h4 className={"heading"}>{day === "today" && "I dag" || "I morgen"}</h4>
             {renderChart && renderChart || <p>Laster graf...</p>}
         </div>
     );
