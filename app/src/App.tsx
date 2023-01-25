@@ -2,9 +2,11 @@ import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
+import {FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
 import {Button, Input, WeatherPlot, LoadingAnimation} from "./components";
-import {FaCalendarMinus, FaCalendarPlus, FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
 import {BiLineChart} from "react-icons/bi";
+import tomorrow from './tomorrow.png'
+import yesterday from './yesterday.png'
 import {GoLocation} from "react-icons/go";
 import {Clothes} from "./components/Clothes";
 import {useDebouceValue} from './utils/hooks';
@@ -28,14 +30,14 @@ function App() {
 
     // Toggle day button
     const [day, setDay] = useState("today");
-    const [dayIcon, setDayIcon] = useState(<FaCalendarPlus/>);
+    const [dayIcon, setDayIcon] = useState(<img src={tomorrow} width={28}/>);
     const toggleDay = () => {
         if (day === "today") {
             setDay("tomorrow");
-            setDayIcon(<FaCalendarMinus/>);
+            setDayIcon(<img src={yesterday} width={28}/>);
         } else {
             setDay("today");
-            setDayIcon(<FaCalendarPlus/>);
+            setDayIcon(<img src={tomorrow} width={28}/>);
         }
     }
 
@@ -125,7 +127,7 @@ function App() {
                     <div className="toggle-weather-display">
                         <Button onClick={() => {
                             toggleWeatherDisplay()
-                        }} type={"icon"} children={weatherDisplayIcon}></Button>
+                        }} type={"round"} children={weatherDisplayIcon}></Button>
                     </div>
 
                     <div className="input-and-button">
@@ -155,7 +157,7 @@ function App() {
                     <div className="toggle-day">
                         <Button onClick={() => {
                             toggleDay()
-                        }} type={"icon"} children={dayIcon}></Button>
+                        }} type={"round"} children={dayIcon}></Button>
                     </div>
                 </div>
             </div>

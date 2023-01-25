@@ -54,9 +54,9 @@ button:hover {
 }
 
 .round {
-    background-image: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
-    color: var(--medium-button-text-color);
-    font-size: var(--font-size-input);
+    background-image: radial-gradient(var(--input-field-background-color) , var(--medium-button-background-color));
+    color: black;
+    font-size: 28px;
     font-weight: bold;
     min-height: var(--button-min-height);
     border-radius: 50%;
