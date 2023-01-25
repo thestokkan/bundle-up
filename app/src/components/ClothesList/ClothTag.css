@@ -1,52 +1,55 @@
-li {
-  list-style: none;
-  background: var(--sharp-contrast-color-1);
-  color: #fff;
-  height: 0;
-  line-height: 2em;
-  margin: 0;
-  padding: 0 0.5em;
-  overflow: hidden;
-  width: 10em;
 
-}
 
-li:hover{
+.tag-show:hover{
   background-color: var(--sharp-contrast-color-2);
   cursor: pointer;
 }
 
 
 
-li.show {
+.tag-show {
 
-  color: #fff;
-  line-height: 2em;
-  padding: 0 0.5em;
-  overflow: hidden;
-  width: 10em;
+/*  color: #fff;
+  opacity: 0.9;
+  height: 19%;
+  margin: 1% 0;*/
 
-  
-  margin: 2px 0;
+ 
 
-  animation-name: fadeIn;
+  background: var(--sharp-contrast-color-1);
+  height: 0;
+  margin-bottom: 1%;
+  color: var(--body-background-color);
+
+
+
+
+
+ animation-name: fadeIn;
   animation-timing-function: cubic-bezier(.36,-0.64,.34,1.76);;
   animation-fill-mode: forwards;
 }
 
-ul {
-  padding: 0;
-}
+
 
 @keyframes fadeIn {
   0% {
     height: 0;
-    opacity: 0.4;
+    opacity: 0.0;
   }
   100% {
     opacity: 0.9;
-    height: 2em;
-    margin: 2px 0;
+    height: 19%;
+    margin: 1% 0;
+    color: white;
 
   }
+}
+.empty-tag{
+  height: 100%;
+
+}
+
+.empty-tag, .tag-show{
+  width: 70%;
 }

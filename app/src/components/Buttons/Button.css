@@ -86,8 +86,10 @@ button:hover {
     font-size: var(--font-size-h2);
     color: var(--icon-button-color);
     background-color: transparent;
-    margin: 5px;
     padding: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
 }
 
 .bottom-left {
