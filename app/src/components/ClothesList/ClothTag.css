@@ -27,7 +27,7 @@
 
  animation-name: fadeIn;
   animation-timing-function: cubic-bezier(.36,-0.64,.34,1.76);;
-  animation-fill-mode: forwards;
+  animation-fill-mode:both;
 }
 
 

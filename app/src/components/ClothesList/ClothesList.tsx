@@ -9,7 +9,13 @@ type InProp={
 
 const ClothesList = ({clothes}:{clothes:Array<Cloth>}) => {
 
+
+
+  console.log("reerer")
+
+  
   const createStyle: (delay:number,duration:number)=>React.CSSProperties= (delay,duration)=>{
+    console.log("iu")
 
     return{animationDelay:delay+"ms",
     animationDuration:duration+"ms"}

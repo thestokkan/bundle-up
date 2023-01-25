@@ -65,9 +65,12 @@ const Clothes = ({ location, day }: { location: String; day: string }) => {
     getWeatherDataAndClothesCombo
   );
 
-  if (error) return null;
-  if (data==undefined) {
+  console.log(location);
 
+  if (error) return null;
+  if (isLoading) {
+
+    console.log("loading")
     return (
       <div className="clothes-list">
         <div className="empty-tag"></div>
@@ -76,8 +79,17 @@ const Clothes = ({ location, day }: { location: String; day: string }) => {
   }
 
   let clothes = dataTooObject(data.clothesCombo[day]);
+  console.log(isLoading)
 
-  return <ClothesList clothes={clothes} />;
+ /*  useEffect(()=>{
+      console.log("changed")
+  },[clothes]) */
+
+
+    return <ClothesList key={day} clothes={clothes} />;
+
+
+
 };
 
 export default Clothes;

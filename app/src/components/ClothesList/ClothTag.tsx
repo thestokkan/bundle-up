@@ -10,8 +10,8 @@ type Props={
 }
 
 
-
 const ClothTag=({classname,style,clothes}:Props)=>{
+    console.log("test")
 
     return(
         <div style={style} className={classname?.join(" ")}>{clothes}</div>
