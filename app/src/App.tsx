@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
-import {Button, Input, WeatherPlot} from "./components";
+import {Button, Input, WeatherPlot, LoadingAnimation} from "./components";
 import {FaCalendarMinus, FaCalendarPlus, FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
 import {BiLineChart} from "react-icons/bi";
 import {GoLocation} from "react-icons/go";
@@ -42,7 +42,6 @@ function App() {
     // Location settings
 
     const [geoLocationName, setGeoLocationName] = useState<string>("");
-    const [useGeoLocation, setUseGeoLocation] = useState(1);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -113,7 +112,7 @@ function App() {
                                 (<WeatherPlot day={day} location={debounceLocationName}/>))
                             || ((weatherDisplay === "basic"
                                 && <BasicWeather day={day} location={debounceLocationName}/>)))
-                        || <p>Loading...</p>}
+                        || <LoadingAnimation text={"Henter værdata..."}/>}
                 </div>
 
                 <div className="recommendation">
