@@ -1,7 +1,7 @@
 
 /* Basic weather display */
 .basic-weather-container {
-    width: 320px;
+    width: 80vw;
     height: 230px;
     margin: 16px 0 0;
     background-color: rgba(178, 230, 230, 0.2);
@@ -64,25 +64,19 @@
 
 }
 
-/* Weather plot settings */
-
 .weather-plot {
     width: 100%;
-    max-width: 480px;
+    height: 100%;
 }
 
+/* Weather plot settings */
 .recharts-legend-item {
     overflow: visible;
-    display: block;
-}
-
-.recharts-legend-wrapper {
-    width: unset;
+    /*display: block;*/
 }
 
 .recharts-legend-item.legend-item-0 {
-    margin-right: 0!important;
-    margin-left: 18px;
+    margin-right: 10px;
 }
 
 .legend-item-0 .recharts-legend-item-text {
