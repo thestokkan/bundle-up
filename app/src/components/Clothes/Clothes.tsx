@@ -65,12 +65,9 @@ const Clothes = ({ location, day }: { location: String; day: string }) => {
     getWeatherDataAndClothesCombo
   );
 
-  console.log(location);
-
   if (error) return null;
   if (data==undefined) {
 
-    console.log("loading")
     return (
       <div className="clothes-list">
         <div className="empty-tag"></div>
@@ -79,9 +76,6 @@ const Clothes = ({ location, day }: { location: String; day: string }) => {
   }
 
   let clothes = dataTooObject(data.clothesCombo[day]);
-  console.log(isLoading)
-
-
 
   return <ClothesList clothes={clothes} />;
 };

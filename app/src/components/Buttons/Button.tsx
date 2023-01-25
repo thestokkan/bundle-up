@@ -1,6 +1,6 @@
 import "./Button.css";
 
-type ButtonTypes = "grid" | "image" | "icon" | "connect" | "danger" | "default" | "primary" | "theme";
+type ButtonTypes = "image" | "icon" | "connect" | "danger" | "default" | "primary" | "theme" | "round";
 
 export type ButtonProps = {
     children?: React.ReactNode;

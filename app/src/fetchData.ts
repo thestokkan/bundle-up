@@ -26,15 +26,12 @@ async function getLocation(locationName: String ): Promise<LocationData|null> {
 export async function getWeatherDataAndClothesCombo(locationName: String) {
     const locationData: LocationData|null = await getLocation(locationName);
     if(locationData==null) return null
-    const timezone = "Europe%2FBerlin";
 
     const weatherUrl = "/weatherandcombo?latitude=" + locationData.latitude
-        + "&longitude=" + locationData.longitude + "&timezone=" + timezone;
+        + "&longitude=" + locationData.longitude + "&timezone=" + locationData.timezone;
 
     const weatherDataIn = await fetch(weatherUrl);
     const data = await weatherDataIn.json();
-
-    console.log(data);
 
     return data;
 }
@@ -43,7 +40,6 @@ export async function getDetailedWeatherData(locationName: String) {
     const locationData: LocationData|null = await getLocation(locationName);
 
     if(locationData==null) return null
-    const timezone = "Europe%2FBerlin";
 
     const weatherUrl = "/detailedweather?latitude=" + locationData.latitude
         + "&longitude=" + locationData.longitude + "&timezone=" + locationData.timezone;

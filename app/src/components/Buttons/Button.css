@@ -47,9 +47,22 @@ button:hover {
     vertical-align: bottom;
 }
 
-.connect:hover {
+.connect:hover,
+.round:hover {
     background-image: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
     color: var(--light-button-text-color);
+}
+
+.round {
+    background-image: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
+    color: var(--medium-button-text-color);
+    font-size: var(--font-size-input);
+    font-weight: bold;
+    min-height: var(--button-min-height);
+    border-radius: 50%;
+    width: var(--button-min-height);
+    margin: 0;
+    padding: 0;
 }
 
 .cross {
