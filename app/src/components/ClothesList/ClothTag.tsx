@@ -1,20 +1,29 @@
-import React from "react";
-import { Cloth,AllClothes } from "../Clothes/Clothes";
+import React, { useState } from "react";
+import { Modal } from "../Modal";
+import type {ClothesType } from "../Recommandation/Recommandation";
 import "./ClothTag.css"
 
 type Props={
-    clothes:AllClothes,
+    clothes:ClothesType,
     style?:React.CSSProperties
     classname?:string[]
+    setmodal?:React.Dispatch<React.SetStateAction<boolean>>
+    modal?:boolean
     
 }
 
 
-const ClothTag=({classname,style,clothes}:Props)=>{
+const ClothTag=({classname,style,clothes,modal,setmodal}:Props)=>{
+    //const [mod, setMod]=useState<boolean>(false)
+
+
+
     console.log("test")
 
+
+
     return(
-        <div style={style} className={classname?.join(" ")}>{clothes}</div>
+        <div style={style} className={classname?.join(" ")} onClick={()=>setmodal? setmodal(!modal): null}>{clothes}</div>
     )
 
 }
