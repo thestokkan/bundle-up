@@ -72,7 +72,7 @@ html, body {
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-evenly;
-    max-height: 30%;
+    height: 40%;
 
     width: 100%;
 }

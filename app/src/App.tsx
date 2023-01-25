@@ -8,7 +8,6 @@ import {BiLineChart} from "react-icons/bi";
 import tomorrow from './tomorrow.png'
 import yesterday from './yesterday.png'
 import {GoLocation} from "react-icons/go";
-import {Clothes} from "./components/Clothes";
 import {useDebouceValue} from './utils/hooks';
 import BasicWeather from "./components/DisplayWeather/BasicWeatherData";
 import { Recommendation } from './components/Recommandation';

@@ -1,6 +1,4 @@
 import React from "react";
-import ClothTag from "../ClothesList/ClothTag";
-import { Clothes } from "../Clothes";
 import { ClothesList } from "../ClothesList";
 import useSWR from "swr";
 import { getWeatherDataAndClothesCombo } from "../../fetchData";
@@ -34,7 +32,7 @@ prioMap.set("Vinterjakke/dress", {
   order: 3,
   path: "bparts/Vinterjakke-dress.png",
 });
-prioMap.set("Regntøy", { order: 4, path: "bparts/Regntøy.png" });
+prioMap.set("Regntøy", { order: 4, path: "bparts/Regnty.png" });
 prioMap.set("Lue/votter", { order: 5, path: "bparts/Lue-votter.png" });
 
 export type Cloth = {
@@ -51,7 +49,16 @@ type Input = {
 
 export type Day = "Today" | "Tomorrow";
 
-const dataTooObject = (data: Input) => {
+
+export const createStyle: (delay:number,duration:number)=>React.CSSProperties= (delay,duration)=>{
+
+    return{animationDelay:delay+"ms",
+    animationDuration:duration+"ms"}
+
+  }
+  
+
+const dataTooObject = (data: Input,duration=500,delay=500) => {
   const clothsimg: ClothImg[] = [];
   const clothes: Cloth[] = [];
 
@@ -61,19 +68,29 @@ const dataTooObject = (data: Input) => {
       cloth: v.name as ClothesType,
       id: v.id,
       path: prioMap.get(v.name as ClothesType)?.path ?? "bpart/OG",
+      
+      
     });
   });
 
   clothsimg.sort((a, b) => a.order - b.order);
-  clothsimg.forEach((v) => {
+  clothsimg.forEach((v,i) => {
     clothes.push({
       order: prioMap.get(v.cloth as ClothesType)?.order ?? 0,
       cloth: v.cloth as ClothesType,
       id: v.id,
     });
   });
+  const listStyle:React.CSSProperties[]=clothes.map((v,i)=>createStyle(delay*i,duration))
+  const imgStyle:React.CSSProperties[] =clothsimg.map((v,i)=>{
+    let tempStyle=createStyle(delay*i,duration)
+    return {animationDelay:tempStyle.animationDelay,
+            animationDuration:tempStyle.animationDuration,
+        zIndex:i+1}
+  })
 
-  return { cloths: clothes, clothsimg: clothsimg };
+
+  return { cloths: clothes, clothsimg: clothsimg, imgStyle:imgStyle,listStyle:listStyle };
 };
 
 const fetcher = async (
@@ -114,14 +131,14 @@ const Recommendation = ({
     return <div className={classname}>Error!</div>;
   }
 
-  let { cloths, clothsimg } = dataTooObject(data.clothesCombo[day]);
+  let { cloths, clothsimg,imgStyle,listStyle } = dataTooObject(data.clothesCombo[day]);
 
   return (
     <div className={classname}>
       {/* <Oscar klar={[]} /> */}
       {/* <img className="oscar" src="raingear.png" alt="rain"/> */}
-      <Oscar clothesImg={clothsimg}/>
-      <ClothesList key={day} clothes={cloths} />
+      <Oscar day={day} styles={imgStyle} clothesImg={clothsimg}/>
+      <ClothesList key={day} clothes={cloths} styles={listStyle} />
     </div>
   );
 

@@ -25,14 +25,14 @@
 
 
 
- animation-name: fadeIn;
+ animation-name: fadeInC;
   animation-timing-function: cubic-bezier(.36,-0.64,.34,1.76);;
-  animation-fill-mode:both;
+  animation-fill-mode:forwards;
 }
 
 
 
-@keyframes fadeIn {
+@keyframes fadeInC {
   0% {
     height: 0;
     opacity: 0.0;

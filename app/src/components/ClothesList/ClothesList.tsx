@@ -1,25 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import ClothTag from "./ClothTag";
-import {Cloth } from "../Clothes/Clothes";
+// import {Cloth } from "../Clothes/Clothes";
+import type { Cloth } from "../Recommandation/Recommandation";
 import "./ClothesList.css"
+import { Modal } from "../Modal";
 
 
 
 
 
-const ClothesList = ({clothes}:{clothes:Array<Cloth>}) => {
+
+const ClothesList = ({clothes,styles}:{clothes:Array<Cloth>,styles:Array<React.CSSProperties>}) => {
+
+  //useState(true)
+  const [mod,setMod] =useState(false)
 
 
 
   console.log("reerer")
  
-  
-  const createStyle: (delay:number,duration:number)=>React.CSSProperties= (delay,duration)=>{
-
-    return{animationDelay:delay+"ms",
-    animationDuration:duration+"ms"}
-
-  }
 
  
 
@@ -27,7 +26,7 @@ const ClothesList = ({clothes}:{clothes:Array<Cloth>}) => {
     <div className="clothes-list">
       
       {clothes.map((c,i) => (
-        <ClothTag style={createStyle(i*500,500)} classname={["tag-show"]} clothes={c.cloth} key={c.id} />
+        <ClothTag style={styles[i]} classname={["tag-show"]} clothes={c.cloth} key={c.id} />
       ))}
     </div>
   );
