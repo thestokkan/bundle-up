@@ -23,7 +23,7 @@ async function getLocation(locationName: String ): Promise<LocationData|null> {
     };
 }
 
-export async function getWeatherDataAndClothesCombo(locationName: String) {
+export async function getWeatherDataAndClothesCombo(locationName: String, random?:React.MutableRefObject<number>) {
     const locationData: LocationData|null = await getLocation(locationName);
     if(locationData==null) return null
 

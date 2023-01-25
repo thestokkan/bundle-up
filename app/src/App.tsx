@@ -11,6 +11,8 @@ import {GoLocation} from "react-icons/go";
 import {Clothes} from "./components/Clothes";
 import {useDebouceValue} from './utils/hooks';
 import BasicWeather from "./components/DisplayWeather/BasicWeatherData";
+import { Recommendation } from './components/Recommandation';
+import type { Day } from './components/Recommandation/Recommandation';
 
 function App() {
     // Theme settings
@@ -117,10 +119,7 @@ function App() {
                         || <LoadingAnimation text={"Henter værdata..."}/>}
                 </div>
 
-                <div className="recommendation">
-                    <img className="oscar" src="raingear.png" alt="rain"/>
-                    <Clothes location={debounceLocationName} day={day}/>
-                </div>
+                <Recommendation location={debounceLocationName} day={day as Day} classname={"recommendation"}/>
 
                 <div className="bottom-row">
 
