@@ -91,7 +91,7 @@ function App() {
 
             <div className="App-body">
 
-                <div>
+                <div className='weather-container'>
                     {weatherDisplay
                         && (((weatherDisplay === "chart") &&
                             (<WeatherPlot day={day} location={debounceLocationName}/>))
@@ -105,9 +105,9 @@ function App() {
                     <Clothes location={debounceLocationName} day={day}/>
                 </div>
 
-                <div className="bottom-row flex-row">
+                <div className="bottom-row">
 
-                    <div className="toggle-weather-display bottom-left">
+                    <div className="toggle-weather-display">
                         <Button onClick={() => {
                             toggleWeatherDisplay()
                         }} type={"icon"} children={weatherDisplayIcon}></Button>
@@ -129,7 +129,7 @@ function App() {
                         {/*    onClick={updateLocationName}*/}
                         {/*    type="connect"/>*/}
                     </div>
-                    <div className="toggle-day bottom-right">
+                    <div className="toggle-day">
                         <Button onClick={() => {
                             toggleDay()
                         }} type={"icon"} children={dayIcon}></Button>

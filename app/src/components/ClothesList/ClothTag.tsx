@@ -14,7 +14,7 @@ type Props={
 const ClothTag=({classname,style,clothes}:Props)=>{
 
     return(
-        <li style={style} className={classname?.join(" ")}>{clothes}</li>
+        <div style={style} className={classname?.join(" ")}>{clothes}</div>
     )
 
 }

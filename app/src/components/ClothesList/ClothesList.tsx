@@ -35,12 +35,12 @@ const ClothesList = ({clothes}:{clothes:Array<Cloth>}) => {
  
 
   return (
-    <ul>
+    <div className="clothes-list">
       
       {clothes.map((c,i) => (
-        <ClothTag style={createStyle(i*500,500)} classname={["show"]} clothes={c.cloth} key={c.id} />
+        <ClothTag style={createStyle(i*500,500)} classname={["tag-show"]} clothes={c.cloth} key={c.id} />
       ))}
-    </ul>
+    </div>
   );
 };
 
