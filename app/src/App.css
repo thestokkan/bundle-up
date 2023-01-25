@@ -83,7 +83,9 @@ html, body {
 .weather-container {
     display: flex;
     align-items: center;
-    flex-grow: 1;
+    /*flex-grow: 1;*/
+    width: 80vw;
+    max-width: 460px;
 }
 
 

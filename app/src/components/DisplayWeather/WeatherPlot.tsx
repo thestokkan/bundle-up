@@ -1,7 +1,7 @@
 import './DisplayWeather.css';
 import {getDetailedWeatherData} from "../../fetchData";
 import {useEffect, useState} from "react";
-import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from 'recharts';
+import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 
 export type WeatherProps = {
     day: string;
@@ -61,28 +61,30 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
     };
 
     const renderChart = (
-        <LineChart
-            width={450}
-            height={230}
-            data={formattedWeatherData}
-            margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-            }}
-        >
-            <title>{location} {day}</title>
-            <CartesianGrid/>
-            <XAxis dataKey="time" tickLine={false}/>
-            <YAxis tickLine={false} label={{value: "℃", position: "insideLeft", dy: -10}}
-                   axisLine={false}/>
-            <Line id="temp" type="monotone" dataKey="temp" name="Temperatur" activeDot={{r: 6}}/>
-            <Line id="appTemp" type="monotone" dataKey="appTemp" name="Føles som"/>
-            <Tooltip content={<CustomTooltip active={undefined} payload={undefined} label={undefined}/>}/>
-            <Legend/>
-        </LineChart>
-    );
+         <ResponsiveContainer height={230} width="100%">
+
+            <LineChart
+                data={formattedWeatherData}
+                margin={{
+                    top: 35,
+                    right: 5,
+                    left: 0,
+                    bottom: 5,
+                }}
+            >
+                <title>{location} {day}</title>
+                <CartesianGrid/>
+                <XAxis dataKey="time" tickLine={false}/>
+                <YAxis tickLine={false} label={{value: "℃", position: "insideLeft", dy: -95}}
+                       axisLine={false} width={30}/>
+                <Line id="temp" type="monotone" dataKey="temp" name="Temp" activeDot={{r: 6}}/>
+                <Line id="appTemp" type="monotone" dataKey="appTemp" name="Føles som"/>
+                <Tooltip content={<CustomTooltip active={undefined} payload={undefined} label={undefined}/>}/>
+                <Legend/>
+            </LineChart>
+        </ResponsiveContainer>
+)
+    ;
 
     return (
         <div className="weather-plot">
