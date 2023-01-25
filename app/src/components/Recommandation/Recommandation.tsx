@@ -5,6 +5,7 @@ import { ClothesList } from "../ClothesList";
 import useSWR from "swr";
 import { getWeatherDataAndClothesCombo } from "../../fetchData";
 import { Oscar } from "./Oscar";
+import "./Oscar.css"
 
 const clothes = [
   "Innerlag",
@@ -23,18 +24,18 @@ type LagInfo = {
 };
 
 const prioMap = new Map<ClothesType, LagInfo>();
-prioMap.set("Innerlag", { order: 1, path: "bpartsInnerlag.png" });
-prioMap.set("Mellomlag", { order: 2, path: "bpartsMellomlag.png" });
+prioMap.set("Innerlag", { order: 1, path: "bparts/Innerlag.png" });
+prioMap.set("Mellomlag", { order: 2, path: "bparts/Mellomlag.png" });
 prioMap.set("Skalljakke/dress", {
   order: 3,
-  path: "bpartsSkalljakke-dress.png.png",
+  path: "bparts/Skalljakke-dress.png.png",
 });
 prioMap.set("Vinterjakke/dress", {
   order: 3,
-  path: "bpartsVinterjakke-dress.png",
+  path: "bparts/Vinterjakke-dress.png",
 });
-prioMap.set("Regntøy", { order: 4, path: "bpartsRegntøy.png" });
-prioMap.set("Lue/votter", { order: 5, path: "bpartsLue-votter.png" });
+prioMap.set("Regntøy", { order: 4, path: "bparts/Regntøy.png" });
+prioMap.set("Lue/votter", { order: 5, path: "bparts/Lue-votter.png" });
 
 export type Cloth = {
   cloth: ClothesType;
@@ -118,7 +119,8 @@ const Recommendation = ({
   return (
     <div className={classname}>
       {/* <Oscar klar={[]} /> */}
-      <img className="oscar" src="raingear.png" alt="rain"/>
+      {/* <img className="oscar" src="raingear.png" alt="rain"/> */}
+      <Oscar clothesImg={clothsimg}/>
       <ClothesList key={day} clothes={cloths} />
     </div>
   );

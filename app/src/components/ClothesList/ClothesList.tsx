@@ -1,21 +1,20 @@
 import React from "react";
 import ClothTag from "./ClothTag";
-import { useState, useEffect } from "react";
 import {Cloth } from "../Clothes/Clothes";
+import "./ClothesList.css"
 
-type InProp={
-  clothes:Cloth[]
-}
+
+
+
 
 const ClothesList = ({clothes}:{clothes:Array<Cloth>}) => {
 
 
 
   console.log("reerer")
-
+ 
   
   const createStyle: (delay:number,duration:number)=>React.CSSProperties= (delay,duration)=>{
-    console.log("iu")
 
     return{animationDelay:delay+"ms",
     animationDuration:duration+"ms"}

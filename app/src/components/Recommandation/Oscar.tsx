@@ -1,16 +1,19 @@
 import React from "react";
 
 import type { ClothImg } from "./Recommandation";
+import "./Oscar.css"
 
 
 
-export const Oscar=({klar}:{klar:Array<ClothImg>})=>{
+export const Oscar=({clothesImg}:{clothesImg:Array<ClothImg>})=>{
 
     return(
-        <div className="clothes-layer">
-            {klar.map(k=>(
-                <img src={k.path} />
+        <div className="oscar">
+        <div className="clothes-layer-container">
+            {clothesImg.map(k=>(
+                <img className="layer-img" src={k.path} />
             ))}
+        </div>
         </div>
     )
 
