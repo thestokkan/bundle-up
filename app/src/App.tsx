@@ -39,8 +39,23 @@ function App() {
         }
     }
 
-    // Connect input field and button
-    const [locationName, setLocationName] = useState('Oslo');
+    // Location settings
+
+    const [geoLocationName, setGeoLocationName] = useState<string>("");
+    const [useGeoLocation, setUseGeoLocation] = useState(1);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            fetch(`https://api.weatherapi.com/v1/forecast.json?key=db698b5e650a441fae6190451221401&q=${position.coords.latitude},${position.coords.longitude}&days=1&aqi=yes&alerts=yes`)
+                .then(response => response.json())
+                .then(data => {
+                    setGeoLocationName(data.location.name);
+                    console.log("UPDATED GEO LOCATION NAME: " + geoLocationName);
+                    if (!locationName) setLocationName(data.location.name);
+                });
+        })
+    }, []);
+    const [locationName, setLocationName] = useState("");
     const debounceLocationName = useDebouceValue(locationName, 500)
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocationName(event.target.value);
@@ -58,20 +73,6 @@ function App() {
             updateLocationName();
         }
     };
-
-    const [geoLocationName, setGeoLocationName] = useState<string>("Bergen");
-    const [useGeoLocation, setUseGeoLocation] = useState(1);
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            fetch(`https://api.weatherapi.com/v1/forecast.json?key=db698b5e650a441fae6190451221401&q=${position.coords.latitude},${position.coords.longitude}&days=1&aqi=yes&alerts=yes`)
-                .then(response => response.json())
-                .then(data => {
-                    setGeoLocationName(data.location.name);
-                    console.log("UPDATED GEO LOCATION NAME: " + data.location.name);
-                });
-        })
-    }, [useGeoLocation]);
 
     // Weather display button
     const [weatherDisplayIcon, setWeatherDisplayIcon] = useState(<BiLineChart/>);
@@ -138,19 +139,19 @@ function App() {
                                onKeyDown={handleKeyDown}
                                value={locationName}
                         />
-                        <div className={"geolocation"}>
-                            <Button
-                                children=<GoLocation/>
-                                onClick={() => {
-                                    if (useGeoLocation === 1) setUseGeoLocation(2);
-                                    if (useGeoLocation === 2) setUseGeoLocation(1);
-                                    setLocationName(geoLocationName);
-                                    console.log(useGeoLocation);
-                                    console.log("geo location:" + geoLocationName);
-                                    console.log("set location:" + locationName);
-                                }}
-                                type="round"/>
-                        </div>
+                        {/*<div className={"geolocation"}>*/}
+                        {/*    <Button*/}
+                        {/*        children=<GoLocation/>*/}
+                        {/*        onClick={() => {*/}
+                        {/*            if (useGeoLocation === 1) setUseGeoLocation(2);*/}
+                        {/*            if (useGeoLocation === 2) setUseGeoLocation(1);*/}
+                        {/*            setLocationName(geoLocationName);*/}
+                        {/*            console.log(useGeoLocation);*/}
+                        {/*            console.log("geoLocationName:" + geoLocationName);*/}
+                        {/*            console.log("locationName:" + locationName);*/}
+                        {/*        }}*/}
+                        {/*        type="round"/>*/}
+                        {/*</div>*/}
                     </div>
                     <div className="toggle-day">
                         <Button onClick={() => {
