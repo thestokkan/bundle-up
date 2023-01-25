@@ -1,12 +1,13 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
 import {Button, Input, WeatherPlot} from "./components";
 import {FaCalendarMinus, FaCalendarPlus, FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
 import {BiLineChart} from "react-icons/bi";
+import {GoLocation} from "react-icons/go";
 import {Clothes} from "./components/Clothes";
-import { useDebouceValue } from './utils/hooks';
+import {useDebouceValue} from './utils/hooks';
 import BasicWeather from "./components/DisplayWeather/BasicWeatherData";
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
 
     // Connect input field and button
     const [locationName, setLocationName] = useState('Oslo');
-    const debounceLocationName=useDebouceValue(locationName,500)
+    const debounceLocationName = useDebouceValue(locationName, 500)
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocationName(event.target.value);
     };
@@ -57,6 +58,20 @@ function App() {
             updateLocationName();
         }
     };
+
+    const [geoLocationName, setGeoLocationName] = useState<string>("Bergen");
+    const [useGeoLocation, setUseGeoLocation] = useState(1);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            fetch(`https://api.weatherapi.com/v1/forecast.json?key=db698b5e650a441fae6190451221401&q=${position.coords.latitude},${position.coords.longitude}&days=1&aqi=yes&alerts=yes`)
+                .then(response => response.json())
+                .then(data => {
+                    setGeoLocationName(data.location.name);
+                    console.log("UPDATED GEO LOCATION NAME: " + data.location.name);
+                });
+        })
+    }, [useGeoLocation]);
 
     // Weather display button
     const [weatherDisplayIcon, setWeatherDisplayIcon] = useState(<BiLineChart/>);
@@ -91,10 +106,10 @@ function App() {
 
             <div className="App-body">
 
-                <div className='weather-container'>
+                <div className="weather-container">
                     {weatherDisplay
                         && (((weatherDisplay === "chart") &&
-                            (<WeatherPlot day={day} location={debounceLocationName}/>))
+                                (<WeatherPlot day={day} location={debounceLocationName}/>))
                             || ((weatherDisplay === "basic"
                                 && <BasicWeather day={day} location={debounceLocationName}/>)))
                         || <p>Loading...</p>}
@@ -116,18 +131,26 @@ function App() {
                     <div className="input-and-button">
                         <Input type="text"
                                className="input"
-                            // className="input connect-right"
+                            //    className="input connect-right"
                                placeholderText="Sted"
                                id="location"
                                onChange={handleChange}
                                onKeyDown={handleKeyDown}
                                value={locationName}
                         />
-
-                        {/*<Button*/}
-                        {/*    children=<FaLongArrowAltRight/>*/}
-                        {/*    onClick={updateLocationName}*/}
-                        {/*    type="connect"/>*/}
+                        <div className={"geolocation"}>
+                            <Button
+                                children=<GoLocation/>
+                                onClick={() => {
+                                    if (useGeoLocation === 1) setUseGeoLocation(2);
+                                    if (useGeoLocation === 2) setUseGeoLocation(1);
+                                    setLocationName(geoLocationName);
+                                    console.log(useGeoLocation);
+                                    console.log("geo location:" + geoLocationName);
+                                    console.log("set location:" + locationName);
+                                }}
+                                type="round"/>
+                        </div>
                     </div>
                     <div className="toggle-day">
                         <Button onClick={() => {
