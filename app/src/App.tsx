@@ -122,7 +122,7 @@ function App() {
                         && (((weatherDisplay === "chart") &&
                                 (<WeatherPlot day={day} location={debounceLocationName}/>))
                             || ((weatherDisplay === "basic"
-                                && <BasicWeather day={day} location={debounceLocationName}/>)))
+                                && (<BasicWeather day={day} location={debounceLocationName}/>))))
                         || <LoadingAnimation text={"Henter værdata..."}/>}
                 </div>
 

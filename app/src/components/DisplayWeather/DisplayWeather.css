@@ -2,8 +2,7 @@
 /* Basic weather display */
 .basic-weather-container {
     width: 100%;
-    height: 230px;
-    margin: 16px 0 0;
+    height: 220px;
     background-color: rgba(178, 230, 230, 0.2);
 }
 
@@ -24,7 +23,11 @@
     justify-content: flex-end;
 }
 
-.temperatures {
+@media screen and (min-width: 450px) {
+    .inner-container {
+        justify-content: space-around;
+    }
+
 }
 
 .wind-and-rain {
@@ -46,6 +49,12 @@
 
 .heading {
     background-color: rgba(178, 230, 230, 0.3);
+    font-weight: normal;
+    padding: 3px 0;
+}
+
+.weather-plot .heading {
+    margin-bottom: 12px;
 }
 
 .basic-weather-container p {
@@ -66,13 +75,13 @@
 
 .weather-plot {
     width: 100%;
-    height: 100%;
+    height: 220px;
+    margin-bottom: 32px;
 }
 
 /* Weather plot settings */
 .recharts-legend-item {
     overflow: visible;
-    /*display: block;*/
 }
 
 .recharts-legend-item.legend-item-0 {
