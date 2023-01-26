@@ -4,16 +4,17 @@ import type {ClothesType } from "../Recommandation/Recommandation";
 import "./ClothTag.css"
 
 type Props={
-    clothes:ClothesType,
+    clothes:ClothesType | string,
     style?:React.CSSProperties
     classname?:string[]
     setmodal?:React.Dispatch<React.SetStateAction<boolean>>
     modal?:boolean
+    click?:()=>void
     
 }
 
 
-const ClothTag=({classname,style,clothes,modal,setmodal}:Props)=>{
+const ClothTag=({classname,style,clothes,click}:Props)=>{
     //const [mod, setMod]=useState<boolean>(false)
 
 
@@ -23,7 +24,9 @@ const ClothTag=({classname,style,clothes,modal,setmodal}:Props)=>{
 
 
     return(
-        <div style={style} className={classname?.join(" ")} onClick={()=>setmodal? setmodal(!modal): null}>{clothes}</div>
+        <div style={style} className={classname?.join(" ")} onClick={click}>
+            {clothes}
+            </div>
     )
 
 }

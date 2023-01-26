@@ -1,12 +1,12 @@
 import React from "react";
 
-import type { ClothImg } from "./Recommandation";
+import type { Cloth } from "./Recommandation";
 import "./Oscar.css"
 
 
 
 
-export const Oscar=({clothesImg, styles,day}:{day:string, styles:Array<React.CSSProperties>,clothesImg:Array<ClothImg>})=>{
+export const Oscar=({clothesImg, styles,day}:{day:string, styles:Array<React.CSSProperties>,clothesImg:Array<Cloth>})=>{
 
     
 
