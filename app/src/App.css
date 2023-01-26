@@ -98,17 +98,6 @@ html, body {
     padding-top: 2%;
 }
 
-.toggle-weather-display {
-
-    padding-left: 3%;
-
-}
-
-.toggle-day {
-    padding-right: 3%;
-
-}
-
 .input-and-button {
     display: flex;
     flex-direction: row;
