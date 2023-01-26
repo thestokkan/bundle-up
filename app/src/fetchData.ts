@@ -12,7 +12,6 @@ async function getLocation(locationName: String ): Promise<LocationData|null> {
 
     if(data.results==undefined){
         return null;
-
     }
 
     return {
