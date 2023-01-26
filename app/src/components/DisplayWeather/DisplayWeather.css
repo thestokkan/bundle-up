@@ -45,6 +45,8 @@
 
 .heading {
     background-color: rgba(178, 230, 230, 0.3);
+    font-weight: normal;
+    padding: 3px 0;
 }
 
 .basic-weather-container p {
@@ -65,8 +67,8 @@
 
 .weather-plot {
     width: 100%;
-    height: 100%;
-    margin-bottom: 24px
+    height: 230px;
+    margin-bottom: 32px
 }
 
 /* Weather plot settings */
