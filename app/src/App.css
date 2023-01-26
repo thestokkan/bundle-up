@@ -3,12 +3,13 @@
 html, body {
     width: 100%;
     height: 100%;
-    background: #19334d;
+    background: var(--body-background-color);
 }
 
 .App {
     text-align: center;
-    width: 100%;
+    width: 100vw;
+    max-width: 500px;
     height: 100vh;
     background-color: var(--body-background-color);
     position: relative;
@@ -74,7 +75,7 @@ html, body {
     align-items: center;
     justify-content: space-evenly;
     height: 40%;
-    width: 80vw;
+    width: 80%;
     /*max-width: 480px;*/
 }
 
@@ -82,7 +83,7 @@ html, body {
     display: flex;
     align-items: center;
     /*flex-grow: 1;*/
-    width: 80vw;
+    width: 80%;
     /*max-width: 460px;*/
 }
 
