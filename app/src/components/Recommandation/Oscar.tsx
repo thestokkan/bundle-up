@@ -13,7 +13,7 @@ export const Oscar=({clothesImg, styles,day}:{day:string, styles:Array<React.CSS
     return(
         
         <div key={day} className="clothes-layer-container">
-            <img style={{"zIndex": "0"}} className="layer-img" src="bparts/kombo7.png" alt="base.png"/>
+            <img style={{"zIndex": "0"}} className="layer-img" src="bparts/komboMain.png" alt="base.png"/>
 
             {clothesImg.map((k,i)=>(
                 <img className="layer-img" src={k.path} style={styles[i]} alt={k.cloth}/>

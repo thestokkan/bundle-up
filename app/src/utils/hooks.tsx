@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {Item} from "../components/Search/Search";
 
-export function useOutsideAlerter(ref:React.MutableRefObject<HTMLElement | null>,setItems:React.Dispatch<React.SetStateAction<Item[]>>) {
+export function useOutsideAlerter(ref:React.MutableRefObject<HTMLElement | null>,callback:()=>void) {
     useEffect(() => {
         /**
          * do something if clicked on outside of element
          */
         function handleClickOutside(event:MouseEvent) {
             if (ref.current && !ref.current.contains(event.target as Node)) {
-                setItems([])
+                callback()
+                
             }
         }
         // Bind the event listener

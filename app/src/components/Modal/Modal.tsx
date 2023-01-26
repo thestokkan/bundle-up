@@ -7,7 +7,7 @@ type ModalProps = {
     isOpen: boolean;
     title?: string;
     buttons?: ButtonProps[];
-    button?: boolean
+    mref?:React.MutableRefObject<null>
 };
 
 const Modal = ({
@@ -16,19 +16,17 @@ const Modal = ({
                    isOpen,
                    title,
                    buttons,
-                   button=false
+                   mref
                }: ModalProps) => {
     if (!isOpen) return null;
 
     return (
-        <div className="modal-layout">
+        <div ref={mref}className="modal-layout">
             <div className="modal-header">
                 <h4>{title}</h4>
                 <CrossButton onClick={closeModal}></CrossButton>
             </div>
             <div className="modal-body">{children}</div>
-
-            {button? 
             <div className="btn-group">
                 {buttons?.map((button, index) => {
                     return (
@@ -38,8 +36,6 @@ const Modal = ({
                     );
                 })}
             </div>
-               :
-               null}
         </div>
     );
 };

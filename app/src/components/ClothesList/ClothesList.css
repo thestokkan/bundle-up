@@ -7,6 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
     min-width: 210px;
     width: 65%;
 }
@@ -16,10 +17,20 @@
     border:1px solid black;
     border-radius: 12%;
 }
+.info-text{
+    width: 30%;
+    font-size: larger;
+    text-align: left;
+   
+    /* justify-self: flex-start;  */
+}
 
 @media screen and (max-width: 440px){
     .clothes-list {
         align-items: end;
+    }
+    .info-text{
+        width: 50%;
     }
 
 }
