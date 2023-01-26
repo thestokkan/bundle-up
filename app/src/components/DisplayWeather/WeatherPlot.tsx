@@ -1,6 +1,6 @@
 import './DisplayWeather.css';
 import {getDetailedWeatherData} from "../../fetchData";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 
 export type WeatherProps = {
@@ -88,6 +88,7 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
 
     return (
         <div className="weather-plot">
+            <h4 className={"heading"}>{day === "today" && "I dag" || "I morgen"} 08 - 17</h4>
             {renderChart && renderChart || <p>Laster graf...</p>}
         </div>
     );
