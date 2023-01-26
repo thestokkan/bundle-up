@@ -1,6 +1,7 @@
 
 .tag-show:hover{
   background-image: var(--tag-linear-gradient-hover);
+  /* background-color: aqua; */
   cursor: pointer;
 }
 
@@ -8,8 +9,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: var(--tag-linear-gradient);
-  color: var(--tag-text-color);
+  
+  color: var(--body-background-color);
   font-size: 16px;
   font-weight: bold;
   height: 0;
@@ -32,6 +33,7 @@
     height: 16%;
     margin: 1% 0;
     color: var(--tag-text-color);
+    background-image: var(--tag-linear-gradient);
   }
 }
 

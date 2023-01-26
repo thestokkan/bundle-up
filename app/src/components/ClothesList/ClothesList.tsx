@@ -8,6 +8,15 @@ import { Modal } from "../Modal";
 
 const MiniInfo=({cloth}:{cloth:Cloth})=>{
 
+  return(
+
+    <>
+      <img className="modal-image" style={{zIndex:11}}src={cloth.path} alt={cloth.name}/>
+      <p>INFO</p>
+    </>
+
+  )
+
 }
 
 const ClothesList = ({clothes,styles}:{clothes:Array<Cloth>,styles:Array<React.CSSProperties>}) => {
@@ -22,7 +31,7 @@ const ClothesList = ({clothes,styles}:{clothes:Array<Cloth>,styles:Array<React.C
     if (open){
 
       return ( <Modal  closeModal={ ()=>setMod(false)} isOpen={true}>
-        {cloth? <p>{cloth?.cloth}</p>:null}
+        {cloth? <MiniInfo cloth={cloth}/>:null}
         </Modal>)
 
     }else return null

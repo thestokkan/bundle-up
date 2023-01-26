@@ -20,6 +20,7 @@ type LagInfo = {
   order: number;
   path: string;
   name: string;
+  info?:string;
 };
 
 const prioMap = new Map<ClothesType, LagInfo>();
@@ -62,6 +63,7 @@ export type Cloth = {
   id: number;
   path: string;
   name: string;
+  info: string;
 };
 // export type ClothImg = Cloth & { path: string };
 
@@ -90,6 +92,7 @@ const dataTooObject = (data: Input, duration = 500, delay = 500) => {
       id: v.id,
       path: prioMap.get(v.name as ClothesType)?.path ?? "bparts/OG.png",
       name: prioMap.get(v.name as ClothesType)?.name ?? "Error",
+      info: prioMap.get(v.name as ClothesType)?.info ?? "",
     });
   });
 

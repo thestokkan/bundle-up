@@ -11,6 +11,12 @@
     width: 65%;
 }
 
+.modal-image{
+    width: 40%;
+    border:1px solid black;
+    border-radius: 12%;
+}
+
 @media screen and (max-width: 440px){
     .clothes-list {
         align-items: end;
