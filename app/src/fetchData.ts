@@ -48,7 +48,5 @@ export async function getDetailedWeatherData(locationName: String) {
     const weatherDataIn = await fetch(weatherUrl);
     const data = await weatherDataIn.json();
 
-    console.log(data);
-
     return data;
 }

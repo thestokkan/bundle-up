@@ -31,27 +31,27 @@ prioMap.set("Innerlag", {
 prioMap.set("Mellomlag", {
   order: 2,
   path: "bparts/Mellomlag.png",
-  name: "INNERLAG",
+  name: "MELLOMLAG",
 });
 prioMap.set("Skalljakke/dress", {
   order: 3,
   path: "bparts/Skalljakke-dress.png.png",
-  name: "INNERLAG",
+  name: "SKALLDRESS",
 });
 prioMap.set("Vinterjakke/dress", {
   order: 3,
   path: "bparts/Vinterjakke-dress.png",
-  name: "INNERLAG",
+  name: "VINTERDRESS",
 });
 prioMap.set("Regntøy", {
   order: 4,
   path: "bparts/Regnty.png",
-  name: "INNERLAG",
+  name: "REGNTØY",
 });
 prioMap.set("Lue/votter", {
   order: 5,
   path: "bparts/Lue-votter.png",
-  name: "INNERLAG",
+  name: "LUE/VOTTER",
 });
 
 console.log(prioMap);
@@ -142,7 +142,6 @@ const Recommendation = ({
 
   if (error) return null;
   if (isLoading) {
-    console.log("loading");
     return (
       <div className="clothes-list">
         <div className="empty-tag"></div>
@@ -150,7 +149,6 @@ const Recommendation = ({
     );
   }
   if (!data) {
-    console.log("dataError");
     return <div className={classname}>Error!</div>;
   }
 

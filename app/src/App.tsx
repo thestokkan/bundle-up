@@ -52,7 +52,6 @@ function App() {
                 .then(response => response.json())
                 .then(data => {
                     setGeoLocationName(data.location.name);
-                    console.log("UPDATED GEO LOCATION NAME: " + geoLocationName);
                     if (!locationName) setLocationName(data.location.name);
                 });
         })
@@ -68,8 +67,6 @@ function App() {
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
-        console.log(event.key);
-
         if (event.key === 'Enter') {
             event.preventDefault();
             updateLocationName();
@@ -138,19 +135,6 @@ function App() {
                                onKeyDown={handleKeyDown}
                                value={locationName}
                         />
-                        {/*<div className={"geolocation"}>*/}
-                        {/*    <Button*/}
-                        {/*        children=<GoLocation/>*/}
-                        {/*        onClick={() => {*/}
-                        {/*            if (useGeoLocation === 1) setUseGeoLocation(2);*/}
-                        {/*            if (useGeoLocation === 2) setUseGeoLocation(1);*/}
-                        {/*            setLocationName(geoLocationName);*/}
-                        {/*            console.log(useGeoLocation);*/}
-                        {/*            console.log("geoLocationName:" + geoLocationName);*/}
-                        {/*            console.log("locationName:" + locationName);*/}
-                        {/*        }}*/}
-                        {/*        type="round"/>*/}
-                        {/*</div>*/}
                     </div>
                     <div className="toggle-day">
                         <Button onClick={() => {

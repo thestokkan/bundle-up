@@ -1,61 +1,42 @@
 
-
 .tag-show:hover{
-  background-color: var(--sharp-contrast-color-2);
+  background-image: var(--tag-linear-gradient-hover);
   cursor: pointer;
 }
 
-
-
 .tag-show {
-
-/*  color: #fff;
-  opacity: 0.9;
-  height: 19%;
-  margin: 1% 0;*/
-
- 
-
-  background: var(--sharp-contrast-color-1);
-  height: 0;
-  margin-bottom: 1%;
-  color: var(--body-background-color);
-
-/* 
-----center-- text
   display: flex;
   justify-content: center;
-  align-items: center; */
-
-
-
-
-
- animation-name: fadeInC;
+  align-items: center;
+  background-image: var(--tag-linear-gradient);
+  color: var(--tag-text-color);
+  font-size: 16px;
+  font-weight: bold;
+  height: 0;
+  margin-bottom: 1%;
+  border-radius: 12px;
+  animation-name: fadeInC;
   animation-timing-function: cubic-bezier(.36,-0.64,.34,1.76);;
   animation-fill-mode:forwards;
+  padding: 3px;
 }
-
-
 
 @keyframes fadeInC {
   0% {
     height: 0;
     opacity: 0.0;
   }
+
   100% {
     opacity: 0.9;
-    height: 19%;
+    height: 16%;
     margin: 1% 0;
-    color: white;
-
+    color: var(--tag-text-color);
   }
 }
 
-
 .empty-tag{
   height: 100%;
-
 }
 
 .empty-tag, .tag-show{

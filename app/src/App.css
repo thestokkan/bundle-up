@@ -1,26 +1,28 @@
 
 html, body {
+    width: 100%;
     height: 100%;
+    background: #19334d;
 }
 
 .App {
     text-align: center;
     width: 100%;
     max-width: 480px;
+    height: 100vh;
+    /*max-height: 900px;*/
     background-color: var(--body-background-color);
     position: relative;
-    border-radius: 12px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    height: 100vh;
     margin: 0;
     padding: 0;
 }
 
 .App-header {
-    height: 20%;
-    padding-top: 3%;
+    height: 100px;
+    padding-top: 46px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -56,7 +58,8 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 77%;
+    height: 100%;
+    width: 100%;
 }
 
 .weather-icons .icon {
@@ -70,15 +73,12 @@ html, body {
 .recommendation {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-evenly;
     height: 40%;
-
-    width: 100%;
+    width: 80vw;
+    max-width: 480px;
 }
-
-
-
 
 .weather-container {
     display: flex;
