@@ -7,6 +7,7 @@ import {Button, Input, WeatherPlot, LoadingAnimation} from "./components";
 import {BiLineChart} from "react-icons/bi";
 import tomorrow from './tomorrow.png'
 import yesterday from './yesterday.png'
+import thermometer from './thermometer.png'
 import {GoLocation} from "react-icons/go";
 import {useDebouceValue} from './utils/hooks';
 import BasicWeather from "./components/DisplayWeather/BasicWeatherData";
@@ -89,7 +90,7 @@ function App() {
     const toggleWeatherDisplay = () => {
         if (weatherDisplay === "basic") {
             setWeatherDisplay("chart");
-            setWeatherDisplayIcon(<FaTemperatureLow/>);
+            setWeatherDisplayIcon(<img src={thermometer} width={28}/>);
         } else {
             setWeatherDisplay("basic");
             setWeatherDisplayIcon(<BiLineChart/>);

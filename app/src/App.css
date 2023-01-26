@@ -1,3 +1,4 @@
+@import url("https://fonts.cdnfonts.com/css/arial-nova");
 
 html, body {
     width: 100%;
@@ -37,14 +38,14 @@ html, body {
 }
 
 .logo-image {
-    height: 72px;
-    max-height: 60%;
+    height: 96px;
+    max-height: 70%;
     margin-right: 5px;
 }
 
 .logo-text {
     font-size: 64px;
-    font-family: Baskerville, sans-serif;
+    font-family: "Arial Nova Cond", sans-serif;
     margin: 0;
     color: var(--sharp-contrast-color-1);
 }
