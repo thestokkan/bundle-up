@@ -55,8 +55,6 @@ prioMap.set("Lue/votter", {
   name: "LUE/VOTTER",
 });
 
-console.log(prioMap);
-
 export type Cloth = {
   cloth: ClothesType;
   order: number;
@@ -137,7 +135,7 @@ const Recommendation = ({
   day: Day;
   classname: string;
 }) => {
-  console.log("RECOMMANDATION");
+
   const { data, isLoading, error } = useSWR<any>(
     location,
     getWeatherDataAndClothesCombo
