@@ -22,7 +22,7 @@ html, body {
 
 .App-header {
     height: 100px;
-    padding-top: 46px;
+    padding-top: 32px;
     display: flex;
     flex-direction: row;
     justify-content: center;
