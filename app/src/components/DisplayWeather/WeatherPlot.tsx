@@ -61,7 +61,7 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
     };
 
     const renderChart = (
-         <ResponsiveContainer height={230} width="100%">
+         <ResponsiveContainer height={190} width="100%">
 
             <LineChart
                 data={formattedWeatherData}
@@ -75,7 +75,7 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
                 <title>{location} {day}</title>
                 <CartesianGrid/>
                 <XAxis dataKey="time" tickLine={false}/>
-                <YAxis tickLine={false} label={{value: "℃", position: "insideLeft", dy: -95}}
+                <YAxis tickLine={false} label={{value: "℃", position: "insideLeft", dy: -75}}
                        axisLine={false} width={30}/>
                 <Line id="temp" type="monotone" dataKey="temp" name="Temp" activeDot={{r: 6}}/>
                 <Line id="appTemp" type="monotone" dataKey="appTemp" name="Føles som"/>
