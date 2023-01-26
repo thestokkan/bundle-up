@@ -17,7 +17,7 @@ html, body {
     flex-direction: column;
     box-sizing: border-box;
     margin: 0;
-    padding: 24px 0;
+    padding: 8px 0;
 }
 
 .App-header {
@@ -45,7 +45,7 @@ html, body {
 }
 
 .logo-text {
-    font-size: 64px;
+    font-size: 20vw;
     font-family: "Arial Nova Cond", sans-serif;
     margin: 0;
     color: var(--sharp-contrast-color-1);

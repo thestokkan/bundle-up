@@ -3,7 +3,7 @@
 }
 
 .loading-text {
-    color: var(--neutral-color-xlight);
+    color: var(--body-font-color);
 }
 
 .lds-ripple {

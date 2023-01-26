@@ -2,7 +2,7 @@
 /* Basic weather display */
 .basic-weather-container {
     width: 100%;
-    height: 220px;
+    height: 200px;
     background-color: rgba(178, 230, 230, 0.2);
 }
 
@@ -14,8 +14,8 @@
 }
 
 .inner-container {
-    height: 175px;
-    width: 160px;
+    height: 145px;
+    width: 155px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,9 +68,8 @@
 .weather-symbol {
     display: flex;
     flex-direction: column;
-    font-size: 120px;
-    color: var(--sharp-contrast-color-2);
-
+    font-size: 90px;
+    color: var(--heading-color);
 }
 
 .weather-plot {
