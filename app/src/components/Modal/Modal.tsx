@@ -7,6 +7,7 @@ type ModalProps = {
     isOpen: boolean;
     title?: string;
     buttons?: ButtonProps[];
+    button?: boolean
 };
 
 const Modal = ({
@@ -15,6 +16,7 @@ const Modal = ({
                    isOpen,
                    title,
                    buttons,
+                   button=false
                }: ModalProps) => {
     if (!isOpen) return null;
 
@@ -25,6 +27,8 @@ const Modal = ({
                 <CrossButton onClick={closeModal}></CrossButton>
             </div>
             <div className="modal-body">{children}</div>
+
+            {button? 
             <div className="btn-group">
                 {buttons?.map((button, index) => {
                     return (
@@ -34,6 +38,8 @@ const Modal = ({
                     );
                 })}
             </div>
+               :
+               null}
         </div>
     );
 };
