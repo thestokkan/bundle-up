@@ -45,16 +45,26 @@ function App() {
     // Location settings
 
     const [geoLocationName, setGeoLocationName] = useState<string>("");
+    const options: PositionOptions = {
+        timeout: 10_000
+    }
+
+    function error(err: GeolocationPositionError) {
+        setLocationName("Stavanger");
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    function success(position: GeolocationPosition) {
+        fetch(`https://api.weatherapi.com/v1/forecast.json?key=db698b5e650a441fae6190451221401&q=${position.coords.latitude},${position.coords.longitude}&days=1&aqi=yes&alerts=yes`)
+            .then(response => response.json())
+            .then(data => {
+                setGeoLocationName(data.location.name);
+                if (!locationName) setLocationName(data.location.name);
+            });
+    }
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            fetch(`https://api.weatherapi.com/v1/forecast.json?key=db698b5e650a441fae6190451221401&q=${position.coords.latitude},${position.coords.longitude}&days=1&aqi=yes&alerts=yes`)
-                .then(response => response.json())
-                .then(data => {
-                    setGeoLocationName(data.location.name);
-                    if (!locationName) setLocationName(data.location.name);
-                });
-        })
+        navigator.geolocation.getCurrentPosition(success,error,options)
     }, []);
     const [locationName, setLocationName] = useState("");
     const debounceLocationName = useDebouceValue(locationName, 500)
