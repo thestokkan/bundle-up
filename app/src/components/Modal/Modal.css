@@ -23,6 +23,8 @@ h4 {
     align-items: center;
     margin-top: 0;
     justify-content: space-between;
+
+    padding-left: 20%;
 }
 
 .modal-body {
@@ -51,6 +53,13 @@ h4 {
 }
 .cross:hover
 {
-    background-color: aqua;
     cursor: pointer;
+}
+
+@media screen and (max-width: 440px){
+    .modal-layout{
+        height: 30%;
+        top:30%;
+    }
+
 }

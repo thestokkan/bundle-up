@@ -39,7 +39,7 @@ const Search= ()=>{
     const [query, setQuery]=useState("")
     const debouceQuery=useDebouceValue(query)
     const divRef =useRef(null)
-    useOutsideAlerter(divRef,setItems)
+    useOutsideAlerter(divRef,()=>setItems([]))
 
     const keyEnter=(e :React.KeyboardEvent)=>{
 

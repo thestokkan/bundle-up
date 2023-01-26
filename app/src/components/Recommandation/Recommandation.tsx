@@ -28,31 +28,37 @@ prioMap.set("Innerlag", {
   order: 1,
   path: "bparts/Innerlag.png",
   name: "INNERLAG",
+  info:"Tynt isolasjonslag, gjerne ull"
 });
 prioMap.set("Mellomlag", {
   order: 2,
   path: "bparts/Mellomlag.png",
   name: "MELLOMLAG",
+  info: "Bukse og genser, gjerne ull eller fleece på kalde dager"
 });
 prioMap.set("Skalljakke/dress", {
   order: 3,
   path: "bparts/Skalljakke-dress.png.png",
   name: "SKALLDRESS",
+  info:"Tynn jakke eller dress som beskytter mot vind"
 });
 prioMap.set("Vinterjakke/dress", {
   order: 3,
   path: "bparts/Vinterjakke-dress.png",
   name: "VINTERDRESS",
+  info: "Varm isolert jakke eller dress"
 });
 prioMap.set("Regntøy", {
   order: 4,
   path: "bparts/Regnty.png",
   name: "REGNTØY",
+  info:"Regntøy og støvler"
 });
 prioMap.set("Lue/votter", {
   order: 5,
   path: "bparts/Lue-votter.png",
   name: "LUE/VOTTER",
+  info:"Gjerne også hals hvis jakken/dressen er åpen i halsen"
 });
 
 export type Cloth = {
