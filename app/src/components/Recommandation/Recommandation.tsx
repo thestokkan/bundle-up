@@ -152,7 +152,7 @@ const Recommendation = ({
     );
   }
   if (!data) {
-    return <div className={classname}>Error!</div>;
+    return null;
   }
 
   let { cloths, clothsimg, imgStyle, listStyle } = dataTooObject(
