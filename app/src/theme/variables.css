@@ -70,6 +70,9 @@
     --chart-apparent-temperature-color: var(--sharp-contrast-color-2);
     --chart-horizontal-line-color: var(--neutral-color-medium);
 
+    --tag-linear-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));
+    --tag-text-color: var(--sharp-contrast-color-1);
+
 }
 
 .light {
@@ -96,4 +99,7 @@
     --chart-temperature-color: var(--sharp-contrast-color-1);
     --chart-apparent-temperature-color: var(--sharp-contrast-color-2);
     --chart-horizontal-line-color: var(--neutral-color-light);
+
+    --tag-linear-gradient: radial-gradient(rgba(51, 102, 153, 0.4), rgba(51, 102, 153, 0.0));
+    --tag-text-color: var(--sharp-contrast-color-1);
 }
