@@ -35,7 +35,7 @@ button:hover {
 }
 
 .connect {
-    background-image: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
+    background-image: var(--button-linear-gradient);
     color: var(--medium-button-text-color);
     font-size: var(--font-size-input);
     font-weight: bold;
@@ -48,8 +48,9 @@ button:hover {
 }
 
 .connect:hover,
-.round:hover {
-    background-image: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
+.round:hover,
+.cross:hover {
+    background-image: var(--button-linear-gradient-hover);
     color: var(--light-button-text-color);
 }
 
@@ -66,6 +67,8 @@ button:hover {
 }
 
 .cross {
+    background-image: var(--button-linear-gradient);
+    color: var(--medium-button-text-color);
     height: 48px;
     width: 48px;
     border-radius: 8px;

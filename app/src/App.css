@@ -21,7 +21,7 @@ html, body {
 }
 
 .App-header {
-    height: 100px;
+    height: 120px;
     padding-top: 32px;
     display: flex;
     flex-direction: row;
@@ -51,6 +51,11 @@ html, body {
     color: var(--sharp-contrast-color-1);
 }
 
+@media screen and (min-width: 500px) {
+    .logo-text {
+        font-size: 100px;
+    }
+}
 
 .App-body {
     display: flex;
