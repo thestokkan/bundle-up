@@ -52,7 +52,6 @@ function App() {
                 .then(response => response.json())
                 .then(data => {
                     setGeoLocationName(data.location.name);
-                    console.log("UPDATED GEO LOCATION NAME: " + geoLocationName);
                     if (!locationName) setLocationName(data.location.name);
                 });
         })
@@ -68,8 +67,6 @@ function App() {
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
-        console.log(event.key);
-
         if (event.key === 'Enter') {
             event.preventDefault();
             updateLocationName();

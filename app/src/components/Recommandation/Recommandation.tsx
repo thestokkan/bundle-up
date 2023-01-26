@@ -149,7 +149,6 @@ const Recommendation = ({
     );
   }
   if (!data) {
-    console.log("dataError");
     return <div className={classname}>Error!</div>;
   }
 

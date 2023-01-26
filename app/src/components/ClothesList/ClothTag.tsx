@@ -17,12 +17,6 @@ type Props={
 const ClothTag=({classname,style,clothes,click}:Props)=>{
     //const [mod, setMod]=useState<boolean>(false)
 
-
-
-    console.log("test")
-
-
-
     return(
         <div style={style} className={classname?.join(" ")} onClick={click}>
             {clothes}

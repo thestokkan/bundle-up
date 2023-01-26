@@ -63,7 +63,7 @@
     --theme-button-color: var(--sharp-contrast-color-1);
     --input-field-background-color: var(--accent-color-light);
     --icon-button-color: var(--accent-color-light);
-    --input-field-border: none;
+    --input-box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
 
     --tooltip-background-color: rgb(0,0,0,0.5);
     --chart-temperature-color: var(--sharp-contrast-color-1);
@@ -71,7 +71,8 @@
     --chart-horizontal-line-color: var(--neutral-color-medium);
 
     --tag-linear-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));
-    --tag-text-color: var(--sharp-contrast-color-1);
+    --tag-linear-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.8), rgba(178, 230, 230, 0.0));
+    --tag-text-color: var(--sharp-contrast-color-2);
 
 }
 
@@ -93,13 +94,14 @@
     --theme-button-color: var(--accent-color-light);
     --input-field-background-color: var(--accent-color-xlight);
     --icon-button-color: var(--accent-color-medium);
-    --input-field-border: solid 1px var(--accent-color-light);
+    --input-box-shadow: inset 0 0 0 2px rgba(178, 230, 230, 0.4);
 
     --tooltip-background-color: rgb(255, 255, 255, 0.6);
     --chart-temperature-color: var(--sharp-contrast-color-1);
     --chart-apparent-temperature-color: var(--sharp-contrast-color-2);
     --chart-horizontal-line-color: var(--neutral-color-light);
 
-    --tag-linear-gradient: radial-gradient(rgba(51, 102, 153, 0.4), rgba(51, 102, 153, 0.0));
-    --tag-text-color: var(--sharp-contrast-color-1);
+    --tag-linear-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));
+    --tag-linear-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.5), rgba(178, 230, 230, 0.0));
+    --tag-text-color: var(--sharp-contrast-color-2);
 }

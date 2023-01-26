@@ -10,23 +10,15 @@ const MiniInfo=({cloth}:{cloth:Cloth})=>{
 
 }
 
-
-
 const ClothesList = ({clothes,styles}:{clothes:Array<Cloth>,styles:Array<React.CSSProperties>}) => {
 
   //useState(true)
   const [mod,setMod] =useState(false)
   const [cloth,setCloth] =useState<Cloth|null>(null)
 
-
-
-
-  console.log("reerer")
-
-
   const modal=(open:boolean
     )=>{
-     const c= <p>hei</p> 
+     const c= <p>hei</p>
     if (open){
 
       return ( <Modal  closeModal={ ()=>setMod(false)} isOpen={true}>
@@ -34,9 +26,6 @@ const ClothesList = ({clothes,styles}:{clothes:Array<Cloth>,styles:Array<React.C
         </Modal>)
 
     }else return null
-
-    
-
   }
 
   const oc =(cloth : Cloth)=>{
@@ -46,11 +35,8 @@ const ClothesList = ({clothes,styles}:{clothes:Array<Cloth>,styles:Array<React.C
       setCloth(cloth)
 
     }
-    
-  }
- 
 
- 
+  }
 
   return (
     <>

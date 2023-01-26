@@ -23,4 +23,3 @@ export const Oscar=({clothesImg, styles,day}:{day:string, styles:Array<React.CSS
     )
 
 }
-
