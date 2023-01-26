@@ -54,7 +54,7 @@
 }
 
 .weather-plot .heading {
-    margin-bottom: 12px;
+    margin-bottom: 3px;
 }
 
 .basic-weather-container p {
@@ -75,7 +75,7 @@
 
 .weather-plot {
     width: 100%;
-    height: 220px;
+    height: 190px;
     margin-bottom: 32px;
 }
 
