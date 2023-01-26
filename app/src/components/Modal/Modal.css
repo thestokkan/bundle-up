@@ -1,5 +1,6 @@
 h4 {
     margin: 0;
+    text-align: center;
 }
 
 .modal-layout {
@@ -9,10 +10,11 @@ h4 {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10; 
-    background-color: var(--sharp-contrast-color-1);
+    background-color:rgb(231, 188, 108);
     border-radius: 12px;
     width: 96%;
     height: 50%;
+    min-height: 275px;
     
 
 }
@@ -56,10 +58,5 @@ h4 {
     cursor: pointer;
 }
 
-@media screen and (max-width: 440px){
-    .modal-layout{
-        height: 30%;
-        top:30%;
-    }
 
-}
+
