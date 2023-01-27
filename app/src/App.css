@@ -47,6 +47,7 @@ html, body {
 .logo-text {
     font-size: 20vw;
     font-family: "Arial Nova Cond", sans-serif;
+    font-weight: normal;
     margin: 0;
     color: var(--sharp-contrast-color-1);
 }

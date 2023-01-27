@@ -48,7 +48,7 @@ function App() {
     const [geoLocationName, setGeoLocationName] = useState<string>("");
     const [timeoutMessage, setTimeOutMessage] = useState("");
     const options: PositionOptions = {
-        timeout: 8_000
+        timeout: 5_000
     }
 
     function error(err: GeolocationPositionError) {
