@@ -11,8 +11,8 @@
     --neutral-color-medium: #666666;
     --neutral-color-light: #b3b3b3;
     --accent-color-dark: #19334d;
-    --accent-color-medium: #336699;
-    --accent-color-light: #b2e6e6;
+    --accent-color-medium: #338099;
+    --accent-color-light: #9fe0e0;
     --accent-color-xlight: #ecf2f9;
     --danger-soft-color: #ebaead;
     --danger-sharp-color: #BD312E;
@@ -39,7 +39,7 @@
     --medium-button-background-color: var(--accent-color-medium);
     --medium-button-text-color: var(--neutral-color-xlight);
     --light-button-background-color: var(--accent-color-light);
-    --light-button-text-color: var(--neutral-color-dark);
+    --light-button-text-color: var(--accent-color-dark);
     --hover-color: var(--neutral-color-xlight);
     --link-color: var(--sharp-contrast-color-2);
     --visited-link-color: var(--sharp-contrast-color-1);
@@ -70,13 +70,17 @@
     --chart-apparent-temperature-color: var(--sharp-contrast-color-2);
     --chart-horizontal-line-color: var(--neutral-color-medium);
 
-    --tag-linear-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));
-    --tag-linear-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.8), rgba(178, 230, 230, 0.0));
-    --tag-text-color: var(--sharp-contrast-color-2);
+    --tag-radial-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));
+    --tag-radial-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.8), rgba(178, 230, 230, 0.0));
+    --tag-text-color: var(--heading-color);
+    --tag-text-color-hover: var(--accent-color-xlight);
 
     --button-linear-gradient: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
     --button-linear-gradient-hover: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
+    --button-radial-gradient: radial-gradient(var(--input-field-background-color) , var(--medium-button-background-color));
+    --button-radial-gradient-hover: radial-gradient(var(--input-field-background-color), var(--light-button-background-color));
 
+    --modal-background-color: rgba(25, 51, 77, 0.8);
 }
 
 .light {
@@ -84,9 +88,9 @@
     --sharp-contrast-color-2: #0099cc;
 
     --h1-color: var(--sharp-contrast-color-1);
-    --heading-color: var(--accent-color-dark);
+    --heading-color: var(--accent-color-medium);
     --body-background-color: var(--neutral-color-xlight);
-    --body-font-color: var(--neutral-color-dark);
+    --body-font-color: var(--accent-color-medium);
 
     --hover-color: var(--accent-color-light);
 
@@ -104,10 +108,19 @@
     --chart-apparent-temperature-color: var(--sharp-contrast-color-2);
     --chart-horizontal-line-color: var(--neutral-color-light);
 
-    --tag-linear-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));
-    --tag-linear-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.5), rgba(178, 230, 230, 0.0));
-    --tag-text-color: var(--sharp-contrast-color-2);
+    /*--tag-radial-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));*/
+    /*--tag-radial-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.5), rgba(178, 230, 230, 0.0));*/
+    --tag-radial-gradient: radial-gradient(rgba(51, 128, 153, 0.4), rgba(178, 230, 230, 0.0));
+    --tag-radial-gradient-hover: radial-gradient(rgba(51, 128, 153, 0.8), rgba(178, 230, 230, 0.0));
+    --tag-text-color: var(--heading-color);
+    --tag-text-color-hover: var(--accent-color-xlight);
 
     --button-linear-gradient-hover: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
     --button-linear-gradient: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
+
+    --button-radial-gradient: radial-gradient(var(--input-field-background-color) , var(--medium-button-background-color));
+    --button-radial-gradient-hover: radial-gradient(var(--input-field-background-color), var(--light-button-background-color));
+
+    --modal-background-color: rgba(25, 51, 77, 0.8);
+
 }

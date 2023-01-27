@@ -48,14 +48,13 @@ button:hover {
 }
 
 .connect:hover,
-.round:hover,
-.cross:hover {
+.round:hover {
     background-image: var(--button-linear-gradient-hover);
     color: var(--light-button-text-color);
 }
 
 .round {
-    background-image: radial-gradient(var(--input-field-background-color) , var(--medium-button-background-color));
+    background-image: var(--button-radial-gradient);
     color: black;
     font-size: 28px;
     font-weight: bold;
@@ -66,13 +65,23 @@ button:hover {
     padding: 0;
 }
 
+.round:hover {
+    background-image: var(--button-radial-gradient-hover);
+    color: var(--light-button-text-color);
+}
+
 .cross {
-    background-image: var(--button-linear-gradient);
-    color: var(--medium-button-text-color);
+    background-image: var(--button-radial-gradient);
+    color: var(--light-button-text-color);
     height: 48px;
     width: 48px;
     border-radius: 8px;
     z-index: 20;
+}
+
+.cross:hover {
+    background-image: var(--button-radial-gradient-hover);
+    color: var(--light-button-text-color);
 }
 
 .counter {
