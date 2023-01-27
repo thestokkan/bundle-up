@@ -121,7 +121,7 @@ const BasicWeather = ({day, location}: WeatherProps) => {
                         {dailyData && (
                             <div>
                                 <WiStrongWind/>
-                                <p>{dailyData.maxWindSpeedDay} m/s</p>
+                                <p>{dailyData.maxWindSpeedDay.toFixed(1)} m/s</p>
                             </div>)}
                         {dailyData && (dailyData.precipitationSumDay.toFixed(1) > 0 &&
                             <div>
