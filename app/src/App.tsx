@@ -46,13 +46,14 @@ function App() {
     // Location settings
 
     const [geoLocationName, setGeoLocationName] = useState<string>("");
+    const [timeoutMessage, setTimeOutMessage] = useState("");
     const options: PositionOptions = {
-        timeout: 10_000
+        timeout: 8_000
     }
 
     function error(err: GeolocationPositionError) {
-        setLocationName("Stavanger");
-        console.warn(`ERROR(${err.code}): ${err.message}`);
+        setTimeOutMessage("Tillat deling av posisjon i nettleser eller velg sted manuelt.")
+        setLocationName("Oslo");
     }
 
     function success(position: GeolocationPosition) {
@@ -123,7 +124,7 @@ function App() {
                                 (<WeatherPlot day={day} location={debounceLocationName}/>))
                             || ((weatherDisplay === "basic"
                                 && (<BasicWeather day={day} location={debounceLocationName}/>))))
-                        || <LoadingAnimation text={"Henter værdata..."}/>}
+                        || <LoadingAnimation text={"Henter værdata..."} timeoutText={timeoutMessage}/>}
                 </div>
 
                 <Recommendation location={debounceLocationName} day={day as Day} classname={"recommendation"}/>

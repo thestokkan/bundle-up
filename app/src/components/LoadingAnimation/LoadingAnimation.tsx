@@ -2,9 +2,10 @@ import './LoadingAnimation.css';
 
 type LoadingProps = {
     text?: string;
+    timeoutText?: string;
 }
 
-const LoadingAnimation = ({text}: LoadingProps) => {
+const LoadingAnimation = ({text, timeoutText}: LoadingProps) => {
     return (
         <div className="loading-animation">
             <div className="lds-ripple">
@@ -13,6 +14,7 @@ const LoadingAnimation = ({text}: LoadingProps) => {
             </div>
             <div className={"loading-text"}>
                 {text && text || <p>Loading...</p>}
+                {timeoutText && <p>{timeoutText}</p>}
             </div>
         </div>
     );
