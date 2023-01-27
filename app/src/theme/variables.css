@@ -74,6 +74,9 @@
     --tag-linear-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.8), rgba(178, 230, 230, 0.0));
     --tag-text-color: var(--sharp-contrast-color-2);
 
+    --button-linear-gradient: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
+    --button-linear-gradient-hover: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
+
 }
 
 .light {
@@ -104,4 +107,7 @@
     --tag-linear-gradient: radial-gradient(rgba(178, 230, 230, 0.4), rgba(178, 230, 230, 0.0));
     --tag-linear-gradient-hover: radial-gradient(rgba(101, 205, 205, 0.5), rgba(178, 230, 230, 0.0));
     --tag-text-color: var(--sharp-contrast-color-2);
+
+    --button-linear-gradient-hover: linear-gradient(to right, var(--input-field-background-color) , var(--medium-button-background-color));
+    --button-linear-gradient: linear-gradient(to right, var(--input-field-background-color), var(--light-button-background-color));
 }

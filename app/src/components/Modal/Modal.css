@@ -4,19 +4,17 @@ h4 {
 }
 
 .modal-layout {
-    border: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10; 
-    background-color:rgb(231, 188, 108);
+    z-index: 10;
+    background-color: var(--body-background-color);
+    border: solid 1px var(--accent-color-light);
     border-radius: 12px;
-    width: 96%;
-    height: 50%;
+    width: 90%;
+    height: 90%;
     min-height: 275px;
-    
-
 }
 
 .modal-header {
@@ -25,7 +23,6 @@ h4 {
     align-items: center;
     margin-top: 0;
     justify-content: space-between;
-
     padding-left: 20%;
 }
 
@@ -37,17 +34,16 @@ h4 {
     flex-grow: 2;
     height: auto;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: space-around;
-
+    text-align: center;
     /* overflow-y: scroll; */
 }
 
 .btn-group {
     display: flex;
     justify-content: flex-end;
-    
 }
 
 .modal-btn {
@@ -57,6 +53,3 @@ h4 {
 {
     cursor: pointer;
 }
-
-
-
