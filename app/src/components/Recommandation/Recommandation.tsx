@@ -38,7 +38,7 @@ prioMap.set("Mellomlag", {
 });
 prioMap.set("Skalljakke/dress", {
   order: 3,
-  path: "bparts/Skalljakke-dress.png.png",
+  path: "bparts/Skalljakke-dress.png",
   name: "SKALLDRESS",
   info:"Tynn jakke eller dress som beskytter mot vind"
 });
