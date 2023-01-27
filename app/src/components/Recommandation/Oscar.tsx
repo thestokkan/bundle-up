@@ -19,11 +19,12 @@ export const Oscar = ({
     const temc = clothesImg.filter((c) => c.cloth == "Mellomlag");
 
     if (temc.length == 1) {
-      path = "bparts/transvarm.png";
+      path = "bparts/varm_full.png"
+      
       console.log("changed");
       clothesImg.forEach((c) => {
         if (c.cloth == "Mellomlag") {
-          c.path = "bparts/varm_full.png";
+          c.path = "bparts/transvarm.png";
         }
       });
     }
