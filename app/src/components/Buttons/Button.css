@@ -72,6 +72,7 @@ button:hover {
     height: 48px;
     width: 48px;
     border-radius: 8px;
+    z-index: 20;
 }
 
 .counter {

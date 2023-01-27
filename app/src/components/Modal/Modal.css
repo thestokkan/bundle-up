@@ -5,15 +5,15 @@ h4 {
 
 .modal-layout {
     position: absolute;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
     background-color: var(--body-background-color);
     border: solid 1px var(--accent-color-light);
     border-radius: 12px;
-    width: 85%;
-    height: 66%;
+    width: 90%;
+    height: 90%;
     min-height: 275px;
 }
 
