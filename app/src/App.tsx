@@ -142,7 +142,11 @@ function App() {
                         || <LoadingAnimation text={"Henter værdata..."} timeoutText={timeoutMessage}/>}
                 </div>
 
-                <Recommendation location={debounceLocationName} day={day as Day} classname={"recommendation"}/>
+                <Recommendation locationData={{
+                    locationName: debounceLocationName,
+                    latitude: latitude,
+                    longitude: longitude,
+                    timezone: timezone}} day={day as Day} classname={"recommendation"}/>
 
                 <div className="bottom-row">
 

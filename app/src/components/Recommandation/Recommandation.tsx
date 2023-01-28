@@ -1,7 +1,7 @@
 import React from "react";
 import { ClothesList } from "../ClothesList";
 import useSWR from "swr";
-import { getWeatherDataAndClothesCombo } from "../../fetchData";
+import {getWeatherDataAndClothesCombo, LocationData} from "../../fetchData";
 import { Oscar } from "./Oscar";
 import "./Oscar.css";
 
@@ -85,7 +85,7 @@ export const createStyle: (
   return { animationDelay: delay + "ms", animationDuration: duration + "ms" };
 };
 
-const dataTooObject = (data: Input, duration = 500, delay = 500) => {
+const dataToObject = (data: Input, duration = 500, delay = 500) => {
   const clothsimg: Cloth[] = [];
   // const clothes: Cloth[] = [];
 
@@ -116,7 +116,7 @@ const dataTooObject = (data: Input, duration = 500, delay = 500) => {
   });
 
   return {
-    cloths: clothes,
+    clothes: clothes,
     clothsimg: clothsimg,
     imgStyle: imgStyle,
     listStyle: listStyle,
@@ -133,17 +133,17 @@ const fetcher = async (
 };
 
 const Recommendation = ({
-  location,
+  locationData,
   day,
   classname,
 }: {
-  location: string;
+  locationData: LocationData;
   day: Day;
   classname: string;
 }) => {
 
   const { data, isLoading, error } = useSWR<any>(
-    location,
+    locationData,
     getWeatherDataAndClothesCombo
   );
 
@@ -159,7 +159,7 @@ const Recommendation = ({
     return null;
   }
 
-  let { cloths, clothsimg, imgStyle, listStyle } = dataTooObject(
+  let { clothes, clothsimg, imgStyle, listStyle } = dataToObject(
     data.clothesCombo[day]
   );
 
@@ -168,7 +168,7 @@ const Recommendation = ({
       {/* <Oscar klar={[]} /> */}
       {/* <img className="oscar" src="raingear.png" alt="rain"/> */}
       <Oscar day={day} styles={imgStyle} clothesImg={clothsimg} />
-      <ClothesList key={day} clothes={cloths} styles={listStyle} />
+      <ClothesList key={day} clothes={clothes} styles={listStyle} />
     </div>
   );
 };
