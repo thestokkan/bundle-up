@@ -20,16 +20,16 @@ import {
 } from "react-icons/wi";
 import {LoadingAnimation} from "../LoadingAnimation";
 
-const BasicWeather = ({day, location}: WeatherProps) => {
+const BasicWeather = ({day, locationData}: WeatherProps) => {
     const [data, setData] = useState<any>(null);
 
     useEffect(() => {
         async function fetchData() {
-            setData(await getWeatherDataAndClothesCombo(location));
+            setData(await getWeatherDataAndClothesCombo(locationData));
         }
 
         fetchData();
-    }, [day, location]);
+    }, [day, locationData.locationName, locationData.latitude]);
 
     const [dailyData, setDailyData] = useState<any>();
 

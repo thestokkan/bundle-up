@@ -1,23 +1,24 @@
 import './DisplayWeather.css';
-import {getDetailedWeatherData} from "../../fetchData";
+import {getDetailedWeatherData, LocationData} from "../../fetchData";
 import React, {useEffect, useState} from "react";
 import {CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 
 export type WeatherProps = {
     day: string;
-    location: string;
+    locationData: LocationData;
 }
 
-const WeatherPlot = ({day, location}: WeatherProps) => {
+const WeatherPlot = ({day, locationData}: WeatherProps) => {
     const [weatherData, setWeatherData] = useState<any>(null);
 
     useEffect(() => {
         async function fetchData() {
-            setWeatherData(await getDetailedWeatherData(location));
+            setWeatherData(await getDetailedWeatherData(locationData));
         }
 
         fetchData();
-    }, [day, location]); // Runs every time this component (re)renders
+    }, [day, locationData.locationName, locationData.latitude]); // Runs every time this component
+    // (re)renders
 
 
     const [formattedWeatherData, setFormattedWeatherData] = useState<any>();
@@ -72,7 +73,7 @@ const WeatherPlot = ({day, location}: WeatherProps) => {
                     bottom: 5,
                 }}
             >
-                <title>{location} {day}</title>
+                <title>{locationData.locationName} {day}</title>
                 <CartesianGrid/>
                 <XAxis dataKey="time" tickLine={false}/>
                 <YAxis tickLine={false} label={{value: "℃", position: "insideLeft", dy: -75}}

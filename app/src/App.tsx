@@ -2,17 +2,16 @@ import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
 import {ThemeContext} from "./theme";
 import './theme/variables.css';
-import {FaMoon, FaSun, FaTemperatureLow} from "react-icons/fa";
-import {Button, Input, WeatherPlot, LoadingAnimation} from "./components";
+import {FaMoon, FaSun} from "react-icons/fa";
+import {Button, Input, LoadingAnimation, WeatherPlot} from "./components";
 import {BiLineChart} from "react-icons/bi";
 import tomorrow from './tomorrow.png'
 import yesterday from './yesterday.png'
 import thermometer from './thermometer.png'
-import {GoLocation} from "react-icons/go";
-import {useDebouceValue} from './utils/hooks';
+import {useDebounceValue} from './utils/hooks';
 import BasicWeather from "./components/DisplayWeather/BasicWeatherData";
-import { Recommendation } from './components/Recommandation';
-import type { Day } from './components/Recommandation/Recommandation';
+import {Recommendation} from './components/Recommandation';
+import type {Day} from './components/Recommandation/Recommandation';
 
 function App() {
     // Theme settings
@@ -43,35 +42,43 @@ function App() {
         }
     }
 
-    // Location settings
-
-    const [geoLocationName, setGeoLocationName] = useState<string>("");
+    // Geolocation
+    // const [geoLocationName, setGeoLocationName] = useState<string>("");
+    const [locationName, setLocationName] = useState("");
+    const [latitude, setLatitude] = useState(-1);
+    const [longitude, setLongitude] = useState(-1);
+    const [timezone, setTimezone] = useState("");
     const [timeoutMessage, setTimeOutMessage] = useState("");
     const options: PositionOptions = {
-        timeout: 5_000
+        timeout: 3_000
     }
 
     function error(err: GeolocationPositionError) {
         setTimeOutMessage("Tillat deling av posisjon i nettleser eller velg sted manuelt.")
-        setLocationName("Oslo");
+        console.log("Looking for location....");
+        // setLocationName("Oslo");
     }
 
     function success(position: GeolocationPosition) {
         fetch(`https://api.weatherapi.com/v1/forecast.json?key=db698b5e650a441fae6190451221401&q=${position.coords.latitude},${position.coords.longitude}&days=1&aqi=yes&alerts=yes`)
             .then(response => response.json())
             .then(data => {
-                setGeoLocationName(data.location.name);
-                if (!locationName) setLocationName(data.location.name);
+                setLocationName(data.location.name);
+                setLatitude(data.location.lat);
+                setLongitude(data.location.lon);
+                setTimezone(data.location.tz_id);
             });
     }
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(success,error,options)
+        navigator.geolocation.getCurrentPosition(success, error, options)
     }, []);
-    const [locationName, setLocationName] = useState("");
-    const debounceLocationName = useDebouceValue(locationName, 500)
+
+    // Location search
+    const debounceLocationName = useDebounceValue(locationName, 500);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocationName(event.target.value);
+        setLatitude(-1);
     };
 
     const updateLocationName = () => {
@@ -121,9 +128,17 @@ function App() {
                 <div className="weather-container">
                     {weatherDisplay
                         && (((weatherDisplay === "chart") &&
-                                (<WeatherPlot day={day} location={debounceLocationName}/>))
+                                (<WeatherPlot day={day} locationData={{
+                                    locationName: debounceLocationName,
+                                    latitude: latitude,
+                                    longitude: longitude,
+                                    timezone: timezone}}/>))
                             || ((weatherDisplay === "basic"
-                                && (<BasicWeather day={day} location={debounceLocationName}/>))))
+                                && (<BasicWeather day={day} locationData={{
+                                    locationName: debounceLocationName,
+                                    latitude: latitude,
+                                    longitude: longitude,
+                                    timezone: timezone}}/>))))
                         || <LoadingAnimation text={"Henter værdata..."} timeoutText={timeoutMessage}/>}
                 </div>
 
@@ -140,7 +155,6 @@ function App() {
                     <div className="input-and-button">
                         <Input type="text"
                                className="input"
-                            //    className="input connect-right"
                                placeholderText="Sted"
                                id="location"
                                onChange={handleChange}
