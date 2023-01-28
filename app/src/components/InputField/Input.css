@@ -3,12 +3,12 @@ input {
     background-color: var(--input-field-background-color);
     border-radius: 12px;
     border: none;
-    padding: 24px;
+    padding: 24px 12px;
     font-size: var(--font-size-input);
     text-align: center;
     box-sizing: border-box;
     outline: none;
-    max-width: 170px;
+    max-width: 180px;
     box-shadow: var(--input-box-shadow);
 }
 

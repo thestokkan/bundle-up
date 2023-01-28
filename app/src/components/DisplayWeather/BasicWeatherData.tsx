@@ -20,16 +20,16 @@ import {
 } from "react-icons/wi";
 import {LoadingAnimation} from "../LoadingAnimation";
 
-const BasicWeather = ({day, location}: WeatherProps) => {
+const BasicWeather = ({day, locationData}: WeatherProps) => {
     const [data, setData] = useState<any>(null);
 
     useEffect(() => {
         async function fetchData() {
-            setData(await getWeatherDataAndClothesCombo(location));
+            setData(await getWeatherDataAndClothesCombo(locationData));
         }
 
         fetchData();
-    }, [day, location]);
+    }, [day, locationData.locationName, locationData.latitude]);
 
     const [dailyData, setDailyData] = useState<any>();
 
@@ -104,12 +104,12 @@ const BasicWeather = ({day, location}: WeatherProps) => {
         <div className="basic-weather">
             <div className={"inner-container temperatures"}>
                 <div className={"main-temperature"}>
-                    <h2>{dailyData && dailyData.minTempDay + "°" || <LoadingAnimation text={"Henter værdata..."}/>}</h2>
+                    <h2>{dailyData && dailyData.minTempDay + "°" || <LoadingAnimation/>}</h2>
                     <p>Min. temp</p>
                 </div>
                 <div className={"apparent-temperature"}>
                     <h3>{dailyData && dailyData.minApparentTempDay + "°" ||
-                        <LoadingAnimation text={"Henter værdata..."}/>}</h3>
+                        <LoadingAnimation/>}</h3>
                     <p>Føles som</p>
                 </div>
             </div>
@@ -138,9 +138,12 @@ const BasicWeather = ({day, location}: WeatherProps) => {
     return (
         <div className={"basic-weather-container"}>
             <h4 className={"heading"}>{day === "today" && "I dag" || "I morgen"} 08 - 17</h4>
-            {dailyData && renderWeatherData || <LoadingAnimation text={"Henter værdata..."}/>}
-        </div>
-    );
-};
+            {dailyData && renderWeatherData || (!locationData.locationName &&
+                <LoadingAnimation text={"Søker etter posisjon..."} subText={"Aktiver stedsdata i nettleseren eller" +
+                    " velg sted manuelt."}/>)
+                || <LoadingAnimation text={"Henter værdata..."}/>}
+                </div>
+                );
+            };
 
-export default BasicWeather;
+            export default BasicWeather;

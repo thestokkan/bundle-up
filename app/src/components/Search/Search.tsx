@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 
 import {useEffect,useState} from "react";
 import "./Search.css"
-import {useDebouceValue,useOutsideAlerter} from "../../utils/hooks";
+import {useDebounceValue,useOutsideAlerter} from "../../utils/hooks";
 import {SearchItem} from "./index";
 
 
@@ -37,7 +37,7 @@ const Search= ()=>{
 
     const [items, setItems] =useState<Item[]>([])
     const [query, setQuery]=useState("")
-    const debouceQuery=useDebouceValue(query)
+    const debouceQuery=useDebounceValue(query)
     const divRef =useRef(null)
     useOutsideAlerter(divRef,()=>setItems([]))
 

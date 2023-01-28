@@ -5,12 +5,12 @@ export type LocationData = {
     timezone: string
 }
 
-async function getLocation(locationName: String ): Promise<LocationData|null> {
+async function getLocation(locationName: string): Promise<LocationData | null> {
     const locationUrl = "https://geocoding-api.open-meteo.com/v1/search?name=" + locationName + "&count=1";
     const locationDataIn = await fetch(locationUrl);
     const data = await locationDataIn.json();
 
-    if(data.results==undefined){
+    if (data.results == undefined) {
         return null;
     }
 
@@ -22,30 +22,40 @@ async function getLocation(locationName: String ): Promise<LocationData|null> {
     };
 }
 
-export async function getWeatherDataAndClothesCombo(locationName: String, random?:React.MutableRefObject<number>) {
-    const locationData: LocationData|null = await getLocation(locationName);
-    if(locationData==null) return null
+export async function getWeatherDataAndClothesCombo(locationData: LocationData | null) {
+    if (locationData && locationData.latitude < 0) {
+        locationData = await getLocation(locationData.locationName);
+    }
+
+    if (locationData == null
+        || !locationData.locationName
+        || !locationData.latitude
+        || !locationData.longitude
+        || !locationData.timezone) return null;
+
+    console.log(locationData.locationName);
+    console.log(locationData.latitude);
+    console.log(locationData.longitude);
+    console.log(locationData.timezone);
 
     const weatherUrl = "/weatherandcombo?latitude=" + locationData.latitude
         + "&longitude=" + locationData.longitude + "&timezone=" + locationData.timezone;
 
     const weatherDataIn = await fetch(weatherUrl);
-    const data = await weatherDataIn.json();
-
-    return data;
+    return await weatherDataIn.json();
 }
 
-export async function getDetailedWeatherData(locationName: String) {
-    const locationData: LocationData|null = await getLocation(locationName);
+export async function getDetailedWeatherData(locationData: LocationData | null) {
+    if (locationData && locationData.latitude < 0) {
+        locationData = await getLocation(locationData.locationName);
+    }
 
-    if(locationData==null) return null
+    if (locationData == null) return null
 
     const weatherUrl = "/detailedweather?latitude=" + locationData.latitude
         + "&longitude=" + locationData.longitude + "&timezone=" + locationData.timezone;
 
 
     const weatherDataIn = await fetch(weatherUrl);
-    const data = await weatherDataIn.json();
-
-    return data;
+    return await weatherDataIn.json();
 }

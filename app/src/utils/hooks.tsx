@@ -22,7 +22,7 @@ export function useOutsideAlerter(ref:React.MutableRefObject<HTMLElement | null>
 }
 
 
-export const useDebouceValue=(value:string,time=100)=>{
+export const useDebounceValue=(value:string, time=100)=>{
     const [debouceValue, setDebounceValue]=useState(value)
     useEffect(()=>{
         const timeout=setTimeout(()=>{

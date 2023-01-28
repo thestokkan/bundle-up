@@ -2,10 +2,10 @@ import './LoadingAnimation.css';
 
 type LoadingProps = {
     text?: string;
-    timeoutText?: string;
+    subText?: string;
 }
 
-const LoadingAnimation = ({text, timeoutText}: LoadingProps) => {
+const LoadingAnimation = ({text, subText}: LoadingProps) => {
     return (
         <div className="loading-animation">
             <div className="lds-ripple">
@@ -13,8 +13,8 @@ const LoadingAnimation = ({text, timeoutText}: LoadingProps) => {
                 <div></div>
             </div>
             <div className={"loading-text"}>
-                {text && text || <p>Loading...</p>}
-                {timeoutText && <p>{timeoutText}</p>}
+                {text && <p id={"text"}>{text}</p> || <p>Loading...</p>}
+                {subText && <p id={"subtext"}>{subText}</p>}
             </div>
         </div>
     );
