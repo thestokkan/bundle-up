@@ -1,9 +1,13 @@
 .loading-animation {
-    margin: 32px
+    margin: 12px;
 }
 
 .loading-text {
     color: var(--body-font-color);
+}
+
+#text {
+    font-size: 18px;
 }
 
 .lds-ripple {

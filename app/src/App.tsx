@@ -43,23 +43,24 @@ function App() {
     }
 
     // Geolocation
-    const [locationName, setLocationName] = useState("");
     const [locationData, setLocationData] = useState({
-        locationName: locationName,
+        locationName: "",
         latitude: -1,
         longitude: -1,
         timezone: ""
     });
-    const [timeoutMessage, setTimeOutMessage] = useState("");
+
     const options: PositionOptions = {
-        timeout: 3_000
+        timeout: 5_000
     }
 
     function error(err: GeolocationPositionError) {
-        setTimeOutMessage("Tillat deling av posisjon i nettleser eller velg sted manuelt.")
-        alert("Tillat deling av posisjon i nettleser eller velg sted manuelt.");
-        console.log("Looking for location....");
-        // setLocationName("Oslo");
+        setLocationData({
+            locationName: "Oslo",
+            latitude: 59.91273,
+            longitude: 10.74609,
+            timezone: "Europe/Oslo"
+        });
     }
 
     function success(position: GeolocationPosition) {
@@ -81,7 +82,7 @@ function App() {
     }, []);
 
     // Location search
-    const debounceLocationName = useDebounceValue(locationName, 500);
+    const debounceLocationName = useDebounceValue(locationData.locationName, 500);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocationData({
             locationName: event.target.value,
@@ -124,12 +125,9 @@ function App() {
             <div className="App-body">
 
                 <div className="weather-container">
-                    {weatherDisplay
-                        && (((weatherDisplay === "chart") &&
-                                (<WeatherPlot day={day} locationData={locationData}/>))
-                            || ((weatherDisplay === "basic"
-                                && (<BasicWeather day={day} locationData={locationData}/>))))
-                        || <LoadingAnimation text={"Henter værdata..."} timeoutText={timeoutMessage}/>}
+                    {(weatherDisplay === "chart" && <WeatherPlot day={day} locationData={locationData}/>)
+                        || (weatherDisplay === "basic" && <BasicWeather day={day} locationData={locationData}/>)
+                    }
                 </div>
 
                 <Recommendation locationData={locationData} day={day as Day} classname={"recommendation"}/>
