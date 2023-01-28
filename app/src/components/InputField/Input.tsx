@@ -7,7 +7,7 @@ interface Props {
     placeholderText?: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     validation?: () => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
     value: string;
 
 }

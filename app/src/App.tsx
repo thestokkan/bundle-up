@@ -43,11 +43,13 @@ function App() {
     }
 
     // Geolocation
-    // const [geoLocationName, setGeoLocationName] = useState<string>("");
     const [locationName, setLocationName] = useState("");
-    const [latitude, setLatitude] = useState(-1);
-    const [longitude, setLongitude] = useState(-1);
-    const [timezone, setTimezone] = useState("");
+    const [locationData, setLocationData] = useState({
+        locationName: locationName,
+        latitude: -1,
+        longitude: -1,
+        timezone: ""
+    });
     const [timeoutMessage, setTimeOutMessage] = useState("");
     const options: PositionOptions = {
         timeout: 3_000
@@ -55,6 +57,7 @@ function App() {
 
     function error(err: GeolocationPositionError) {
         setTimeOutMessage("Tillat deling av posisjon i nettleser eller velg sted manuelt.")
+        alert("Tillat deling av posisjon i nettleser eller velg sted manuelt.");
         console.log("Looking for location....");
         // setLocationName("Oslo");
     }
@@ -63,10 +66,13 @@ function App() {
         fetch(`https://api.weatherapi.com/v1/forecast.json?key=db698b5e650a441fae6190451221401&q=${position.coords.latitude},${position.coords.longitude}&days=1&aqi=yes&alerts=yes`)
             .then(response => response.json())
             .then(data => {
-                setLocationName(data.location.name);
-                setLatitude(data.location.lat);
-                setLongitude(data.location.lon);
-                setTimezone(data.location.tz_id);
+                setLocationData({
+                        locationName: data.location.name,
+                        latitude: data.location.lat,
+                        longitude: data.location.lon,
+                        timezone: data.location.tz_id
+                    }
+                );
             });
     }
 
@@ -77,19 +83,12 @@ function App() {
     // Location search
     const debounceLocationName = useDebounceValue(locationName, 500);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLocationName(event.target.value);
-        setLatitude(-1);
-    };
-
-    const updateLocationName = () => {
-        setLocationName(locationName);
-    };
-
-    const handleKeyDown = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            updateLocationName();
-        }
+        setLocationData({
+            locationName: event.target.value,
+            latitude: -1,
+            longitude: -1,
+            timezone: ""
+        });
     };
 
     // Weather display button
@@ -107,7 +106,6 @@ function App() {
 
     // Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // const closeModal = () => setIsModalOpen(false);
 
     return (
         <div className="App">
@@ -128,25 +126,13 @@ function App() {
                 <div className="weather-container">
                     {weatherDisplay
                         && (((weatherDisplay === "chart") &&
-                                (<WeatherPlot day={day} locationData={{
-                                    locationName: debounceLocationName,
-                                    latitude: latitude,
-                                    longitude: longitude,
-                                    timezone: timezone}}/>))
+                                (<WeatherPlot day={day} locationData={locationData}/>))
                             || ((weatherDisplay === "basic"
-                                && (<BasicWeather day={day} locationData={{
-                                    locationName: debounceLocationName,
-                                    latitude: latitude,
-                                    longitude: longitude,
-                                    timezone: timezone}}/>))))
+                                && (<BasicWeather day={day} locationData={locationData}/>))))
                         || <LoadingAnimation text={"Henter værdata..."} timeoutText={timeoutMessage}/>}
                 </div>
 
-                <Recommendation locationData={{
-                    locationName: debounceLocationName,
-                    latitude: latitude,
-                    longitude: longitude,
-                    timezone: timezone}} day={day as Day} classname={"recommendation"}/>
+                <Recommendation locationData={locationData} day={day as Day} classname={"recommendation"}/>
 
                 <div className="bottom-row">
 
@@ -162,8 +148,7 @@ function App() {
                                placeholderText="Sted"
                                id="location"
                                onChange={handleChange}
-                               onKeyDown={handleKeyDown}
-                               value={locationName}
+                               value={locationData.locationName}
                         />
                     </div>
                     <div className="toggle-day">
