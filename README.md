@@ -8,7 +8,7 @@ Clicking on an item brings up a popup with more information.
 <img src="app/public/bundle-up-screenshot.png" alt="Bundle Up screenshot" width="200px" ></img>
 
 ### Features
-The weather dashboard displays minimum temperature (actual and 'feels like') and maximum wind speed between 8 a.m. and 5 p.m.
+- The weather dashboard displays minimum temperature (actual and 'feels like') and maximum wind speed between 8 a.m. and 5 p.m.
 - Toggle between the weather dashboard and graph views.
 - Toggle between today's and tomorrow's forecast.
 - Manually select any location.
